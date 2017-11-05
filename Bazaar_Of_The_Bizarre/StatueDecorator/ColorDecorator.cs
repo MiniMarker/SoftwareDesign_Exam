@@ -5,6 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Bazaar_Of_The_Bizarre {
-	class ArmsDecorator {
+	class ColorDecorator : StatueDecorator {
 	}
 }
