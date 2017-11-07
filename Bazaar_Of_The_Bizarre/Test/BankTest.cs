@@ -8,8 +8,8 @@ namespace Bazaar_Of_The_Bizarre.Test
 {
     class BankTest
     {
-        static void Main(string[] args)
-        {
+       /* static void Main(string[] args)
+       {
             //Tries to create two banks with same name.
             Bank pBank = BankFactory.GetBank("pBanki");
             Bank pBank1 = BankFactory.GetBank("pBanki");
@@ -36,6 +36,6 @@ namespace Bazaar_Of_The_Bizarre.Test
             pBank.Transaction(10000, 2323);
 
             Console.ReadKey();
-        }
+       }*/
     }
 }
