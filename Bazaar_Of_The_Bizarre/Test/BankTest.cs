@@ -17,9 +17,11 @@ namespace Bazaar_Of_The_Bizarre.Test
             //Prints out all banks to check if BankFactory works properly.
             BankFactory.PrintBanks();
 
+     
+
             //Registers values to bank.
-            pBank.setCustomers(2323)
-            pBank.setCapital(1000);
+            pBank.Customers(2323)
+            pBank.Capital(1000);
             pBank.HandelingCustomer();
             
             //Creates two accounts with same name.

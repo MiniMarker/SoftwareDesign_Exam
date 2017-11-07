@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 namespace Bazaar_Of_The_Bizarre {
 	class Bank : IBank
 	{
-        private String _name { get; set; }
-        private int _customers { get; set; }
-	    private int _capital { get; set; }
-        private Dictionary<int, BankAccount> _accounts = new Dictionary<int, BankAccount>();
+        public string Name { get; set; }
+        public int Customers { get; set; }
+	    public int Capital { get; set; }
+	    private Dictionary<int, BankAccount> _accounts = new Dictionary<int, BankAccount>();
 
         public Bank(String name)
         {
@@ -22,18 +22,6 @@ namespace Bazaar_Of_The_Bizarre {
 	    public void HandelingCustomer()
 	    {
             Console.WriteLine("The bank {0} as {1} customers and a capital of {2} kr.", _name, _customers, _capital);
-	    }
-
-        //Sets customer value.
-	    public void SetCustomers(int Customers)
-	    {
-	        this._customers = Customers;
-	    }
-
-	    //Sets capital value.
-        public void SetCapital(int Capital)
-	    {
-	        this._capital = Capital;
 	    }
 
 	    //Creates a new account, if customer does not have one, and adds it to _accounts.
