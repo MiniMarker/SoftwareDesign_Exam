@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Bazaar_Of_The_Bizarre.statueDecorator {
-	class ColorDecorator : StatueDecorator {
+	class ColorDecorator : StatueDecorator
+	{
 
-		private readonly Random _random = new Random();
+		private readonly Random _random;
 
 		public ColorDecorator(IStatue originalStatue) : base(originalStatue) {
+			_random = new Random();
 		}
 
 		public override double GetPrice() {
@@ -49,20 +51,18 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 			var colorIsNotAdded = false;
 
 			while(!colorIsNotAdded) {
-				if(!CheckIfColorHasBeenUsedInCurrentDescription(colorToBeAddedToDescription, currentDescriptionOfStatue))
-				{
+				if(!CheckIfColorHasBeenUsedInCurrentDescription(colorToBeAddedToDescription, currentDescriptionOfStatue)) {
 					revisedDescription = colorToBeAddedToDescription;
-					if (Enum.IsDefined(typeof(Colors), currentDescriptionWords[0]))
-					{
+					if(Enum.IsDefined(typeof(Colors), currentDescriptionWords[0])) {
 						revisedDescription += " and";
 					}
 					currentDescriptionWords[0] = currentDescriptionWords[0].ToLower();
-						colorIsNotAdded = true;
-					}
-					else {
-						colorToBeAddedToDescription = GetRandomColor();
-					}
+					colorIsNotAdded = true;
 				}
+				else {
+					colorToBeAddedToDescription = GetRandomColor();
+				}
+			}
 
 			foreach(var word in currentDescriptionWords) {
 				revisedDescription += " " + word;
@@ -70,6 +70,11 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 
 			return revisedDescription;
 		}
+
+//		private string AddingColorToDescription()
+//		{
+//			
+//		}
 
 		private bool CheckIfColorHasBeenUsedInCurrentDescription(string color, string currentDescriptionOfStatue) {
 			var currentDescription = currentDescriptionOfStatue.Split();
