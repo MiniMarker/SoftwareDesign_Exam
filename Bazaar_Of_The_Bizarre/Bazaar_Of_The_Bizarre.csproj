@@ -64,6 +64,7 @@
     <Compile Include="StatueDecorator\Statue.cs" />
     <Compile Include="StatueDecorator\StatueDecorator.cs" />
     <Compile Include="StoreFacade\Store.cs" />
+    <Compile Include="Test\BankTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

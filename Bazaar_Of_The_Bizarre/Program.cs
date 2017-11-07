@@ -7,17 +7,32 @@ using Bazaar_Of_The_Bizarre.statueDecorator;
 
 namespace Bazaar_Of_The_Bizarre {
 	class Program {
-		static void Main(string[] args) {
-			IStatue statue = new Statue();
-			IStatue cd = new ColorDecorator(statue);
-			IStatue cd1 = new ColorDecorator(cd);
-			IStatue cd2 = new ColorDecorator(cd1);
+        public static void Main(string[] args)
+        {
+            IStatue statue = new Statue();
+            IStatue arm1 = new ArmsDecorator(statue);
+            IStatue arm2 = new ArmsDecorator(arm1);
+            IStatue arm3 = new ArmsDecorator(arm2);
+            IStatue arm4 = new ArmsDecorator(arm3);
 
-			Console.WriteLine(cd.GetDescription());
-			Console.WriteLine(cd1.GetDescription());
-			Console.WriteLine(cd2.GetDescription());
 
-			Console.ReadKey();
-		}
-	}
+            Console.WriteLine(statue.GetDescription());
+            Console.WriteLine(statue.GetPrice());
+
+            Console.WriteLine(arm1.GetDescription());
+            Console.WriteLine(arm1.GetPrice());
+
+            Console.WriteLine(arm2.GetDescription());
+            Console.WriteLine(arm2.GetPrice());
+
+            Console.WriteLine(arm3.GetDescription());
+            Console.WriteLine(arm3.GetPrice());
+
+            Console.WriteLine(arm4.GetDescription());
+            Console.WriteLine(arm4.GetPrice());
+
+            Console.ReadKey();
+
+        }
+    }
 }
