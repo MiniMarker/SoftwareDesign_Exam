@@ -43,13 +43,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client.cs" />
+    <Compile Include="StatueDecorator\ArmsDecorator.cs" />
+    <Compile Include="StoreFacade\Backroom.cs" />
+    <Compile Include="Bank\BankFlyweight\Bank.cs" />
+    <Compile Include="Bank\BankAccount.cs" />
+    <Compile Include="Bank\BankFlyweight\BankFactory.cs" />
+    <Compile Include="Controller\Bazaar.cs" />
+    <Compile Include="StoreFacade\ShopFactory\CheapShop.cs" />
+    <Compile Include="StatueDecorator\HatDecorator.cs" />
+    <Compile Include="Controller\Client.cs" />
+    <Compile Include="StatueDecorator\ColorDecorator.cs" />
+    <Compile Include="Controller\Configuration.cs" />
+    <Compile Include="Controller\Customer.cs" />
+    <Compile Include="StoreFacade\ShopFactory\FancyShop.cs" />
+    <Compile Include="Bank\BankFlyweight\IBank.cs" />
+    <Compile Include="StoreFacade\ShopFactory\IShop.cs" />
+    <Compile Include="StatueDecorator\IStatue.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StatueDecorator\Statue.cs" />
+    <Compile Include="StatueDecorator\StatueDecorator.cs" />
+    <Compile Include="StoreFacade\Store.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
