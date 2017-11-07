@@ -16,6 +16,7 @@ namespace Bazaar_Of_The_Bizarre {
 			Console.WriteLine(cd.GetDescription());
 			Console.WriteLine(cd1.GetDescription());
 			Console.WriteLine(cd2.GetDescription());
+
 			Console.ReadKey();
 		}
 	}

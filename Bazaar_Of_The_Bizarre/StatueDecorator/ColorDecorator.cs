@@ -4,43 +4,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bazaar_Of_The_Bizarre.statueDecorator
-{
-	class ColorDecorator : StatueDecorator
-	{
+namespace Bazaar_Of_The_Bizarre.statueDecorator {
+	class ColorDecorator : StatueDecorator {
 
-		public ColorDecorator(IStatue originalStatue) : base(originalStatue)
-		{
+		private readonly Random _random = new Random();
+
+		public ColorDecorator(IStatue originalStatue) : base(originalStatue) {
 		}
 
-		public override double GetPrice()
-		{
+		public override double GetPrice() {
 			return base.GetPrice() + 5.0;
 		}
 
-		public override string GetDescription()
-		{
+		public override string GetDescription() {
 			var description = base.GetDescription();
-			if (description.Equals("Statue"))
-			{
-				description = getRandomColor() + " statue";
+			if(description.Equals("Statue")) {
+				description = GetRandomColor() + " statue";
 			}
-			else
-			{
-				description = AddColorToDecoratedStatue();
+			else {
+				description = AddColorToDecoratedStatue(description);
 			}
 			return description;
 		}
 
-		private string getRandomColor()
-		{
-			var rnd = new Random();
+		private string GetRandomColor() {
 			Array colorValues = Enum.GetValues(typeof(Colors));
-			return colorValues.GetValue(rnd.Next(colorValues.Length)).ToString();
+			return colorValues.GetValue(_random.Next(colorValues.Length)).ToString();
 		}
-
-		private enum Colors
-		{
+		
+		private enum Colors {
 			Green,
 			Red,
 			Blue,
@@ -49,35 +41,39 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator
 			Orange
 		}
 
-		private string AddColorToDecoratedStatue()
-		{
-			var currentDescription = base.GetDescription().Split();
+		private string AddColorToDecoratedStatue(string currentDescriptionOfStatue) {
+			var currentDescriptionWords = currentDescriptionOfStatue.Split();
+			var colorToBeAddedToDescription = GetRandomColor();
+			var revisedDescription = "";
+			var colorIsNotAdded = false;
 
-			var revisedDescription = getRandomColor() + " ";
-			if (Enum.IsDefined(typeof(Colors), currentDescription[0]))
-			{
-				revisedDescription += "and ";
-				currentDescription[0] = currentDescription[0].ToLower();
+			if(Enum.IsDefined(typeof(Colors), currentDescriptionWords[0])) {
+				while(!colorIsNotAdded) {
+					if(!CheckIfColorHasBeenUsedInCurrentDescription(colorToBeAddedToDescription, currentDescriptionOfStatue)) {
+						revisedDescription = colorToBeAddedToDescription + " and";
+						currentDescriptionWords[0] = currentDescriptionWords[0].ToLower();
+						colorIsNotAdded = true;
+					}
+					else {
+						colorToBeAddedToDescription = GetRandomColor();
+					}
+				}
 			}
 
-			foreach (var word in currentDescription)
-			{
-				revisedDescription = revisedDescription + " " + word;
+			foreach(var word in currentDescriptionWords) {
+				Console.WriteLine(word);
+				revisedDescription += " " + word;
 			}
 
 			return revisedDescription;
 		}
 
-
-		private bool checkIfColorHasBeenUsedInCurrentDescription(String color)
-		{
-			var currentDescription = base.GetDescription().Split();
-			bool colorHasBeenUsed = false;
-			foreach (var descriptiveWord in currentDescription)
-			{
-				if (Enum.IsDefined(typeof(Colors), descriptiveWord))
-				{
-
+		private bool CheckIfColorHasBeenUsedInCurrentDescription(string color, string currentDescriptionOfStatue) {
+			var currentDescription = currentDescriptionOfStatue.Split();
+			var colorHasBeenUsed = false;
+			foreach(var currentDescribingWord in currentDescription) {
+				if(color.ToLower().Equals(currentDescribingWord.ToLower())) {
+					colorHasBeenUsed = true;
 				}
 			}
 			return colorHasBeenUsed;
