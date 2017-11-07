@@ -19,6 +19,11 @@ namespace Bazaar_Of_The_Bizarre {
             //bank.CreateAccount(SocialSecurityNumber); Banken upprättat konto efter personen har upprättas i client.
         }
 
+	    public int GetSocialSecurityNumber()
+	    {
+	        return _SocialSecurityNumber;
+	    }
+
 	    private void ChooseStore(String Store)
 	    {
 
