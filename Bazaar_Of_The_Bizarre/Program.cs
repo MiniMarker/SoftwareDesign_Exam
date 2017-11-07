@@ -11,9 +11,11 @@ namespace Bazaar_Of_The_Bizarre {
 			IStatue statue = new Statue();
 			IStatue cd = new ColorDecorator(statue);
 			IStatue cd1 = new ColorDecorator(cd);
+			IStatue cd2 = new ColorDecorator(cd1);
 
 			Console.WriteLine(cd.GetDescription());
 			Console.WriteLine(cd1.GetDescription());
+			Console.WriteLine(cd2.GetDescription());
 			Console.ReadKey();
 		}
 	}
