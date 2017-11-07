@@ -15,21 +15,14 @@ namespace Bazaar_Of_The_Bizarre {
             IStatue arm3 = new ArmsDecorator(arm2);
             IStatue arm4 = new ArmsDecorator(arm3);
 
+			IStatue colorStatue = new ColorDecorator(arm1);
+			IStatue color1Statue = new ColorDecorator(statue);
 
-            Console.WriteLine(statue.GetDescription());
-            Console.WriteLine(statue.GetPrice());
+			IStatue armColor = new ArmsDecorator(color1Statue);
 
-            Console.WriteLine(arm1.GetDescription());
-            Console.WriteLine(arm1.GetPrice());
+			Console.WriteLine(colorStatue.GetDescription());
 
-            Console.WriteLine(arm2.GetDescription());
-            Console.WriteLine(arm2.GetPrice());
-
-            Console.WriteLine(arm3.GetDescription());
-            Console.WriteLine(arm3.GetPrice());
-
-            Console.WriteLine(arm4.GetDescription());
-            Console.WriteLine(arm4.GetPrice());
+         
 
             Console.ReadKey();
 
