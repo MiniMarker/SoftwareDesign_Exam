@@ -4,7 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bazaar_Of_The_Bizarre {
+namespace Bazaar_Of_The_Bizarre.statueDecorator {
 	class HatDecorator : StatueDecorator {
+		protected HatDecorator(IStatue originalStatue) : base(originalStatue)
+		{
+
+		}
 	}
 }

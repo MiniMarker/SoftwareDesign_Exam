@@ -4,7 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bazaar_Of_The_Bizarre {
-	interface IStatue {
+namespace Bazaar_Of_The_Bizarre.statueDecorator {
+	interface IStatue
+	{
+		string GetDescription();
+		double GetPrice();
 	}
 }
