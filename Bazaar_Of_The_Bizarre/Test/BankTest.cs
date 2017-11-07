@@ -18,8 +18,8 @@ namespace Bazaar_Of_The_Bizarre.Test
             BankFactory.PrintBanks();
 
             //Registers values to bank.
-            pBank._customers = 233;
-            pBank._capital = 43434;
+            pBank.setCustomers(2323)
+            pBank.setCapital(1000);
             pBank.HandelingCustomer();
             
             //Creates two accounts with same name.

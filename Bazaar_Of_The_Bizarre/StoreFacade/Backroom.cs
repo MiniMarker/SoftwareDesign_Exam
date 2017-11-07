@@ -6,5 +6,9 @@ using System.Threading.Tasks;
 
 namespace Bazaar_Of_The_Bizarre {
 	class Backroom {
+	    public void CreateStatue()
+	    {
+
+	    }
 	}
 }

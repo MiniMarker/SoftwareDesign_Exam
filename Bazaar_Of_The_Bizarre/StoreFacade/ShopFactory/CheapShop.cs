@@ -6,5 +6,13 @@ using System.Threading.Tasks;
 
 namespace Bazaar_Of_The_Bizarre {
 	class CheapShop : IShop{
-	}
+	    public void SetProductPrice(int Price)
+	    {
+
+	    }
+
+	    public void SetName(String Name)
+	    {
+	    }
+    }
 }
