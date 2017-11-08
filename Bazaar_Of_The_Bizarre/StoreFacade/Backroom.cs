@@ -1,5 +1,6 @@
 ﻿using System;
 using Bazaar_Of_The_Bizarre.statueDecorator;
+using Bazaar_Of_The_Bizarre.StatueDecorator;
 
 namespace Bazaar_Of_The_Bizarre.StoreFacade {
 	class Backroom
@@ -13,8 +14,9 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 
 			for (var i = 0; i < numberOfDecorations; i++)
 			{
-				
+		
 				var value = random.Next(1, 4);
+				int numberOfColorsChosen = 0;
 
 				switch (value)
 				{
@@ -34,9 +36,16 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 					
 					//colorDecorator
 					case 3:
-						IStatue colorDecoratedStatue = new ColorDecorator(statue);
-						statue = colorDecoratedStatue;
+						if (numberOfColorsChosen <= Enum.GetValues(typeof(Colors)).Length)
+						{
+							IStatue colorDecoratedStatue = new ColorDecorator(statue);
+							statue = colorDecoratedStatue;
+							numberOfColorsChosen++;
+						}
+						//TODO add else..
+
 						Console.WriteLine("3");
+
 						break;	
 				}
 			}
