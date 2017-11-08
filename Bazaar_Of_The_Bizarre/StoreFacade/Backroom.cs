@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Bazaar_Of_The_Bizarre.statueDecorator;
 
-namespace Bazaar_Of_The_Bizarre {
+namespace Bazaar_Of_The_Bizarre.StoreFacade {
 	class Backroom
 	{
 		//private IStatue statue = new Statue();
 
-		public void CreateProduct(int numberOfDecorations)
+		public IStatue CreateProduct(int numberOfDecorations)
 		{
 			IStatue statue = new Statue();
 			var random = new Random();
@@ -45,7 +41,7 @@ namespace Bazaar_Of_The_Bizarre {
 				}
 			}
 			Console.WriteLine(statue.GetDescription());
-			//return statue;
+			return statue;
 		}
 	}
 }

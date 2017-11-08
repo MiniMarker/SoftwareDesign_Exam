@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Bazaar_Of_The_Bizarre {
+namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
 	class BankFactory {
-	    private static Dictionary<String, Bank> BANKMAP = new Dictionary<string, Bank>();
+	    private static Dictionary<String, Bazaar_Of_The_Bizarre.Bank.BankFlyweight.Bank> BANKMAP = new Dictionary<string, Bazaar_Of_The_Bizarre.Bank.BankFlyweight.Bank>();
 
         //GetBank creates new bank if it does not exist and returns it. Otherwise existing bank is returned.
-	    public static Bank GetBank(String name)
+	    public static Bazaar_Of_The_Bizarre.Bank.BankFlyweight.Bank GetBank(String name)
 	    {
 	        if (!BANKMAP.ContainsKey(name))
 	        {
-                BANKMAP.Add(name, new Bank(name));
+                BANKMAP.Add(name, new Bazaar_Of_The_Bizarre.Bank.BankFlyweight.Bank(name));
 	        }
 	        return BANKMAP[name];
 	    }
@@ -21,7 +18,7 @@ namespace Bazaar_Of_The_Bizarre {
         //prints out all banks.
 	    public static void PrintBanks()
 	    {
-	        foreach (KeyValuePair<String, Bank> Pair in BANKMAP)
+	        foreach (KeyValuePair<String, Bazaar_Of_The_Bizarre.Bank.BankFlyweight.Bank> Pair in BANKMAP)
 	        {
 	            Console.WriteLine("Name = {0}, Bank = {1}", Pair.Key, Pair.Value);
 	        }

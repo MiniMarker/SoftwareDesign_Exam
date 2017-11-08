@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
@@ -11,6 +12,8 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
 
 		public static IShop CreateShop(ShopType typeOfShop, int productPrice)
 		{
+			//
+			Thread.Sleep(450);
 			IShop shop = null;
 			switch (typeOfShop)
 			{
@@ -23,5 +26,6 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
 			}
 			return shop;
 		}
+
 	}
 }

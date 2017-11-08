@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
 	class CheapShop : IShop {
 		private string _name;
 		private int _price;
-		private Random _random;
+		private readonly Random _random = new Random();
 
 		public CheapShop(int price) {
 			SetProductPrice(price);
+			GenerateName();
 		}
 
 		public void GenerateName() {
-			_random = new Random();
 			var chosenStoreName = _random.Next(5);
 			switch(chosenStoreName) {
 				case 0:

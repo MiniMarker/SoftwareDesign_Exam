@@ -4,7 +4,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
 	class ExpensiveShop : IShop {
 		private string _name;
 		private int _price;
-		private Random _random;
+		private Random _random = new Random();
 
 		public ExpensiveShop(int price) {
 			SetProductPrice(price);
