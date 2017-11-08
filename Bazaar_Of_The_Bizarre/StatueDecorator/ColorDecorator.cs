@@ -20,7 +20,6 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 
 		public override string GetDescription() {
 			var description = base.GetDescription();
-			Console.WriteLine("Base description: "+description);
 			if(description.Equals("Statue")) {
 				description = GetRandomColor() + " statue";
 			}

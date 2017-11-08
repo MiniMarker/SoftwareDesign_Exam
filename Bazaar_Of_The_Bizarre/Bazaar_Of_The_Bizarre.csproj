@@ -55,7 +55,7 @@
     <Compile Include="StatueDecorator\ColorDecorator.cs" />
     <Compile Include="Controller\Configuration.cs" />
     <Compile Include="Controller\Customer.cs" />
-    <Compile Include="StoreFacade\ShopFactory\FancyShop.cs" />
+    <Compile Include="StoreFacade\ShopFactory\ExpensiveShop.cs" />
     <Compile Include="Bank\BankFlyweight\IBank.cs" />
     <Compile Include="StoreFacade\ShopFactory\IShop.cs" />
     <Compile Include="StatueDecorator\IStatue.cs" />
@@ -63,6 +63,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StatueDecorator\Statue.cs" />
     <Compile Include="StatueDecorator\StatueDecorator.cs" />
+    <Compile Include="StoreFacade\ShopFactory\ShopFactory.cs" />
+    <Compile Include="StoreFacade\ShopFactory\ShopType.cs" />
     <Compile Include="StoreFacade\Store.cs" />
     <Compile Include="Test\BankTest.cs" />
   </ItemGroup>
