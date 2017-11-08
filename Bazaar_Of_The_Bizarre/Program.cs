@@ -37,9 +37,23 @@ namespace Bazaar_Of_The_Bizarre {
 			 Customer customer3 = new Customer(230266, "Mats Toret");
 			 bank.CreateAccount(customer3.GetSocialSecurityNumber());
 			 */
+//
+//			var backroom = new Backroom();
+//			Console.WriteLine(backroom.CreateProduct(10).GetDescription());
 
-			var backroom = new Backroom();
-			Console.WriteLine(backroom.CreateProduct(10).GetDescription());
+			IStatue statue = new Statue();
+			IStatue colorStatue = new ColorDecorator(statue);
+			IStatue colorStatue1 = new ColorDecorator(colorStatue);
+			IStatue colorStatue2 = new ColorDecorator(colorStatue1);
+			IStatue colorStatue3 = new ColorDecorator(colorStatue2);
+			IStatue colorStatue4 = new ColorDecorator(colorStatue3);
+
+			Console.WriteLine(colorStatue.GetDescription());
+			Console.WriteLine(colorStatue1.GetDescription());
+			Console.WriteLine(colorStatue2.GetDescription());
+			Console.WriteLine(colorStatue3.GetDescription());
+			Console.WriteLine(colorStatue4.GetDescription());
+
 			Console.ReadKey();
 
         }

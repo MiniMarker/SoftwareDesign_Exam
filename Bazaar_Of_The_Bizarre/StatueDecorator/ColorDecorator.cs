@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
 using Bazaar_Of_The_Bizarre.StatueDecorator;
 
 namespace Bazaar_Of_The_Bizarre.statueDecorator {
-	class ColorDecorator : StatueDecorator
-	{
+	class ColorDecorator : StatueDecorator {
 
 		private readonly Random _random;
 
@@ -27,7 +27,7 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 			else {
 				description = AddColorToDecoratedStatue(description);
 			}
-			return description;
+			return ReplaceAndWithSeparator(description);
 		}
 
 		private string GetRandomColor() {
@@ -36,41 +36,39 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 		}
 
 		//TODO Figure out how Decorator works.
-		private string AddColorToDecoratedStatue(string currentDescriptionOfStatueOfNewStatue)
-		{
+		private string AddColorToDecoratedStatue(string currentDescriptionOfStatueOfNewStatue) {
 			var currentDescriptionWords = currentDescriptionOfStatueOfNewStatue.Split();
 
 			var colorToBeAddedToDescription = GetRandomColor();
 			var revisedDescription = "";
 			var colorIsAdded = false;
 
-			while (!colorIsAdded)
-			{
-				if (!CheckIfColorHasBeenUsedInCurrentDescription(colorToBeAddedToDescription, currentDescriptionOfStatueOfNewStatue))
-				{
+			while(!colorIsAdded) {
+				if(!CheckIfColorHasBeenUsedInCurrentDescription(colorToBeAddedToDescription, currentDescriptionOfStatueOfNewStatue)) {
 					revisedDescription = colorToBeAddedToDescription;
-					if (Enum.IsDefined(typeof(Colors), currentDescriptionWords[0]))
-					{
-						revisedDescription += " and";
-					}
 					currentDescriptionWords[0] = currentDescriptionWords[0].ToLower();
 					colorIsAdded = true;
 				}
-				else
-				{
+				else {
 					colorToBeAddedToDescription = GetRandomColor();
 				}
+
+				revisedDescription += " and";
 			}
-			foreach (var word in currentDescriptionWords)
-			{
+
+
+			foreach(var word in currentDescriptionWords) {
 				revisedDescription += " " + word;
 			}
 
+
+			//			Console.WriteLine("Amount of colors used: " + CheckHowManyColorsAreUsedInCurrentDescription(revisedDescription));
+			//			Console.WriteLine("Amount of colors used in old: " + CheckHowManyColorsAreUsedInCurrentDescription(currentDescriptionOfStatueOfNewStatue));
 			return revisedDescription;
 		}
 
 		private bool CheckIfColorHasBeenUsedInCurrentDescription(string color, string currentDescriptionOfStatue) {
-			var currentDescription = currentDescriptionOfStatue.Split();
+			var currentDescription = currentDescriptionOfStatue.Split(',',' ');
 			var colorHasBeenUsed = false;
 			foreach(var currentDescribingWord in currentDescription) {
 				if(color.ToLower().Equals(currentDescribingWord.ToLower())) {
@@ -79,5 +77,58 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 			}
 			return colorHasBeenUsed;
 		}
+
+		/*private string ReplaceAndWithSeparator(string description) {
+
+			var fixedDescription = "";
+			var counter = 0;
+			var descriptionWords = description.Split();
+
+			foreach(var words in descriptionWords) {
+				if(words.Equals("and")) {
+					counter++;
+				}
+			}
+
+			if(counter > 1) {
+
+				foreach(var word in descriptionWords) {
+					if(word.Equals("and") && counter > 1) {
+						fixedDescription += ",";
+						counter--;
+					}
+					else {
+						if(word == descriptionWords[0]) {
+							fixedDescription += word;
+						}
+						else {
+							fixedDescription += " " + word;
+						}
+					}
+				}
+			}
+			else {
+				fixedDescription = description;
+			}
+
+
+			return fixedDescription;
+		}*/
+
+		//		private int CheckHowManyColorsAreUsedInCurrentDescription(string currentDescriptionOfStatue) {
+		//			char[] delimiters = { ',', ' ' };
+		//			var currentDescription = currentDescriptionOfStatue.Split(delimiters);
+		//			var counter = 0;
+		//			foreach(var currentDescribingWord in currentDescription) {
+		//				Console.WriteLine(currentDescribingWord);
+		//				if(!currentDescribingWord.Equals(" ")) {
+		//					if(Enum.IsDefined(typeof(Colors), currentDescribingWord.Substring(1, 2).ToUpper())) {
+		//						counter++;
+		//					}
+		//				}
+		//
+		//			}
+		//			return counter;
+		//		}
 	}
 }

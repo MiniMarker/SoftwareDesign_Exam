@@ -25,5 +25,55 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator{
 		{
 			return _originalStatue.GetPrice();
 		}
+
+		protected string ReplaceAndWithSeparator(string description) {
+
+			var fixedDescription = description;
+			var descriptionWords = description.Split();
+			var amountOfAnd = GetAmountOfAndInDescription(descriptionWords);
+
+
+
+			if(amountOfAnd > 1)
+			{
+				fixedDescription = ReplaceAndWithComma(amountOfAnd, descriptionWords);
+			}
+
+			return fixedDescription;
+		}
+
+		private string ReplaceAndWithComma(int amount, string[] descriptionWords)
+		{
+			var result = "";
+
+			foreach(var word in descriptionWords) {
+				if(word.Equals("and") && amount > 1) {
+					result += ",";
+					amount--;
+				}
+				else {
+					if(word == descriptionWords[0]) {
+						result += word;
+					}
+					else {
+						result += " " + word;
+					}
+				}
+			}
+			return result;
+		}
+
+		private int GetAmountOfAndInDescription(string[] descriptionWords)
+		{
+			var amount = 0;
+
+			foreach(var words in descriptionWords) {
+				if(words.Equals("and")) {
+					amount++;
+				}
+			}
+
+			return amount;
+		}
 	}
 }

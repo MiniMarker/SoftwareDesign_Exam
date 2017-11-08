@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 namespace Bazaar_Of_The_Bizarre.statueDecorator {
 	class JewelDecorator : StatueDecorator {
 
-		private int _numberOfArms;
 
 		public JewelDecorator(IStatue originalStatue) : base(originalStatue) {
-			this._numberOfArms = 0;
 		}
 
 		public override double GetPrice() {
