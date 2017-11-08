@@ -32,26 +32,31 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 
 		}
 
-		private void GetShop(string type)
+		public void GetShop()
 		{
-			ShopType randomShopType = ChooseRandomType();
-			int productPrice = rnd.Next(30);
-
-			if (randomShopType == ShopType.ExpensiveShop)
-			{
-				productPrice = rnd.Next(30,40);
-			}
-			ShopFactory.ShopFactory.CreateShop(randomShopType, productPrice);
+			var shopType = ChooseRandomShopType();
+			
+			Shop = ShopFactory.ShopFactory.CreateShop(shopType, ChooseRandomPrice(shopType));
 		}
 
-		private ShopType ChooseRandomType() {
-			int randomType = rnd.Next(2);
+		private ShopType ChooseRandomShopType() {
+			var randomType = rnd.Next(2);
 
 			if(randomType == 0) {
 				return ShopType.CheapShop;
 			}
 
 			return ShopType.ExpensiveShop;
+		}
+
+		private int ChooseRandomPrice(ShopType shopType)
+		{
+			var productPrice = rnd.Next(30);
+
+			if(shopType == ShopType.ExpensiveShop) {
+				productPrice = rnd.Next(30, 40);
+			}
+			return productPrice;
 		}
 
 	}

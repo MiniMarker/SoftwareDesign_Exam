@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="StatueDecorator\ArmsDecorator.cs" />
+    <Compile Include="StatueDecorator\Colors.cs" />
     <Compile Include="StoreFacade\Backroom.cs" />
     <Compile Include="Bank\BankFlyweight\Bank.cs" />
     <Compile Include="Bank\BankAccount.cs" />
