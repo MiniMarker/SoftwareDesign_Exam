@@ -25,11 +25,11 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 			var description = base.GetDescription();
 			if (description.Equals("Statue"))
 			{
-				description = GetRandomSticker() + " statue";
+				description += " " + GetRandomDecoration("sticker");
 			}
 			else
 			{
-				
+				description = AddDecorationToDescription(description, "sticker");
 			}
 			return description;
 		}

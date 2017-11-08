@@ -67,7 +67,6 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 					amount++;
 				}
 			}
-
 			return amount;
 		}
 
@@ -108,7 +107,7 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 			return colorValues.GetValue(_random.Next(colorValues.Length)).ToString();
 		}
 
-		protected string AddDecorationToDecoratedStatue(string currentDescription, string decoration) {
+/*		protected string AddDecorationToDecoratedStatue(string currentDescription, string decoration) {
 			var revisedDescription = "";
 
 			switch(decoration) {
@@ -121,9 +120,9 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 					break;
 			}
 			return revisedDescription;
-		}
+		}*/
 
-		protected string AddColorToDescription(string currentDescription) {
+	/*	protected string AddColorToDescription(string currentDescription) {
 			var currentDescriptionWords = currentDescription.Split();
 			var colorIsAdded = false;
 			var decorationToBeAddedToDescription = GetRandomColor();
@@ -148,7 +147,7 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 			}
 
 			return descriptionWithAddedDecoration;
-		}
+		}*/
 
 		protected string AddDecorationToDescription(string currentDescription, string decoration) {
 			var currentDescriptionWords = currentDescription.Split();
@@ -160,13 +159,16 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 			while(!decorationIsAdded) {
 				if(!CheckIfDecorationHasBeenUsedInCurrentDescription(decorationToBeAddedToDescription, currentDescription)) {
 					descriptionWithAddedDecoration = decorationToBeAddedToDescription;
+					if(decoration.Equals("color")) { 
 					currentDescriptionWords[0] = currentDescriptionWords[0].ToLower();
+					}
 					decorationIsAdded = true;
 				}
 				else
 				{
 					decorationToBeAddedToDescription = GetRandomDecoration(decoration);
 				}
+				//TODO choose to add before or after decoration
 				descriptionWithAddedDecoration += GetEndingToDecorationInDescription(decoration);
 			}
 
@@ -177,7 +179,7 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 			return descriptionWithAddedDecoration;
 		}
 
-		//TODO Make decoration type
+		//TODO Make decoration into type
 		private string GetEndingToDecorationInDescription(string decoration)
 		{
 			switch (decoration)
@@ -188,7 +190,6 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 					return " and";
 				case "jewel":
 					break;
-
 			}
 			return "";
 		}
