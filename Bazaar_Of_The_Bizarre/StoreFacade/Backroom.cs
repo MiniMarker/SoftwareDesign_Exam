@@ -17,8 +17,9 @@ namespace Bazaar_Of_The_Bizarre {
 
 			for (var i = 0; i < numberOfDecorations; i++)
 			{
-				
+		
 				var value = random.Next(1, 4);
+				int numberOfColorsChosen = 0;
 
 				switch (value)
 				{
@@ -38,9 +39,19 @@ namespace Bazaar_Of_The_Bizarre {
 					
 					//colorDecorator
 					case 3:
+						if (numberOfColorsChosen <= Enum.GetValues(typeof(Colors)).Length)
+						{
+
+						}
 						IStatue colorDecoratedStatue = new ColorDecorator(statue);
 						statue = colorDecoratedStatue;
+						numberOfColorsChosen++;
+
+						
+
 						Console.WriteLine("3");
+
+
 						break;	
 				}
 			}
