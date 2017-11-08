@@ -5,15 +5,16 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using Bazaar_Of_The_Bizarre.statueDecorator;
+using Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory;
 
-namespace Bazaar_Of_The_Bizarre {
+namespace Bazaar_Of_The_Bizarre.StoreFacade {
 	class Store
-    {
-         IShop _shop { get; set; }
-         Backroom Backroom { get; set; }
-         String Name { get; set; }
-         int Quota { get; set; }
-         List<Statue> _products { get; set; }
+	{
+		public IShop Shop;
+        public Backroom Backroom { get; set; }
+        public string Name { get; set; }
+        public int Quota { get; set; }
+	    private List<Statue> _productsForSale;
 
    
         public Statue RecieveProductFromBackroom()
@@ -36,9 +37,9 @@ namespace Bazaar_Of_The_Bizarre {
 
         }
 
-        private void CreateShop(String type)
+        private void GetShop(string type)
         {
-
+	        ShopFactory.ShopFactory.CreateShop(ShopType.CheapShop, "cheapshit", 20);
         }
     }
 }
