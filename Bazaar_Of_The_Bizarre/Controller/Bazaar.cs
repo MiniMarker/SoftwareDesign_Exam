@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bazaar_Of_The_Bizarre.statueDecorator;
 
-namespace Bazaar_Of_The_Bizarre {
+namespace Bazaar_Of_The_Bizarre.controller {
 	class Bazaar
 	{
 	    private Dictionary<int, BankAccount> _accounts;
@@ -13,9 +14,9 @@ namespace Bazaar_Of_The_Bizarre {
             this._accounts = new Dictionary<int, BankAccount>();
         }
 
-	    public iStatue GetProductFromStoreForCustomer(Store store)
+	    public IStatue GetProductFromStoreForCustomer(Store store)
 	    {
-
+		    return null;
 	    }
 
 	    public void CreateStore()

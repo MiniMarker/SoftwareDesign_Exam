@@ -11,17 +11,17 @@ namespace Bazaar_Of_The_Bizarre {
         public string Name { get; set; }
         public int Customers { get; set; }
 	    public int Capital { get; set; }
-	    private Dictionary<int, BankAccount> _accounts = new Dictionary<int, BankAccount>();
+	    private readonly Dictionary<int, BankAccount> _accounts = new Dictionary<int, BankAccount>();
 
         public Bank(String name)
         {
-            this._name = name;
+	        Name = name;
         }
 
         //Prints out information about the bank.
 	    public void HandelingCustomer()
 	    {
-            Console.WriteLine("The bank {0} as {1} customers and a capital of {2} kr.", _name, _customers, _capital);
+            Console.WriteLine("The bank {0} as {1} customers and a capital of {2} kr.", Name, Customers, Capital);
 	    }
 
 	    //Creates a new account, if customer does not have one, and adds it to _accounts.
@@ -29,13 +29,13 @@ namespace Bazaar_Of_The_Bizarre {
 	    {
             //Creates new account with random sum.
 	        Random random = new Random();
-	        int Sum = random.Next(1,250);
-            BankAccount NewAccount = new BankAccount(Sum);
+	        int sum = random.Next(1,250);
+            BankAccount newAccount = new BankAccount(sum);
 
             //Adds account to _account dictionary if customer hasn't an existing account.
 	        if (!_accounts.ContainsKey(CustomerId))
 	        {
-	            _accounts.Add(CustomerId, NewAccount);
+	            _accounts.Add(CustomerId, newAccount);
                 Console.WriteLine("Account has been added.");
 	            return true;
 	        }
@@ -47,12 +47,12 @@ namespace Bazaar_Of_The_Bizarre {
 	    }
   
         //Performs a withdrawal if customer has account and sufficient funds.
-	    public bool Transaction(int Sum, int CustomerId)
+	    public bool Transaction(int sum, int customerId)
 	    {
-	        if (_accounts.ContainsKey(CustomerId))
+	        if (_accounts.ContainsKey(customerId))
 	        {
-	            BankAccount CustomerAccount = _accounts[CustomerId];
-	            bool result = CustomerAccount.Withdrawal(Sum);
+	            BankAccount customerAccount = _accounts[customerId];
+	            bool result = customerAccount.Withdrawal(sum);
 	            return result;
 	        }
 	        else
@@ -65,9 +65,9 @@ namespace Bazaar_Of_The_Bizarre {
         //Prints out all accounts in _accounts.
 	    public void PrintAccounts()
 	    {
-	        foreach (KeyValuePair<int, BankAccount> Pair in _accounts)
+	        foreach (KeyValuePair<int, BankAccount> pair in _accounts)
 	        {
-	            Console.WriteLine("Customer = {0}, Account = {1}", Pair.Key, Pair.Value);
+	            Console.WriteLine("Customer = {0}, Account = {1}", pair.Key, pair.Value);
             }
         }
 

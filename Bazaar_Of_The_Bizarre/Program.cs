@@ -17,10 +17,17 @@ namespace Bazaar_Of_The_Bizarre {
 
 			IStatue colorStatue = new ColorDecorator(arm1);
 			IStatue color1Statue = new ColorDecorator(statue);
+	        IStatue color = new ColorDecorator(statue);
+	        IStatue color1 = new ColorDecorator(color);
+	        IStatue color2 = new ColorDecorator(color1);
+	        IStatue color3 = new ColorDecorator(color2);
 
+			Console.WriteLine(color.GetDescription());
+			Console.WriteLine(color1.GetDescription());
+			Console.WriteLine(color2.GetDescription());
+			Console.WriteLine(color3.GetDescription());
 			IStatue armColor = new ArmsDecorator(color1Statue);
 
-			Console.WriteLine(colorStatue.GetDescription());
 
          
 

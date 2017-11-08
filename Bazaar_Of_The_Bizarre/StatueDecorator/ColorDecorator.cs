@@ -20,6 +20,7 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 
 		public override string GetDescription() {
 			var description = base.GetDescription();
+			Console.WriteLine("Base description: "+description);
 			if(description.Equals("Statue")) {
 				description = GetRandomColor() + " statue";
 			}
@@ -42,39 +43,39 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 			Yellow,
 			Orange
 		}
-
-		private string AddColorToDecoratedStatue(string currentDescriptionOfStatue) {
-			var currentDescriptionWords = currentDescriptionOfStatue.Split();
+		//TODO Figure out how Decorator works.
+		private string AddColorToDecoratedStatue(string currentDescriptionOfStatueOfNewStatue)
+		{
+			var currentDescriptionWords = currentDescriptionOfStatueOfNewStatue.Split();
 
 			var colorToBeAddedToDescription = GetRandomColor();
 			var revisedDescription = "";
-			var colorIsNotAdded = false;
+			var colorIsAdded = false;
 
-			while(!colorIsNotAdded) {
-				if(!CheckIfColorHasBeenUsedInCurrentDescription(colorToBeAddedToDescription, currentDescriptionOfStatue)) {
+			while (!colorIsAdded)
+			{
+				if (!CheckIfColorHasBeenUsedInCurrentDescription(colorToBeAddedToDescription, currentDescriptionOfStatueOfNewStatue))
+				{
 					revisedDescription = colorToBeAddedToDescription;
-					if(Enum.IsDefined(typeof(Colors), currentDescriptionWords[0])) {
+					if (Enum.IsDefined(typeof(Colors), currentDescriptionWords[0]))
+					{
 						revisedDescription += " and";
 					}
 					currentDescriptionWords[0] = currentDescriptionWords[0].ToLower();
-					colorIsNotAdded = true;
+					colorIsAdded = true;
 				}
-				else {
+				else
+				{
 					colorToBeAddedToDescription = GetRandomColor();
 				}
 			}
-
-			foreach(var word in currentDescriptionWords) {
+			foreach (var word in currentDescriptionWords)
+			{
 				revisedDescription += " " + word;
 			}
 
 			return revisedDescription;
 		}
-
-//		private string AddingColorToDescription()
-//		{
-//			
-//		}
 
 		private bool CheckIfColorHasBeenUsedInCurrentDescription(string color, string currentDescriptionOfStatue) {
 			var currentDescription = currentDescriptionOfStatue.Split();

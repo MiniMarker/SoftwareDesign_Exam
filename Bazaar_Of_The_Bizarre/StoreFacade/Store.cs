@@ -4,39 +4,26 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Bazaar_Of_The_Bizarre.statueDecorator;
 
 namespace Bazaar_Of_The_Bizarre {
 	class Store
     {
-        private Shop _shop { get; set; }
-        private BackRoom _backroom { get; set; }
-        private String _name { get; set; }
-        private int _quota { get; set; }
-        private List<Products> _products { get; set; }
+         IShop _shop { get; set; }
+         Backroom Backroom { get; set; }
+         String Name { get; set; }
+         int Quota { get; set; }
+         List<Statue> _products { get; set; }
 
-        public Store(String name)
+   
+        public Statue RecieveProductFromBackroom()
         {
-            this._name = name;
+	        return null;
         }
 
-        public String GetName()
+        public Statue ViewSoldProducts()
         {
-            return _name;
-        }
-
-        public void SetQuota(int Quota)
-        {
-            this._quota = Quota;
-        }
-
-        public Product recieveProductFromBackroom()
-        {
-
-        }
-
-        public Product ViewSoldProducts()
-        {
-
+	        return null;
         }
 
         public Boolean CloseStore()
@@ -44,7 +31,7 @@ namespace Bazaar_Of_The_Bizarre {
             return true;
         }
 
-        public void SellProduct(int Price, int SocialSecurityNumber)
+        public void SellProduct(int price, int socialSecurityNumber)
         {
 
         }
