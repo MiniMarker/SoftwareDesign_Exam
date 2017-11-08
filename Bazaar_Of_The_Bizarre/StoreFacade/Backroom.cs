@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bazaar_Of_The_Bizarre.statueDecorator;
+using Bazaar_Of_The_Bizarre.StatueDecorator;
 
 namespace Bazaar_Of_The_Bizarre {
 	class Backroom
@@ -41,16 +42,13 @@ namespace Bazaar_Of_The_Bizarre {
 					case 3:
 						if (numberOfColorsChosen <= Enum.GetValues(typeof(Colors)).Length)
 						{
-
+							IStatue colorDecoratedStatue = new ColorDecorator(statue);
+							statue = colorDecoratedStatue;
+							numberOfColorsChosen++;
 						}
-						IStatue colorDecoratedStatue = new ColorDecorator(statue);
-						statue = colorDecoratedStatue;
-						numberOfColorsChosen++;
-
-						
+						//TODO add else..
 
 						Console.WriteLine("3");
-
 
 						break;	
 				}
