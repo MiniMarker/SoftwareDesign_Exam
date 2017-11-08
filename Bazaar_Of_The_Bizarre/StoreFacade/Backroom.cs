@@ -2,7 +2,8 @@
 using Bazaar_Of_The_Bizarre.statueDecorator;
 using Bazaar_Of_The_Bizarre.StatueDecorator;
 
-namespace Bazaar_Of_The_Bizarre.StoreFacade {
+namespace Bazaar_Of_The_Bizarre.StoreFacade
+{
 	class Backroom
 	{
 		//private IStatue statue = new Statue();
@@ -13,9 +14,8 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 			var random = new Random();
 			var numberOfColorsChosen = 0;
 
-			for(var i = 0; i < numberOfDecorations; i++)
+			for (var i = 0; i < numberOfDecorations; i++)
 			{
-		
 				var value = random.Next(1, 4);
 
 				switch (value)
@@ -29,11 +29,11 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 
 					//hatDecorator
 					case 2:
-						IStatue hatDecoratedStatue= new StickerDecorator(statue);
+						IStatue hatDecoratedStatue = new StickerDecorator(statue);
 						statue = hatDecoratedStatue;
 						Console.WriteLine("2");
 						break;
-					
+
 					//colorDecorator
 					case 3:
 						if (numberOfColorsChosen <= Enum.GetValues(typeof(Colors)).Length)
@@ -51,7 +51,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 
 						Console.WriteLine("3");
 
-						break;	
+						break;
 				}
 			}
 			return statue;
