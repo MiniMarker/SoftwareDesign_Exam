@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace Bazaar_Of_The_Bizarre.statueDecorator {
 	class ArmsDecorator : StatueDecorator {
 
-        private int numberOfArms = 0;
+        private int numberOfArms;
 
         public ArmsDecorator(IStatue originalStatue) : base(originalStatue)
         {
-
+	        this.numberOfArms = 0;
         }
 
         public override double GetPrice()
@@ -22,15 +22,35 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 
         public override string GetDescription()
         {
-            var description = base.GetDescription();
+	        var desc = base.GetDescription();
 
-            if (!description.Contains("arm(s)"))
-            {
-                numberOfArms++;
-                description =  base.GetDescription() + " " + numberOfArms + " arm(s)";
+	        if (!desc.Contains("arm(s)"))
+	        {
+				numberOfArms++;
+		        desc = base.GetDescription() + " " + numberOfArms + " arm(s)";
+			}
+	        else
+	        {
+		        numberOfArms++;
 
-            }
-            return description;
+			}
+	        return desc;
+
+
+	        /*var description = base.GetDescription();
+
+	        if (!description.Contains("arm(s)"))
+	        {
+		        numberOfArms++;
+		        description = base.GetDescription() + " " + numberOfArms + " arm(s)";
+
+	        }
+	        else
+	        {
+		        numberOfArms++;
+	        }
+
+			return description;*/
         }
     }
 }

@@ -9,5 +9,6 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 	{
 		string GetDescription();
 		double GetPrice();
+		string ToString();
 	}
 }
