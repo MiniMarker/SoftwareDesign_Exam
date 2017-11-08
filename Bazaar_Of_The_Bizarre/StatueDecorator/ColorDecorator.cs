@@ -9,10 +9,8 @@ using Bazaar_Of_The_Bizarre.StatueDecorator;
 namespace Bazaar_Of_The_Bizarre.statueDecorator {
 	class ColorDecorator : StatueDecorator {
 
-		private readonly Random _random;
 
 		public ColorDecorator(IStatue originalStatue) : base(originalStatue) {
-			_random = new Random();
 		}
 
 		public override double GetPrice() {
@@ -30,10 +28,7 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 			return ReplaceAndWithSeparator(description);
 		}
 
-		private string GetRandomColor() {
-			var colorValues = Enum.GetValues(typeof(Colors));
-			return colorValues.GetValue(_random.Next(colorValues.Length)).ToString();
-		}
+		
 
 		//TODO Figure out how Decorator works.
 		private string AddColorToDecoratedStatue(string currentDescription) {
@@ -44,7 +39,7 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 			var colorIsAdded = false;
 
 			while(!colorIsAdded) {
-				if(!CheckIfColorHasBeenUsedInCurrentDescription(colorToBeAddedToDescription, currentDescription)) {
+				if(!CheckIfDecorationHasBeenUsedInCurrentDescription(colorToBeAddedToDescription, currentDescription)) {
 					revisedDescription = colorToBeAddedToDescription;
 					currentDescriptionWords[0] = currentDescriptionWords[0].ToLower();
 					colorIsAdded = true;
@@ -66,17 +61,17 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 			//			Console.WriteLine("Amount of colors used in old: " + CheckHowManyColorsAreUsedInCurrentDescription(currentDescription));
 			return revisedDescription;
 		}
-		//TODO can be more dynamic?
-		private bool CheckIfColorHasBeenUsedInCurrentDescription(string color, string currentDescriptionOfStatue) {
-			var currentDescription = currentDescriptionOfStatue.Split(',',' ');
-			var colorHasBeenUsed = false;
-			foreach(var currentDescribingWord in currentDescription) {
-				if(color.ToLower().Equals(currentDescribingWord.ToLower())) {
-					colorHasBeenUsed = true;
-				}
-			}
-			return colorHasBeenUsed;
-		}
+//		//TODO can be more dynamic?
+//		private bool CheckIfColorHasBeenUsedInCurrentDescription(string color, string currentDescriptionOfStatue) {
+//			var currentDescription = currentDescriptionOfStatue.Split(',',' ');
+//			var colorHasBeenUsed = false;
+//			foreach(var currentDescribingWord in currentDescription) {
+//				if(color.ToLower().Equals(currentDescribingWord.ToLower())) {
+//					colorHasBeenUsed = true;
+//				}
+//			}
+//			return colorHasBeenUsed;
+//		}
 
 		/*private string ReplaceAndWithSeparator(string description) {
 

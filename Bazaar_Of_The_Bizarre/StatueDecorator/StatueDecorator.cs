@@ -4,15 +4,18 @@ using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
+using Bazaar_Of_The_Bizarre.StatueDecorator;
 
 namespace Bazaar_Of_The_Bizarre.statueDecorator{
 	class StatueDecorator : IStatue
 	{
 
 		private readonly IStatue _originalStatue;
+		private readonly Random _random;
 
 		protected StatueDecorator(IStatue originalStatue)
 		{
+			_random = new Random();
 			_originalStatue = originalStatue;
 		}
 
@@ -72,6 +75,77 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator{
 			}
 
 			return amount;
+		}
+
+		protected bool CheckIfDecorationHasBeenUsedInCurrentDescription(string decoration, string currentDescriptionOfStatue) {
+			var currentDescription = currentDescriptionOfStatue.Split(',', ' ','-');
+			var decorationHasBeenUsed = false;
+			foreach(var currentDescribingWord in currentDescription) {
+				if(decoration.ToLower().Equals(currentDescribingWord.ToLower())) {
+					decorationHasBeenUsed = true;
+				}
+			}
+			return decorationHasBeenUsed;
+		}
+
+
+		protected string GetRandomSticker() {
+			var stickerValues = Enum.GetValues(typeof(Stickers));
+			return stickerValues.GetValue(_random.Next(stickerValues.Length)).ToString();
+		}
+
+		protected string GetRandomColor() {
+			var colorValues = Enum.GetValues(typeof(Colors));
+			return colorValues.GetValue(_random.Next(colorValues.Length)).ToString();
+		}
+
+		protected string AddDecorationToDecoratedStatue(string currentDescription, string decoration) {
+			var revisedDescription = "";
+
+			switch (decoration)
+			{
+				case "color":
+					revisedDescription = AddColorToDescription(currentDescription);
+					break;
+				case "sticker":
+					break;
+				case "jewel":
+					break;
+			}
+			return revisedDescription;
+		}
+
+		private string AddColorToDescription(string currentDescription)
+		{
+			var currentDescriptionWords = currentDescription.Split();
+			var colorIsAdded = false;
+			var decorationToBeAddedToDescription = GetRandomColor();
+
+			var descriptionWithAddedDecoration = "";
+
+			while(!colorIsAdded) {
+				if(!CheckIfDecorationHasBeenUsedInCurrentDescription(decorationToBeAddedToDescription, currentDescription)) {
+					descriptionWithAddedDecoration = decorationToBeAddedToDescription;
+					currentDescriptionWords[0] = currentDescriptionWords[0].ToLower();
+					colorIsAdded = true;
+				}
+				else {
+					decorationToBeAddedToDescription = GetRandomColor();
+				}
+
+				descriptionWithAddedDecoration += " and";
+			}
+
+			foreach(var word in currentDescriptionWords) {
+				descriptionWithAddedDecoration += " " + word;
+			}
+
+			return descriptionWithAddedDecoration;
+		}
+
+		private string AddStickerToDescription(string currentDescription)
+		{
+			return null;
 		}
 	}
 }

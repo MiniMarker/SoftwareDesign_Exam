@@ -34,20 +34,16 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 			return description;
 		}
 
-		private string GetRandomSticker()
-		{
-			var stickerValues = Enum.GetValues(typeof(Stickers));
-			return stickerValues.GetValue(_random.Next(stickerValues.Length)).ToString();
-		}
+		//
+		//		private String AddStickerToDecoratedStatue(string currentDescription)
+		//		{
+		//			var currentDescriptionWords = currentDescription.Split();
+		//
+		//			var colorToBeAddedToDescription = GetRandomColor();
+		//			var revisedDescription = "";
+		//			var stickerIsAdded = false;
+		//			return null;
+		//		}
 
-		private String AddStickerToDecoratedStatue(string currentDescription)
-		{
-			var currentDescriptionWords = currentDescription.Split();
-
-			var colorToBeAddedToDescription = GetRandomColor();
-			var revisedDescription = "";
-			var stickerIsAdded = false;
-			return null;
-		}
 	}
 }
