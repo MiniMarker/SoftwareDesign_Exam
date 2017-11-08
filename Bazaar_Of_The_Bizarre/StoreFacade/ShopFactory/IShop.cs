@@ -4,7 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bazaar_Of_The_Bizarre {
-	interface IShop {
+namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
+	interface IShop
+	{
+		void GenerateName();
+		void SetProductPrice(int price);
+		int GetPrice();
+		string GetName();
 	}
 }
