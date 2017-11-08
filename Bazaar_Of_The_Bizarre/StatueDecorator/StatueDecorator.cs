@@ -3,29 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Bazaar_Of_The_Bizarre.StatueDecorator;
 
-namespace Bazaar_Of_The_Bizarre.statueDecorator{
-	class StatueDecorator : IStatue
-	{
+namespace Bazaar_Of_The_Bizarre.statueDecorator {
+	class StatueDecorator : IStatue {
 
 		private readonly IStatue _originalStatue;
 		private readonly Random _random;
 
-		protected StatueDecorator(IStatue originalStatue)
-		{
+		protected StatueDecorator(IStatue originalStatue) {
 			_random = new Random();
 			_originalStatue = originalStatue;
 		}
 
-		public virtual string GetDescription()
-		{
+		public virtual string GetDescription() {
 			return _originalStatue.GetDescription();
 		}
 
-		public virtual double GetPrice()
-		{
+		public virtual double GetPrice() {
 			return _originalStatue.GetPrice();
 		}
 
@@ -34,17 +31,15 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator{
 			var fixedDescription = description;
 			var descriptionWords = description.Split();
 			var amountOfAnd = GetAmountOfAndInDescription(descriptionWords);
-			
-			if(amountOfAnd > 1)
-			{
+
+			if(amountOfAnd > 1) {
 				fixedDescription = ReplaceAndWithComma(amountOfAnd, descriptionWords);
 			}
 
 			return fixedDescription;
 		}
 
-		protected string ReplaceAndWithComma(int amount, string[] descriptionWords)
-		{
+		protected string ReplaceAndWithComma(int amount, string[] descriptionWords) {
 			var result = "";
 
 			foreach(var word in descriptionWords) {
@@ -64,8 +59,7 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator{
 			return result;
 		}
 
-		protected int GetAmountOfAndInDescription(string[] descriptionWords)
-		{
+		protected int GetAmountOfAndInDescription(string[] descriptionWords) {
 			var amount = 0;
 
 			foreach(var words in descriptionWords) {
@@ -78,7 +72,7 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator{
 		}
 
 		protected bool CheckIfDecorationHasBeenUsedInCurrentDescription(string decoration, string currentDescriptionOfStatue) {
-			var currentDescription = currentDescriptionOfStatue.Split(',', ' ','-');
+			var currentDescription = currentDescriptionOfStatue.Split(',', ' ', '-');
 			var decorationHasBeenUsed = false;
 			foreach(var currentDescribingWord in currentDescription) {
 				if(decoration.ToLower().Equals(currentDescribingWord.ToLower())) {
@@ -88,6 +82,21 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator{
 			return decorationHasBeenUsed;
 		}
 
+		protected string GetRandomDecoration(string decoration) {
+			var decorationToBeAdded = "";
+
+			switch(decoration.ToLower()) {
+				case "sticker":
+					decorationToBeAdded = GetRandomSticker();
+					break;
+				case "color":
+					decorationToBeAdded = GetRandomColor();
+					break;
+				case "jewel":
+					break;
+			}
+			return decorationToBeAdded;
+		}
 
 		protected string GetRandomSticker() {
 			var stickerValues = Enum.GetValues(typeof(Stickers));
@@ -102,8 +111,7 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator{
 		protected string AddDecorationToDecoratedStatue(string currentDescription, string decoration) {
 			var revisedDescription = "";
 
-			switch (decoration)
-			{
+			switch(decoration) {
 				case "color":
 					revisedDescription = AddColorToDescription(currentDescription);
 					break;
@@ -115,8 +123,7 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator{
 			return revisedDescription;
 		}
 
-		private string AddColorToDescription(string currentDescription)
-		{
+		protected string AddColorToDescription(string currentDescription) {
 			var currentDescriptionWords = currentDescription.Split();
 			var colorIsAdded = false;
 			var decorationToBeAddedToDescription = GetRandomColor();
@@ -143,9 +150,47 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator{
 			return descriptionWithAddedDecoration;
 		}
 
-		private string AddStickerToDescription(string currentDescription)
+		protected string AddDecorationToDescription(string currentDescription, string decoration) {
+			var currentDescriptionWords = currentDescription.Split();
+			var decorationIsAdded = false;
+			var decorationToBeAddedToDescription = GetRandomDecoration(decoration);
+
+			var descriptionWithAddedDecoration = "";
+
+			while(!decorationIsAdded) {
+				if(!CheckIfDecorationHasBeenUsedInCurrentDescription(decorationToBeAddedToDescription, currentDescription)) {
+					descriptionWithAddedDecoration = decorationToBeAddedToDescription;
+					currentDescriptionWords[0] = currentDescriptionWords[0].ToLower();
+					decorationIsAdded = true;
+				}
+				else
+				{
+					decorationToBeAddedToDescription = GetRandomDecoration(decoration);
+				}
+				descriptionWithAddedDecoration += GetEndingToDecorationInDescription(decoration);
+			}
+
+			foreach(var word in currentDescriptionWords) {
+				descriptionWithAddedDecoration += " " + word;
+			}
+
+			return descriptionWithAddedDecoration;
+		}
+
+		//TODO Make decoration type
+		private string GetEndingToDecorationInDescription(string decoration)
 		{
-			return null;
+			switch (decoration)
+			{
+				case "sticker":
+					return "-sticker,";
+				case "color":
+					return " and";
+				case "jewel":
+					break;
+
+			}
+			return "";
 		}
 	}
 }

@@ -23,7 +23,7 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 				description = GetRandomColor() + " statue";
 			}
 			else {
-				description = AddColorToDecoratedStatue(description);
+				description = AddDecorationToDescription(description, "color");
 			}
 			return ReplaceAndWithSeparator(description);
 		}
@@ -31,7 +31,7 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 		
 
 		//TODO Figure out how Decorator works.
-		private string AddColorToDecoratedStatue(string currentDescription) {
+/*		private string AddColorToDecoratedStatue(string currentDescription) {
 			var currentDescriptionWords = currentDescription.Split();
 
 			var colorToBeAddedToDescription = GetRandomColor();
@@ -60,7 +60,7 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 			//			Console.WriteLine("Amount of colors used: " + CheckHowManyColorsAreUsedInCurrentDescription(revisedDescription));
 			//			Console.WriteLine("Amount of colors used in old: " + CheckHowManyColorsAreUsedInCurrentDescription(currentDescription));
 			return revisedDescription;
-		}
+		}*/
 //		//TODO can be more dynamic?
 //		private bool CheckIfColorHasBeenUsedInCurrentDescription(string color, string currentDescriptionOfStatue) {
 //			var currentDescription = currentDescriptionOfStatue.Split(',',' ');
