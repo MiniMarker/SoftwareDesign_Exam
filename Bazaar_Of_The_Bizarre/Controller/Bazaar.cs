@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bazaar_Of_The_Bizarre.statueDecorator;
+using Bazaar_Of_The_Bizarre.StoreFacade;
 
 namespace Bazaar_Of_The_Bizarre.controller {
 	class Bazaar

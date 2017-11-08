@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bazaar_Of_The_Bizarre.StatueDecorator;
 
 namespace Bazaar_Of_The_Bizarre.statueDecorator {
 	class ColorDecorator : StatueDecorator
@@ -34,14 +35,6 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 			return colorValues.GetValue(_random.Next(colorValues.Length)).ToString();
 		}
 
-		private enum Colors {
-			Green,
-			Red,
-			Blue,
-			Black,
-			Yellow,
-			Orange
-		}
 		//TODO Figure out how Decorator works.
 		private string AddColorToDecoratedStatue(string currentDescriptionOfStatueOfNewStatue)
 		{

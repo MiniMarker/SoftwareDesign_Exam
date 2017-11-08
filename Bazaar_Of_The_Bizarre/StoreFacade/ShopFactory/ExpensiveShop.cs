@@ -8,7 +8,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
 
 		public ExpensiveShop(int price) {
 			SetProductPrice(price);
-
+			GenerateName();
 		}
 
 		public void GenerateName() {
@@ -40,6 +40,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
 		public void SetName(string name) {
 			_name = name;
 		}
+
 		public int GetPrice() {
 			return _price;
 		}
