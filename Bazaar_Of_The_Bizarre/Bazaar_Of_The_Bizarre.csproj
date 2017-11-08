@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StatueDecorator\ArmsDecorator.cs" />
+    <Compile Include="StatueDecorator\JewelDecorator.cs" />
     <Compile Include="StatueDecorator\Colors.cs" />
     <Compile Include="StoreFacade\Backroom.cs" />
     <Compile Include="Bank\BankFlyweight\Bank.cs" />
@@ -51,7 +51,7 @@
     <Compile Include="Bank\BankFlyweight\BankFactory.cs" />
     <Compile Include="Controller\Bazaar.cs" />
     <Compile Include="StoreFacade\ShopFactory\CheapShop.cs" />
-    <Compile Include="StatueDecorator\HatDecorator.cs" />
+    <Compile Include="StatueDecorator\StickerDecorator.cs" />
     <Compile Include="Controller\Client.cs" />
     <Compile Include="StatueDecorator\ColorDecorator.cs" />
     <Compile Include="Controller\Configuration.cs" />

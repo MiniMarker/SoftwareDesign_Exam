@@ -11,6 +11,8 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 
 		private readonly string _description;
 		private readonly double _price;
+		public static int _numberOfArms;
+		private static int _numberOfHats;
 
 		public Statue(double price = 20.0, string description = "Statue")
 		{
