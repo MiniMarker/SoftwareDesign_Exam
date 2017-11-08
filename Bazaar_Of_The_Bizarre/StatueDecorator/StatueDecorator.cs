@@ -31,9 +31,7 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator{
 			var fixedDescription = description;
 			var descriptionWords = description.Split();
 			var amountOfAnd = GetAmountOfAndInDescription(descriptionWords);
-
-
-
+			
 			if(amountOfAnd > 1)
 			{
 				fixedDescription = ReplaceAndWithComma(amountOfAnd, descriptionWords);
@@ -42,7 +40,7 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator{
 			return fixedDescription;
 		}
 
-		private string ReplaceAndWithComma(int amount, string[] descriptionWords)
+		protected string ReplaceAndWithComma(int amount, string[] descriptionWords)
 		{
 			var result = "";
 
@@ -63,7 +61,7 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator{
 			return result;
 		}
 
-		private int GetAmountOfAndInDescription(string[] descriptionWords)
+		protected int GetAmountOfAndInDescription(string[] descriptionWords)
 		{
 			var amount = 0;
 
