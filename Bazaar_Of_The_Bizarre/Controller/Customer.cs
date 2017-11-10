@@ -3,44 +3,42 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bazaar_Of_The_Bizarre.statueDecorator;
 
-namespace Bazaar_Of_The_Bizarre {
+namespace Bazaar_Of_The_Bizarre.controller {
 	class Customer
 	{
 	    private int _SocialSecurityNumber { get; set; }
 	    private String _name { get; set; }
-	    private List<String> _itemsPurchased { get; set;}
+	    private List<IStatue> _itemsPurchased { get; set;}
 
 	    public Customer(int SocialSecurityNumber, String name)
 	    {
             this._name = name;
 	        this._SocialSecurityNumber = SocialSecurityNumber;
-            this._itemsPurchased = new List<string>();
+            this._itemsPurchased = new List<IStatue>();
             //bank.CreateAccount(SocialSecurityNumber); Banken upprättat konto efter personen har upprättas i client.
         }
 
-	    public int GetSocialSecurityNumber()
+		// Buys item if sufficient funds on bankaccount. Adds in _itemsPurchased.
+	    private void BuyItem(Bazaar bazaar)
 	    {
-	        return _SocialSecurityNumber;
-	    }
+		    IStatue productBought = null;
 
-	    private void ChooseStore(String Store)
-	    {
+			productBought = bazaar.GetProductFromStoreForCustomer(_SocialSecurityNumber);
 
-	    }
-
-	    private void BuyItem()
-	    {
-
-
+		    if (productBought != null)
+		    {
+			    _itemsPurchased.Add(productBought);
+		    }
 	    }
 
         //Prints out all the purchased items.
 	    private void GetItemsPurchased()
 	    {
-	        foreach(String Item in _itemsPurchased)
+	        foreach(IStatue Item in _itemsPurchased)
 	        {
-	            Console.WriteLine(Item);
+	            Console.WriteLine(Item.ToString());
 	        }
 
 	    }
