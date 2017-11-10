@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bazaar_Of_The_Bizarre.Bank.BankFlyweight;
+using Bazaar_Of_The_Bizarre.controller;
 
 namespace Bazaar_Of_The_Bizarre {
 	class Client {
+/*
 	    private Bank.BankFlyweight.Bank _bank { get; set; }
 	    private Customer _Customer1 { get; set;}
 	    private Customer _Customer2 { get; set; }
@@ -23,6 +25,7 @@ namespace Bazaar_Of_The_Bizarre {
 		     Customer _Customer3 = new Customer(230266, "Mats Toret");
 		     _bank.CreateAccount(_Customer3.GetSocialSecurityNumber());
         }
+*/
 
 
     }

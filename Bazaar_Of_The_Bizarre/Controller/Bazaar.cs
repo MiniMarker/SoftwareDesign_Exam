@@ -26,7 +26,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 			if (_stores.ContainsKey(store))
 		    {
 			    Store StoreToShopFrom = _stores[store];
-			    ProductToSell = StoreToShopFrom.SellProduct(socialSecurityNumber);
+//			    ProductToSell = StoreToShopFrom.SellProduct(socialSecurityNumber);
 		    }
 		    return ProductToSell;
 	    }

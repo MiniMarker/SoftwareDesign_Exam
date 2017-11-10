@@ -10,8 +10,10 @@
 		dog,
 		horse,
 		football,
-		present,
+		smiley,
 		cake,
+		GLaDOS,
+		Wheatley,
 		portalgun
 	}
 }
