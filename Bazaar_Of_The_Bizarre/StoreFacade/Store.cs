@@ -57,7 +57,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 
 		//Todo, when products are 100% done.
 		//sjekk pris, hvis kundens balanse
-		public IStatue SellProduct(int socialSecurityNumber) {
+	/*	public IStatue SellProduct(int socialSecurityNumber) {
 			Bank.BankFlyweight.Bank bank = Bank.BankFlyweight.BankFactory.GetBank("DnB");
 			int price = 0; // Må få pris på produkten?
 			if (bank.Transaction(price, socialSecurityNumber))
@@ -68,7 +68,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 			{
 			}
 
-		}
+		}*/
 
 		//Creates a shop based on given type of shop.
 		public IShop CreateShop(ShopType shopType)

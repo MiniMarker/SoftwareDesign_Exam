@@ -3,15 +3,17 @@
 	{
 		Mario,
 		Luigi,
-		Arthas,
+		Superman,
 		orc,
 		zergling,
 		cat,
 		dog,
 		horse,
 		football,
-		present,
+		smiley,
 		cake,
+		GLaDOS,
+		Wheatley,
 		portalgun
 	}
 }

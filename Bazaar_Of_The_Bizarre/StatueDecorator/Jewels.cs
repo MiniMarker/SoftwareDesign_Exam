@@ -8,12 +8,12 @@ namespace Bazaar_Of_The_Bizarre.StatueDecorator
 {
 	enum Jewels
 	{
-		Diamond,
-		Emerald,
-		Pearl,
-		Opals,
-		Ruby,
-		Sapphire,
-		Topaz
+		diamond,
+		emerald,
+		pearl,
+		opal,
+		ruby,
+		sapphire,
+		topaz
 	}
 }

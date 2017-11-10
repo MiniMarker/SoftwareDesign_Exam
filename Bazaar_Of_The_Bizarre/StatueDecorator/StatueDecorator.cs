@@ -8,29 +8,28 @@ using System.Threading.Tasks;
 using Bazaar_Of_The_Bizarre.StatueDecorator;
 
 namespace Bazaar_Of_The_Bizarre.statueDecorator {
-	class StatueDecorator : IStatue {
+	class StatueDecorator : IStatue
+	{
 
 		private readonly IStatue _originalStatue;
 		private readonly Random _random;
 
-		protected StatueDecorator(IStatue originalStatue) {
+		protected StatueDecorator(IStatue originalStatue)
+		{
 			_random = new Random();
 			_originalStatue = originalStatue;
 		}
 
-		public virtual string GetDescription() {
+		public virtual string GetDescription()
+		{
 			return _originalStatue.GetDescription();
 		}
 
-		public virtual double GetPrice() {
+		public virtual double GetPrice()
+		{
 			return _originalStatue.GetPrice();
 		}
-
-		public virtual string ToString()
-		{
-			return _originalStatue.GetDescription() + ". price: " + _originalStatue.GetPrice();
-		}
-
+/*
 		protected string ReplaceAndWithSeparator(string description) {
 
 			var fixedDescription = description;
@@ -42,29 +41,29 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 			}
 
 			return fixedDescription;
-		}
+		}*/
 
-		protected string ReplaceAndWithComma(int amount, string[] descriptionWords) {
-			var result = "";
-
-			foreach(var word in descriptionWords) {
-				if(word.Equals("and") && amount > 1) {
-					result += ",";
-					amount--;
-				}
-				else {
-					if(word == descriptionWords[0]) {
-						result += word;
+		/*	protected string ReplaceAndWithComma(int amount, string[] descriptionWords) {
+				var result = "";
+	
+				foreach(var word in descriptionWords) {
+					if(word.Equals("and") && amount > 1) {
+						result += ",";
+						amount--;
 					}
 					else {
-						result += " " + word;
+						if(word == descriptionWords[0]) {
+							result += word;
+						}
+						else {
+							result += " " + word;
+						}
 					}
 				}
-			}
-			return result;
-		}
+				return result;
+			}*/
 
-		protected int GetAmountOfAndInDescription(string[] descriptionWords) {
+/*		protected int GetAmountOfAndInDescription(string[] descriptionWords) {
 			var amount = 0;
 
 			foreach(var words in descriptionWords) {
@@ -73,23 +72,28 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 				}
 			}
 			return amount;
-		}
+		}*/
 
-		protected bool CheckIfDecorationHasBeenUsedInCurrentDescription(string decoration, string currentDescriptionOfStatue) {
-			var currentDescription = currentDescriptionOfStatue.Split(',', ' ', '-');
+		protected bool CheckIfDecorationHasBeenUsedInCurrentDescription(string decoration, string currentDescriptionOfStatue)
+		{
+			var currentDescription = currentDescriptionOfStatue.Split();
 			var decorationHasBeenUsed = false;
-			foreach(var currentDescribingWord in currentDescription) {
-				if(decoration.ToLower().Equals(currentDescribingWord.ToLower())) {
+			foreach (var currentDescribingWord in currentDescription)
+			{
+				if (decoration.ToLower().Equals(currentDescribingWord.ToLower()))
+				{
 					decorationHasBeenUsed = true;
 				}
 			}
 			return decorationHasBeenUsed;
 		}
 
-		protected string GetRandomDecoration(string decoration) {
+		protected string GetRandomDecoration(string decoration)
+		{
 			var decorationToBeAdded = "";
 
-			switch(decoration.ToLower()) {
+			switch (decoration.ToLower())
+			{
 				case "sticker":
 					decorationToBeAdded = GetRandomSticker();
 					break;
@@ -97,106 +101,56 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 					decorationToBeAdded = GetRandomColor();
 					break;
 				case "jewel":
+					decorationToBeAdded = GetRandomJewel();
 					break;
 			}
 			return decorationToBeAdded;
 		}
 
-		protected string GetRandomSticker() {
+		private string GetRandomSticker() {
+			
 			var stickerValues = Enum.GetValues(typeof(Stickers));
 			return stickerValues.GetValue(_random.Next(stickerValues.Length)).ToString();
 		}
 
-		protected string GetRandomColor() {
+		private string GetRandomColor() { 
 			var colorValues = Enum.GetValues(typeof(Colors));
 			return colorValues.GetValue(_random.Next(colorValues.Length)).ToString();
 		}
 
-/*		protected string AddDecorationToDecoratedStatue(string currentDescription, string decoration) {
-			var revisedDescription = "";
+		private string GetRandomJewel() {
+			var jewelValues = Enum.GetValues(typeof(Jewels));
+			return jewelValues.GetValue(_random.Next(jewelValues.Length)).ToString();
+		}
 
-			switch(decoration) {
-				case "color":
-					revisedDescription = AddColorToDescription(currentDescription);
-					break;
-				case "sticker":
-					break;
-				case "jewel":
-					break;
-			}
-			return revisedDescription;
-		}*/
 
-	/*	protected string AddColorToDescription(string currentDescription) {
-			var currentDescriptionWords = currentDescription.Split();
-			var colorIsAdded = false;
-			var decorationToBeAddedToDescription = GetRandomColor();
-
-			var descriptionWithAddedDecoration = "";
-
-			while(!colorIsAdded) {
-				if(!CheckIfDecorationHasBeenUsedInCurrentDescription(decorationToBeAddedToDescription, currentDescription)) {
-					descriptionWithAddedDecoration = decorationToBeAddedToDescription;
-					currentDescriptionWords[0] = currentDescriptionWords[0].ToLower();
-					colorIsAdded = true;
-				}
-				else {
-					decorationToBeAddedToDescription = GetRandomColor();
-				}
-
-				descriptionWithAddedDecoration += " and";
-			}
-
-			foreach(var word in currentDescriptionWords) {
-				descriptionWithAddedDecoration += " " + word;
-			}
-
-			return descriptionWithAddedDecoration;
-		}*/
-
-		protected string AddDecorationToDescription(string currentDescription, string decoration) {
+		protected string AddDecorationToDescription(string currentDescription, string decoration)
+		{
 			var currentDescriptionWords = currentDescription.Split();
 			var decorationIsAdded = false;
 			var decorationToBeAddedToDescription = GetRandomDecoration(decoration);
 
 			var descriptionWithAddedDecoration = "";
 
-			while(!decorationIsAdded) {
-				if(!CheckIfDecorationHasBeenUsedInCurrentDescription(decorationToBeAddedToDescription, currentDescription)) {
+			while (!decorationIsAdded)
+			{
+				if (!CheckIfDecorationHasBeenUsedInCurrentDescription(decorationToBeAddedToDescription, currentDescription))
+				{
 					descriptionWithAddedDecoration = decorationToBeAddedToDescription;
-					if(decoration.Equals("color")) { 
-					currentDescriptionWords[0] = currentDescriptionWords[0].ToLower();
-					}
 					decorationIsAdded = true;
 				}
 				else
 				{
 					decorationToBeAddedToDescription = GetRandomDecoration(decoration);
 				}
-				//TODO choose to add before or after decoration
-				descriptionWithAddedDecoration += GetEndingToDecorationInDescription(decoration);
 			}
 
-			foreach(var word in currentDescriptionWords) {
+			foreach (var word in currentDescriptionWords)
+			{
 				descriptionWithAddedDecoration += " " + word;
 			}
 
 			return descriptionWithAddedDecoration;
-		}
-
-		//TODO Make decoration into type
-		private string GetEndingToDecorationInDescription(string decoration)
-		{
-			switch (decoration)
-			{
-				case "sticker":
-					return "-sticker,";
-				case "color":
-					return " and";
-				case "jewel":
-					break;
-			}
-			return "";
 		}
 	}
 }
