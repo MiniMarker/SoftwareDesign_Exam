@@ -40,7 +40,7 @@ namespace Bazaar_Of_The_Bizarre {
 			//			var backroom = new Backroom();
 			//			Console.WriteLine(backroom.CreateProduct(10).GetDescription());
 
-			IStatue statue = new Statue();
+			/* IStatue statue = new Statue();
 			IStatue colorStatue = new ColorDecorator(statue);
 			IStatue colorStatue1 = new ColorDecorator(colorStatue);
 			IStatue colorStatue2 = new ColorDecorator(colorStatue1);
@@ -63,7 +63,16 @@ namespace Bazaar_Of_The_Bizarre {
 			Console.WriteLine(colorStatue2.GetDescription());
 			Console.WriteLine(colorStatue3.GetDescription());
 			Console.WriteLine(colorStatue4.GetDescription());
+			*/
 
+			var backroom = new Backroom();
+
+			Console.WriteLine(backroom.CreateProduct(10).ToString());
+
+			Console.WriteLine(backroom.CreateProduct(10).ToString());
+
+			Console.WriteLine(backroom.CreateProduct(10).ToString());
+			
 			Console.ReadKey();
 
 		}

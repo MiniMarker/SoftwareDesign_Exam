@@ -26,6 +26,11 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 			return _originalStatue.GetPrice();
 		}
 
+		public virtual string ToString()
+		{
+			return _originalStatue.GetDescription() + ". price: " + _originalStatue.GetPrice();
+		}
+
 		protected string ReplaceAndWithSeparator(string description) {
 
 			var fixedDescription = description;

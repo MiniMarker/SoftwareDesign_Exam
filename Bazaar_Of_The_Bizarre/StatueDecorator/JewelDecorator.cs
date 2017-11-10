@@ -14,15 +14,18 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 		public override double GetPrice() {
 			return base.GetPrice() + 7.50;
 
+
 		}
 
 		public override string GetDescription() {
 			var desc = base.GetDescription();
 
 			return desc;
-
-
 		}
 
+		public override string ToString()
+		{
+			return base.ToString();
+		}
 	}
 }
