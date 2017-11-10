@@ -3,7 +3,7 @@
 	{
 		Mario,
 		Luigi,
-		Arthas,
+		Superman,
 		orc,
 		zergling,
 		cat,

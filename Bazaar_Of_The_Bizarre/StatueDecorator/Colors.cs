@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Bazaar_Of_The_Bizarre.StatueDecorator {
 	enum Colors {
-		Green,
-		Red,
-		Blue,
-		Black,
-		Yellow,
-		Orange
+		green,
+		red,
+		blue,
+		black,
+		yellow,
+		orange
 	}
 }

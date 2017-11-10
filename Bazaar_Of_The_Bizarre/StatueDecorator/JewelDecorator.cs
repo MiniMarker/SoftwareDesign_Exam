@@ -17,11 +17,16 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 		}
 
 		public override string GetDescription() {
-			var desc = base.GetDescription();
-
-			return desc;
-
-
+			var description = base.GetDescription();
+			if (description.Equals("Statue"))
+			{
+				description = GetRandomDecoration("jewel") + " statue";
+			}
+			else
+			{
+				description = AddDecorationToDescription(description, "jewel");
+			}
+			return description;
 		}
 
 	}

@@ -51,6 +51,15 @@ namespace Bazaar_Of_The_Bizarre {
 			IStatue stickerStatue1 = new StickerDecorator(stickerStatue);
 			IStatue stickerStatue2 = new StickerDecorator(stickerStatue1);
 			IStatue stickerStatue3 = new StickerDecorator(stickerStatue2);
+			
+			IStatue jewelStatue = new JewelDecorator(statue);
+			IStatue jewelStatue1 = new JewelDecorator(jewelStatue);
+			IStatue jewelStatue2 = new JewelDecorator(jewelStatue1);
+			IStatue jewelStatue3 = new JewelDecorator(jewelStatue2);
+
+
+			IStatue colorStickerStatue = new StickerDecorator(colorStatue4);
+			IStatue superStatue = new JewelDecorator(colorStickerStatue);
 
 
 			Console.WriteLine(stickerStatue.GetDescription());
@@ -64,6 +73,14 @@ namespace Bazaar_Of_The_Bizarre {
 			Console.WriteLine(colorStatue3.GetDescription());
 			Console.WriteLine(colorStatue4.GetDescription());
 
+
+			Console.WriteLine(jewelStatue.GetDescription());
+			Console.WriteLine(jewelStatue1.GetDescription());
+			Console.WriteLine(jewelStatue2.GetDescription());
+			Console.WriteLine(jewelStatue3.GetDescription());
+
+			Console.WriteLine(colorStickerStatue.GetDescription());
+			Console.WriteLine(superStatue.GetDescription());
 			Console.ReadKey();
 
 		}
