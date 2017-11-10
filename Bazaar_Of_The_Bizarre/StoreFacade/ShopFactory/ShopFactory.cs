@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
 
 	class ShopFactory {
+		private static readonly Random _rnd = new Random();
 		private ShopFactory() { }
 
-		public static IShop CreateShop(ShopType typeOfShop, int productPrice)
+		public static IShop CreateShop(ShopType typeOfShop)
 		{
 			//
 			Thread.Sleep(450);
@@ -18,13 +19,24 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
 			switch (typeOfShop)
 			{
 				case ShopType.ExpensiveShop:
-					shop = new ExpensiveShop(productPrice);
+					shop = new ExpensiveShop(ChooseRandomPrice(ShopType.ExpensiveShop));
 					break;
 				case ShopType.CheapShop:
-					shop = new CheapShop(productPrice);
+					shop = new CheapShop(ChooseRandomPrice(ShopType.CheapShop));
 					break;
 			}
 			return shop;
+		}
+
+		//Chooses a random price for products.
+		private static int ChooseRandomPrice(ShopType shopType)
+		{
+			var productPrice = _rnd.Next(30);
+			if (shopType == ShopType.ExpensiveShop)
+			{
+				productPrice += 7;
+			}
+			return productPrice;
 		}
 
 	}

@@ -14,13 +14,28 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		public Backroom Backroom { get; set; }
 		public string Name { get; set; }
 		public int Quota { get; set; }
-		private List<Statue> _productsForSale;
+		private List<IStatue> _productsForSale;
 		private readonly Random _rnd = new Random();
 
-		public Statue RecieveProductFromBackroom() {
-			return null;
+		public Store(string name, int quota, ShopType typeOfShop)
+		{
+			Name = name;
+			Quota = quota;
+			Shop = CreateShop(typeOfShop);
+			Backroom = new Backroom();
+			_productsForSale = new List<IStatue>();
+			_productsForSale = Backroom.CreateManyStatues(5);
+
 		}
 
+		// Makes backroom create a product and adds it to _productsForSale
+		public void RecieveProductFromBackroom(int numberOfDecorations)
+		{
+			IStatue result = Backroom.CreateProduct(numberOfDecorations);
+			_productsForSale.Add(result);
+		}
+
+		//Prints out amount of products sold and total income.
 		public void ViewSoldProducts()
 		{
 			var sumOfDay = 0.0;
@@ -34,50 +49,40 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 			Console.WriteLine("Store {0} is now closed. {1} products were sold and generated {2} kr.", Name, amountOfProducts, sumOfDay);
 		}
 
+		//Todo, what should CloseStore actually do?
 		public Boolean CloseStore() {
 			ViewSoldProducts();
-			return true;
+			return false;
 		}
 
-		public void SellProduct(int price, int socialSecurityNumber) {
+		//Todo, when products are 100% done.
+		//sjekk pris, hvis kundens balanse
+		public IStatue SellProduct(int socialSecurityNumber) {
 			Bank.BankFlyweight.Bank bank = Bank.BankFlyweight.BankFactory.GetBank("DnB");
+			int price = 0; // Må få pris på produkten?
 			if (bank.Transaction(price, socialSecurityNumber))
 			{
-
+				
 			}
 			else
 			{
 			}
 
 		}
-		//TODO Make random
-		public void GetShop(string shopType)
+
+		//Creates a shop based on given type of shop.
+		public IShop CreateShop(ShopType shopType)
 		{
-			switch (shopType.ToLower())
+			switch (shopType)
 			{
-				case "cheap":
-					Shop = ShopFactory.ShopFactory.CreateShop(ShopType.CheapShop, ChooseRandomPrice(ShopType.CheapShop));
+				case ShopType.CheapShop:
+					Shop = ShopFactory.ShopFactory.CreateShop(ShopType.CheapShop);
 					break;
-				case "expensive":
-					Shop = ShopFactory.ShopFactory.CreateShop(ShopType.ExpensiveShop, ChooseRandomPrice(ShopType.ExpensiveShop));
+				case ShopType.ExpensiveShop:
+					Shop = ShopFactory.ShopFactory.CreateShop(ShopType.ExpensiveShop);
 					break;
 			}
-		}
-
-		/*		private ShopType ChooseRandomShopType()
-				{
-					var randomType = _rnd.Next(2);
-					return randomType == 0 ? ShopType.CheapShop : ShopType.ExpensiveShop;
-				}*/
-
-		private int ChooseRandomPrice(ShopType shopType)
-		{
-			var productPrice = _rnd.Next(30);
-			if(shopType == ShopType.ExpensiveShop)
-			{
-				productPrice += 7;
-			}
-			return productPrice;
+			return Shop;
 		}
 
 	}

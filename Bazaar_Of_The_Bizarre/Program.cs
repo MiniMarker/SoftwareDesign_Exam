@@ -14,10 +14,10 @@ namespace Bazaar_Of_The_Bizarre {
 			 var stuff2 = new Store();
 			 var stuff3 = new Store();
 
-			 stuff.GetShop("cheap");
-			 stuff1.GetShop("expensive");
-			 stuff2.GetShop("cheap");
-			 stuff3.GetShop("expensive");
+			 stuff.CreateShop("cheap");
+			 stuff1.CreateShop("expensive");
+			 stuff2.CreateShop("cheap");
+			 stuff3.CreateShop("expensive");
 
 			 Console.WriteLine(stuff.Shop.GetName());
 			 Console.WriteLine(stuff.Shop.GetPrice());
@@ -67,11 +67,13 @@ namespace Bazaar_Of_The_Bizarre {
 
 			var backroom = new Backroom();
 
-			Console.WriteLine(backroom.CreateProduct(10).ToString());
+			/*Console.WriteLine(backroom.CreateProduct(3).ToString());
+			Console.WriteLine("----");
+			Console.WriteLine(backroom.CreateProduct(3).ToString());
+			Console.WriteLine("------");
+			Console.WriteLine(backroom.CreateProduct(4).ToString()); */
 
-			Console.WriteLine(backroom.CreateProduct(10).ToString());
-
-			Console.WriteLine(backroom.CreateProduct(10).ToString());
+			backroom.CreateManyStatues(5);
 			
 			Console.ReadKey();
 
