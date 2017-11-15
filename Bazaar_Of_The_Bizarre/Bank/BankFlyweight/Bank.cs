@@ -54,6 +54,7 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
 	        {
 	            BankAccount customerAccount = _accounts[customerId];
 	            bool result = customerAccount.Withdrawal(sum);
+				Console.WriteLine(customerId);
 	            return result;
 	        }
 	        else
