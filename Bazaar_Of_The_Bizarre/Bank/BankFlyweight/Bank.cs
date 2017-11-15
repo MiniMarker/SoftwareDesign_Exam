@@ -43,7 +43,7 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
 	    }
   
         //Performs a withdrawal if customer has account and sufficient funds.
-	    public bool Transaction(int sum, int customerId)
+	    public bool Transaction(double sum, int customerId)
 	    {
 	        if (_accounts.ContainsKey(customerId))
 	        {
