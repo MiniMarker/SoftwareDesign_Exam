@@ -8,7 +8,6 @@ namespace Bazaar_Of_The_Bizarre.Test
 	[TestFixture]
 	public class BazaarTests
 	{
-
 		[Test]
 		public void TestCreateStores()
 		{
@@ -16,6 +15,7 @@ namespace Bazaar_Of_The_Bizarre.Test
 
 			Assert.AreEqual(bazaar.GetStoreList().Count, 4);
 		}
+		
 
 	}
 }

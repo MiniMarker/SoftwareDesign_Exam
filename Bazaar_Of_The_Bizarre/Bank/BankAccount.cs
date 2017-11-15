@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 namespace Bazaar_Of_The_Bizarre {
 	class BankAccount
 	{
-	    private double _sum { get; set; }
+	    public double Sum { get; private set; }
 
 	    public BankAccount(double sum)
 	    {
-	        this._sum = sum;
+	        Sum = sum;
 	    }
 
         // Withdrawal tries to subtract SumToWithdraw if there is enough funds.
         public bool Withdrawal(double SumToWithdraw)
 	    {
-            //If the sum is smaller or equal to current _sum, a withdrawal of sum is performed.
-	        if (_sum >= SumToWithdraw)
+            //If the sum is smaller or equal to current Sum, a withdrawal of sum is performed.
+	        if (Sum >= SumToWithdraw)
 	        {
-	            _sum -= SumToWithdraw;
-                Console.WriteLine("Withdrawal of {0} from account has been made. Current balance of account is {1} kr.", SumToWithdraw, _sum );
+	            Sum -= SumToWithdraw;
+                Console.WriteLine("Withdrawal of {0} from account has been made. Current balance of account is {1} kr.", SumToWithdraw, Sum );
 	            return true;
 	        }
 	        else
