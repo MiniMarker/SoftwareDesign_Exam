@@ -12,17 +12,10 @@ namespace Bazaar_Of_The_Bizarre.Test
 		[Test]
 		public void TestCreateStore()
 		{
-			var store = new Store("Christians most awesome items", 2, ShopType.CheapShop);
-			store.RecieveProductFromBackroom(10);
-			store.RecieveProductFromBackroom(4);
+			Store store = new Store("Christians most awesome items", 2, ShopType.CheapShop);
 
+			Assert.AreEqual(store.Name, "Christians most awesome items");
 
-			Assert.IsTrue(store.Name.Equals("Christians most awesome items"));
-
-
-
-			Console.WriteLine(store.GetProductList().Count);
-			//Assert.IsTrue(store.GetProductList().Count == 4);
 
 		}
 	}
