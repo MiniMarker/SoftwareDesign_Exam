@@ -12,69 +12,72 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 	class Store {
 		public IShop Shop;
 		public Backroom Backroom { get; set; }
+		public bool StoreIsOpen { get; private set; }
 		public string Name { get; set; }
 		public int Quota { get; set; }
+
 		private List<IStatue> _productsForSale;
+		private List<IStatue> _productsSold;
 		private readonly Random _rnd = new Random();
 
-		public Store(string name, int quota, ShopType typeOfShop)
-		{
-			Name = name;
+		public Store(string name, int quota, ShopType typeOfShop) {
 			Quota = quota;
 			Shop = CreateShop(typeOfShop);
+			Name = Shop.GetName();
 			Backroom = new Backroom();
-			_productsForSale = new List<IStatue>();
 			_productsForSale = Backroom.CreateMultipleStatues(5);
-
+			_productsSold = new List<IStatue>();
+			StoreIsOpen = true;
 		}
 
 		// Makes backroom create a product and adds it to _productsForSale
-		public void RecieveProductFromBackroom(int numberOfDecorations)
-		{
-			IStatue result = Backroom.CreateProduct(numberOfDecorations);
-			_productsForSale.Add(result);
+		private bool RecieveProductFromBackroom(int numberOfDecorations) {
+			if((_productsForSale.Count + _productsSold.Count) < Quota) {
+				var result = Backroom.CreateProduct(numberOfDecorations);
+				_productsForSale.Add(result);
+				return true;
+			}
+			return false;
 		}
 
 		//Prints out amount of products sold and total income.
-		public void ViewSoldProducts()
-		{
+		private void ViewSoldProducts() {
 			var sumOfDay = 0.0;
 			var amountOfProducts = 0;
 
-			foreach (var product in _productsForSale)
-			{
+			foreach(var product in _productsSold) {
 				amountOfProducts++;
 				sumOfDay += product.GetPrice();
 			}
 			Console.WriteLine("Store {0} is now closed. {1} products were sold and generated {2} kr.", Name, amountOfProducts, sumOfDay);
 		}
+		
+		private void CheckIfStoreShouldClose()
+		{
+			if(_productsForSale.Count == 0) {
+				StoreIsOpen = false;
+			}
+		}
+		
+		//TODO insert ThreadLock
+		public IStatue SellProduct(int socialSecurityNumber) {
+			var bank = Bank.BankFlyweight.BankFactory.GetBank("DnB");
+			var product = _productsForSale[0];
+			var price = product.GetPrice();
 
-		//Todo, what should CloseStore actually do?
-		public Boolean CloseStore() {
-			ViewSoldProducts();
-			return false;
+			if(bank.Transaction(price, socialSecurityNumber)) {
+				_productsSold.Add(product);
+				_productsForSale.Remove(product);
+				CheckIfStoreShouldClose();
+				return product;
+			}
+
+			return null;
 		}
 
-		//Todo, when products are 100% done.
-		//sjekk pris, hvis kundens balanse
-	/*	public IStatue SellProduct(int socialSecurityNumber) {
-			Bank.BankFlyweight.Bank bank = Bank.BankFlyweight.BankFactory.GetBank("DnB");
-			int price = 0; // Må få pris på produkten?
-			if (bank.Transaction(price, socialSecurityNumber))
-			{
-				
-			}
-			else
-			{
-			}
-
-		}*/
-
 		//Creates a shop based on given type of shop.
-		public IShop CreateShop(ShopType shopType)
-		{
-			switch (shopType)
-			{
+		public IShop CreateShop(ShopType shopType) {
+			switch(shopType) {
 				case ShopType.CheapShop:
 					Shop = ShopFactory.ShopFactory.CreateShop(ShopType.CheapShop);
 					break;
