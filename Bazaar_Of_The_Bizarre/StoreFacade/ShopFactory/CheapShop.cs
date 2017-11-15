@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
 	class CheapShop : IShop {
+		//TODO make into properties
 		private string _name;
 		private int _price;
 		private readonly Random _random = new Random();

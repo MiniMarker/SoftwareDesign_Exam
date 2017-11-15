@@ -20,7 +20,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		private List<IStatue> _productsSold;
 		private readonly Random _rnd = new Random();
 
-		public Store(string name, int quota, ShopType typeOfShop) {
+		public Store(int quota, ShopType typeOfShop) {
 			Quota = quota;
 			Shop = CreateShop(typeOfShop);
 			Name = Shop.GetName();
