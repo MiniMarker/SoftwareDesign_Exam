@@ -46,7 +46,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		}
 
 		public List<IStatue> CreateManyStatues(int numberOfStatuesToBeCreated) {
-			List<IStatue> staueList = new List<IStatue>();
+			var staueList = new List<IStatue>();
 
 			for(var i = 0; i < numberOfStatuesToBeCreated; i++)
 			{

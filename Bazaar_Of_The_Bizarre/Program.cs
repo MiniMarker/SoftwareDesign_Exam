@@ -10,8 +10,7 @@ namespace Bazaar_Of_The_Bizarre {
 	class Program {
 		public static void Main(string[] args) {
 
-
-			Backroom backroom = new Backroom();
+			var backroom = new Backroom();
 			backroom.CreateManyStatues(5);
 
 			Console.ReadKey();
