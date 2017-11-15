@@ -12,24 +12,30 @@ namespace Bazaar_Of_The_Bizarre.controller {
 	    public string Name { get; set; }
 	    public List<IStatue> ItemsPurchased { get; set;}
 
-	    public Customer(int socialSecurityNumber, string name)
-	    {
-            Name = name;
-	        SocialSecurityNumber = socialSecurityNumber;
-            ItemsPurchased = new List<IStatue>();
-            //bank.CreateAccount(SocialSecurityNumber); Banken upprättat konto efter personen har upprättas i client.
-        }
+		/// <summary>
+		/// Constructor 
+		/// </summary>
+		/// <param name="socialSecurityNumber"></param>
+		/// <param name="name"></param>
+		/// <param name="bank"></param>
+		public Customer(int socialSecurityNumber, string name, Bank.BankFlyweight.Bank bank)
+		{
+			Name = name;
+			SocialSecurityNumber = socialSecurityNumber;
+			ItemsPurchased = new List<IStatue>();
+			bank.CreateAccount(SocialSecurityNumber);
+		}
 
 		// Buys item if sufficient funds on bankaccount. Adds in _itemsPurchased.
 	    private void BuyItem(Bazaar bazaar)
 	    {
-		    IStatue productBought = null;
+		    IStatue productPurchased = null;
+			//Rule -> Hvis ingen varer igjen; slutt å lete etter varer. 
+			productPurchased = bazaar.GetProductFromStoreForCustomer(SocialSecurityNumber);
 
-			productBought = bazaar.GetProductFromStoreForCustomer(SocialSecurityNumber);
-
-		    if (productBought != null)
+		    if (productPurchased != null)
 		    {
-			    ItemsPurchased.Add(productBought);
+			    ItemsPurchased.Add(productPurchased);
 		    }
 	    }
 
