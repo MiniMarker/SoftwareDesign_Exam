@@ -53,7 +53,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 			}
 		}
 
-		public List<Store> GetStores()
+		public List<Store> GetStoreList()
 		{
 			return _listOfAllStores;
 		}
