@@ -87,6 +87,5 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 			}
 			return Shop;
 		}
-
 	}
 }

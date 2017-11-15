@@ -12,9 +12,9 @@ namespace Bazaar_Of_The_Bizarre.Test
 		[Test]
 		public void TestCreateStore()
 		{
-			Store store = new Store("Christians most awesome items", 2, ShopType.CheapShop);
+			Store store = new Store(2, ShopType.CheapShop);
 
-			Assert.AreEqual(store.Name, "Christians most awesome items");
+			Console.WriteLine(store.Name);
 
 
 		}

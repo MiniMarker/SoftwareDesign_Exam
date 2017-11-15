@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 namespace Bazaar_Of_The_Bizarre {
 	class BankAccount
 	{
-	    private int _sum { get; set; }
+	    private double _sum { get; set; }
 
-	    public BankAccount(int sum)
+	    public BankAccount(double sum)
 	    {
 	        this._sum = sum;
 	    }
 
         // Withdrawal tries to subtract SumToWithdraw if there is enough funds.
-        public bool Withdrawal(int SumToWithdraw)
+        public bool Withdrawal(double SumToWithdraw)
 	    {
             //If the sum is smaller or equal to current _sum, a withdrawal of sum is performed.
 	        if (_sum >= SumToWithdraw)
