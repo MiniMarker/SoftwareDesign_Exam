@@ -72,5 +72,10 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
             }
         }
 
+		public Dictionary<int, BankAccount> getAccounts()
+		{
+			return _accounts;
+		}
+
 	}
 }
