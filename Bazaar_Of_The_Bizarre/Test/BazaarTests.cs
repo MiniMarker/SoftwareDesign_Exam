@@ -14,8 +14,7 @@ namespace Bazaar_Of_The_Bizarre.Test
 		{
 			Bazaar bazaar = new Bazaar();
 
-			Assert.AreEqual(bazaar.GetStores().Count, 4);
-			//Assert.IsFalse(bazaar.GetStores().ContainsKey("TestStore10"));
+			Assert.AreEqual(bazaar.GetStoreList().Count, 4);
 		}
 
 	}

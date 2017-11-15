@@ -14,9 +14,6 @@ namespace Bazaar_Of_The_Bizarre.Test
 		{
 			Store store = new Store(2, ShopType.CheapShop);
 
-			Assert.IsTrue(store);
-			Console.WriteLine(store.Name);
-
 
 		}
 	}
