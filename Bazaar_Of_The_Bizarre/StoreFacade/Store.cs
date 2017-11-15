@@ -24,7 +24,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 			Shop = CreateShop(typeOfShop);
 			Backroom = new Backroom();
 			_productsForSale = new List<IStatue>();
-			_productsForSale = Backroom.CreateManyStatues(5);
+			_productsForSale = Backroom.CreateMultipleStatues(5);
 
 		}
 

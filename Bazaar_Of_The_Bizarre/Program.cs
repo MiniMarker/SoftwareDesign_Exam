@@ -11,7 +11,7 @@ namespace Bazaar_Of_The_Bizarre {
 		public static void Main(string[] args) {
 
 			var backroom = new Backroom();
-			backroom.CreateManyStatues(5);
+			backroom.CreateMultipleStatues(5);
 
 			Console.ReadKey();
 

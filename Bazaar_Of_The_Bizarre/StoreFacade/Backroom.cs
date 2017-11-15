@@ -7,9 +7,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade
 {
 	class Backroom
 	{
-		private List<string> _stickerList;
-		private List<string> _jewelList;
-		private List<string> _colorList;
+
 
 		private IStatue _statue = new Statue();
 		private readonly Random _random = new Random();
@@ -51,14 +49,12 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade
 						break;
 				}
 			}
-			SortDescription(_statue.GetDescription());
-			Console.WriteLine(PrintStatueDesc());
 			return _statue;
 		}
 
-		public List<IStatue> CreateManyStatues(int numberOfStatuesToBeCreated)
+		public List<IStatue> CreateMultipleStatues(int numberOfStatuesToBeCreated)
 		{
-			List<IStatue> staueList = new List<IStatue>();
+			var staueList = new List<IStatue>();
 
 			for (var i = 0; i < numberOfStatuesToBeCreated; i++)
 			{
@@ -136,57 +132,5 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade
 			}
 		}
 
-		public void SortDescription(string description)
-		{
-			_stickerList = new List<string>();
-			_jewelList = new List<string>();
-			_colorList = new List<string>();
-
-			var descriptionWords = description.Split();
-
-			foreach (var word in descriptionWords)
-			{
-				if (Enum.IsDefined(typeof(Jewels), word))
-				{
-					_jewelList.Add(word);
-				}
-
-				if (Enum.IsDefined(typeof(Stickers), word))
-				{
-					_stickerList.Add(word);
-				}
-				if (Enum.IsDefined(typeof(Colors), word))
-				{
-					_colorList.Add(word);
-				}
-			}
-		}
-
-		private string PrintStatueDesc()
-		{
-			string colors = "";
-			string jewels = "";
-			string stickers = "";
-
-			foreach (var color in _colorList)
-			{
-				colors += color + ", ";
-			}
-
-			foreach (var jewel in _jewelList)
-			{
-				jewels += jewel + " ,";
-			}
-
-			foreach (var sticker in _stickerList)
-			{
-				stickers += sticker + ", ";
-			}
-			return String.Format(
-				"{0} Statue \n " +
-				"- 'Jewels': {1} \n " +
-				"- Stickers: {2}",
-				colors, jewels, stickers); 
-		}
 	}
 }
