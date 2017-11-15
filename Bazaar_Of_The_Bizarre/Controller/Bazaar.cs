@@ -11,6 +11,9 @@ namespace Bazaar_Of_The_Bizarre.controller {
 	class Bazaar {
 		private List<Store> _stores;
 
+		/// <summary>
+		/// Constructor for 
+		/// </summary>
 		public Bazaar() {
 			_stores = new List<Store>();
 			CreateStores(4);
@@ -32,7 +35,10 @@ namespace Bazaar_Of_The_Bizarre.controller {
 			return _stores[rnd.Next(1, _stores.Count)];
 
 		}
-		//Creates four different stores and adds them i _stores list.
+		/// <summary>
+		/// Creates stores, amount set in param.
+		/// </summary>
+		/// <param name="amountOfStores"></param>
 		public void CreateStores(int amountOfStores) {
 			for(var i = 0; i < amountOfStores; i++) {
 				var rnd = new Random();
@@ -46,11 +52,5 @@ namespace Bazaar_Of_The_Bizarre.controller {
 				}
 			}
 		}
-
-		/*
-				public List<Store> GetStores()
-				{
-					return _stores;
-				}*/
 	}
 }
