@@ -14,7 +14,7 @@ namespace Bazaar_Of_The_Bizarre.Test
 		private string[] _descriptionWords;
 
 		[Test]
-		public void DecorateProductWithColor()
+		public void DecorateProductWithColorTest()
 		{
 			IStatue colorBaseStatue = new ColorDecorator(_baseStatue);
 
@@ -25,7 +25,7 @@ namespace Bazaar_Of_The_Bizarre.Test
 		}
 
 		[Test]
-		public void DecorateProductWithSticker()
+		public void DecorateProductWithStickerTest()
 		{
 			IStatue stickerBaseStatue = new StickerDecorator(_baseStatue);
 
@@ -36,7 +36,7 @@ namespace Bazaar_Of_The_Bizarre.Test
 		}
 
 		[Test]
-		public void DecorateProductWithJewel()
+		public void DecorateProductWithJewelTest()
 		{
 			IStatue jewelBaseStatue = new JewelDecorator(_baseStatue);
 
