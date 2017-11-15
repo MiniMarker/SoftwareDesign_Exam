@@ -24,7 +24,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 			Shop = CreateShop(typeOfShop);
 			Backroom = new Backroom();
 			_productsForSale = new List<IStatue>();
-			_productsForSale = Backroom.CreateManyStatues(5);
+			_productsForSale = Backroom.CreateManyStatues(quota);
 
 		}
 
@@ -83,6 +83,11 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 					break;
 			}
 			return Shop;
+		}
+
+		public List<IStatue> GetProductList()
+		{
+			return _productsForSale;
 		}
 
 	}

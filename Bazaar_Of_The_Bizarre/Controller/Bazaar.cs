@@ -43,5 +43,10 @@ namespace Bazaar_Of_The_Bizarre.controller {
 			var store4 = new Store("TestStore4", 19, ShopType.ExpensiveShop);
 		    _stores.Add("TestStore4", store4);
 		}
+
+		public Dictionary<string, Store> GetStores()
+		{
+			return _stores;
+		}
 	}
 }
