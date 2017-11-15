@@ -4,15 +4,15 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
 	class ExpensiveShop : IShop {
 		private string _name;
 		private int _price;
-		private Random _random = new Random();
+		private readonly Random _random;
 
-		public ExpensiveShop(int price) {
+		public ExpensiveShop(int price, Random random) {
 			SetProductPrice(price);
+			_random = random;
 			GenerateName();
 		}
 
 		public void GenerateName() {
-			_random = new Random();
 			var chosenStore = _random.Next(4);
 			switch(chosenStore) {
 				case 0:

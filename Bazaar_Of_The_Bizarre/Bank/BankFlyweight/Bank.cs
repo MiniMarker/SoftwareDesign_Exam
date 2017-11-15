@@ -7,15 +7,20 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
         public string Name { get; set; }
         public int Customers { get; set; }
 	    public int Capital { get; set; }
-	    private readonly Dictionary<int, BankAccount> _accounts = new Dictionary<int, BankAccount>();
+		private Random _random;
+		private readonly Dictionary<int, BankAccount> _accounts = new Dictionary<int, BankAccount>();
 
-        public Bank(String name)
+        public Bank(string name)
         {
 	        Name = name;
+			_random = new Random();
+
         }
 
-        //Prints out information about the bank.
-	    public void HandelingCustomer()
+		/// <summary>
+		/// Prints out information about the bank.
+		/// </summary>
+		public void HandelingCustomer()
 	    {
             Console.WriteLine("The bank {0} as {1} customers and a capital of {2} kr.", Name, Customers, Capital);
 	    }
@@ -24,8 +29,8 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
 	    public bool CreateAccount(int CustomerId)
 	    {
             //Creates new account with random sum.
-	        Random random = new Random();
-	        int sum = random.Next(1,250);
+	        
+	        int sum = _random.Next(1,250);
             BankAccount newAccount = new BankAccount(sum);
 
             //Adds account to _account dictionary if customer hasn't an existing account.

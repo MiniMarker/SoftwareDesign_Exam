@@ -13,7 +13,7 @@ namespace Bazaar_Of_The_Bizarre {
 		private List<string> _jewelList;
 		private List<string> _colorList;
 
-		public void SortDescription(string description)
+		public void SortStatueDescription(string description)
 		{
 			_stickerList = new List<string>();
 			_jewelList = new List<string>();

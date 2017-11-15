@@ -22,12 +22,23 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 
 		public Store(int quota, ShopType typeOfShop) {
 			Quota = quota;
-			Shop = CreateShop(typeOfShop);
+			Shop = ShopFactory.ShopFactory.CreateShop(typeOfShop);
 			Name = Shop.GetName();
+			Console.WriteLine("Name of store: " + Name);
 			Backroom = new Backroom();
+//			_productsForSale = new List<IStatue>();
 			_productsForSale = Backroom.CreateMultipleStatues(5);
 			_productsSold = new List<IStatue>();
 			StoreIsOpen = true;
+
+/*
+			_productsForSale.Add(Backroom.CreateProduct(5));
+			_productsForSale.Add(Backroom.CreateProduct(5));
+			_productsForSale.Add(Backroom.CreateProduct(5));
+			_productsForSale.Add(Backroom.CreateProduct(5));
+			_productsForSale.Add(Backroom.CreateProduct(5));
+			_productsForSale.Add(Backroom.CreateProduct(5));
+			Console.WriteLine(_productsForSale.Count);*/
 		}
 
 		// Makes backroom create a product and adds it to _productsForSale
@@ -61,7 +72,9 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		
 		//TODO insert ThreadLock
 		public IStatue SellProduct(int socialSecurityNumber) {
-			var bank = Bank.BankFlyweight.BankFactory.GetBank("DnB");
+			var bank = Bank.BankFlyweight.BankFactory.GetBank("DNB");
+			Console.WriteLine(_productsForSale.Count);
+			
 			var product = _productsForSale[0];
 			var price = product.GetPrice();
 
@@ -75,7 +88,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 			return null;
 		}
 
-		//Creates a shop based on given type of shop.
+		/*//Creates a shop based on given type of shop.
 		public IShop CreateShop(ShopType shopType) {
 			switch(shopType) {
 				case ShopType.CheapShop:
@@ -86,6 +99,6 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 					break;
 			}
 			return Shop;
-		}
+		}*/
 	}
 }

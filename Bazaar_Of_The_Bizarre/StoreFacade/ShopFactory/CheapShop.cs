@@ -11,10 +11,12 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
 		//TODO make into properties
 		private string _name;
 		private int _price;
-		private readonly Random _random = new Random();
+		private readonly Random _random;
 
-		public CheapShop(int price) {
+
+		public CheapShop(int price, Random random) {
 			SetProductPrice(price);
+			_random = random;
 			GenerateName();
 		}
 

@@ -14,19 +14,20 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
 		public static IShop CreateShop(ShopType typeOfShop)
 		{
 			//
-			Thread.Sleep(450);
+//			Thread.Sleep(450);
 			IShop shop = null;
 			switch (typeOfShop)
 			{
 				case ShopType.ExpensiveShop:
-					shop = new ExpensiveShop(ChooseRandomPrice(ShopType.ExpensiveShop));
+					shop = new ExpensiveShop(ChooseRandomPrice(ShopType.ExpensiveShop), _rnd);
 					break;
 				case ShopType.CheapShop:
-					shop = new CheapShop(ChooseRandomPrice(ShopType.CheapShop));
+					shop = new CheapShop(ChooseRandomPrice(ShopType.CheapShop), _rnd);
 					break;
 			}
 			return shop;
 		}
+
 
 		//Chooses a random price for products.
 		private static int ChooseRandomPrice(ShopType shopType)

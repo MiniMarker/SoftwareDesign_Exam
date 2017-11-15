@@ -54,7 +54,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade
 
 		public List<IStatue> CreateMultipleStatues(int numberOfStatuesToBeCreated)
 		{
-			var staueList = new List<IStatue>();
+			var statueList = new List<IStatue>();
 
 			for (var i = 0; i < numberOfStatuesToBeCreated; i++)
 			{
@@ -62,8 +62,10 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade
 
 				CreateProduct(numberOfDecorations);
 				_statue = new Statue();
+				statueList.Add(_statue);
 			}
-			return staueList;
+			Console.WriteLine(statueList[0].ToString());
+			return statueList;
 		}
 
 		private bool CanUseDecoration(string description, string decorationType)

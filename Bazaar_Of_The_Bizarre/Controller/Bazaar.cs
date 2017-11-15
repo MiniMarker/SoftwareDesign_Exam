@@ -9,13 +9,13 @@ using Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory;
 
 namespace Bazaar_Of_The_Bizarre.controller {
 	class Bazaar {
-		private List<Store> _stores;
+		private List<Store> _listOfAllStores;
 
 		/// <summary>
 		/// Constructor for 
 		/// </summary>
 		public Bazaar() {
-			_stores = new List<Store>();
+			_listOfAllStores = new List<Store>();
 			CreateStores(4);
 		}
 
@@ -32,7 +32,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		private Store GetRandomStore() {
 			var rnd = new Random();
 
-			return _stores[rnd.Next(1, _stores.Count)];
+			return _listOfAllStores[rnd.Next(1, _listOfAllStores.Count)];
 
 		}
 		/// <summary>
@@ -45,17 +45,17 @@ namespace Bazaar_Of_The_Bizarre.controller {
 				var quota = rnd.Next(10, 30);
 
 				if(i % 2 == 0) {
-					_stores.Add(new Store(quota, ShopType.ExpensiveShop));
+					_listOfAllStores.Add(new Store(quota, ShopType.ExpensiveShop));
 				}
 				else {
-					_stores.Add(new Store(quota, ShopType.CheapShop));
+					_listOfAllStores.Add(new Store(quota, ShopType.CheapShop));
 				}
 			}
 		}
 
 		public List<Store> GetStores()
 		{
-			return _stores;
+			return _listOfAllStores;
 		}
 	}
 }

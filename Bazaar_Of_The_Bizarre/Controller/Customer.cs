@@ -27,24 +27,23 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		}
 
 		// Buys item if sufficient funds on bankaccount. Adds in _itemsPurchased.
-	    private void BuyItem(Bazaar bazaar)
+	    public void BuyItem(Bazaar bazaar)
 	    {
-		    IStatue productPurchased = null;
-			//Rule -> Hvis ingen varer igjen; slutt å lete etter varer. 
-			productPurchased = bazaar.GetProductFromStoreForCustomer(SocialSecurityNumber);
+		    var productBought = bazaar.GetProductFromStoreForCustomer(SocialSecurityNumber);
 
-		    if (productPurchased != null)
-		    {
-			    ItemsPurchased.Add(productPurchased);
+		    if(productBought != null) {
+			    ItemsPurchased.Add(productBought);
 		    }
-	    }
+		}
 
         //Prints out all the purchased items.
-	    private void GetItemsPurchased()
+
+			//TODO Move this method when finished with other methods.
+	    public void GetItemsPurchased()
 	    {
-	        foreach(IStatue Item in ItemsPurchased)
+	        foreach(var item in ItemsPurchased)
 	        {
-	            Console.WriteLine(Item.ToString());
+	            Console.WriteLine(item.ToString());
 	        }
 
 	    }
