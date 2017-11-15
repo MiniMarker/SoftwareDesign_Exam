@@ -3,11 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bazaar_Of_The_Bizarre.Bank.BankFlyweight;
+using NUnit.Framework;
+using NUnit.Framework.Internal;
+using Bazaar_Of_The_Bizarre.Bank.BankFlyweight;
 
 namespace Bazaar_Of_The_Bizarre.Test
 {
+	[TestFixture]
     class BankTest
     {
+
+
+		[Test]
+	    public void TestCreateAccount()
+	    {
+		    var DnB = BankFactory.GetBank("DnB");
+
+		    DnB.CreateAccount(007);
+		    DnB.CreateAccount(009);
+
+		    Assert.AreEqual(DnB.getAccounts().Count, 2);
+	    }
+
+		[Test]
+	    public void TestWithdrawal()
+	    {
+			var DnB = BankFactory.GetBank("DnB");
+
+		    DnB.CreateAccount(007);
+
+		    Assert.IsTrue(DnB.Transaction(1, 1));
+
+
+		}
+
        /* static void Main(string[] args)
        {
             //Tries to create two banks with same name.
