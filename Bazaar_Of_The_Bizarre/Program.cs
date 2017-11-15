@@ -12,11 +12,8 @@ using Bazaar_Of_The_Bizarre.StoreFacade;
 namespace Bazaar_Of_The_Bizarre {
 	class Program {
 		public static void Main(string[] args) {
-			var backroom = new Backroom();
-			backroom.CreateMultipleStatues(5);
 
-			var bank = BankFactory.GetBank("DNB");
-			var bazaar = new Bazaar();
+			
 			var cust1 = new Customer(123,"Henrik", bank);
 			var cust2 = new Customer(124,"Emma", bank);
 			var cust3 = new Customer(125,"Christian", bank);

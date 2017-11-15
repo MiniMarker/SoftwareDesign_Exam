@@ -23,7 +23,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade
 					case 1:
 						if (CanUseDecoration(statue.GetDescription(), "jewel"))
 						{
-							IStatue jewelDecoratedStatue = new JewelDecorator(statue);
+							var jewelDecoratedStatue = new JewelDecorator(statue);
 							statue = jewelDecoratedStatue;
 							break;
 						}
@@ -32,7 +32,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade
 					case 2:
 						if (CanUseDecoration(statue.GetDescription(), "sticker"))
 						{
-							IStatue stickerDecoratedStatue = new StickerDecorator(statue);
+							var stickerDecoratedStatue = new StickerDecorator(statue);
 							statue = stickerDecoratedStatue;
 							break;
 						}
@@ -41,7 +41,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade
 					case 3:
 						if (CanUseDecoration(statue.GetDescription(), "color"))
 						{
-							IStatue colorDecoratedStatue = new ColorDecorator(statue);
+							var colorDecoratedStatue = new ColorDecorator(statue);
 							statue = colorDecoratedStatue;
 							break;
 						}
