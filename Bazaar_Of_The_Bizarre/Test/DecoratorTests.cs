@@ -10,17 +10,40 @@ namespace Bazaar_Of_The_Bizarre.Test
 	[TestFixture]
 	public class DecoratorTests
 	{
+		private readonly IStatue _baseStatue = new Statue();
+		private string[] _descriptionWords;
 
 		[Test]
-		public void DecorateProduct()
+		public void DecorateProductWithColor()
 		{
-			IStatue baseStatue = new Statue();
-			IStatue colorBaseStatue = new ColorDecorator(baseStatue);
-			IStatue colorStickerBaseStatue = new StickerDecorator(colorBaseStatue);
-			IStatue colorStickerJewelBaseStatue = new JewelDecorator(colorStickerBaseStatue);
+			IStatue colorBaseStatue = new ColorDecorator(_baseStatue);
 
-			Assert.IsFalse(colorStickerJewelBaseStatue.GetDescription().Contains("blue"));
+			_descriptionWords = colorBaseStatue.GetDescription().Split();
+
+			//Color will be added before the word "Statue"
+			Assert.IsTrue(Enum.IsDefined(typeof(Colors), _descriptionWords[0]));
 		}
 
+		[Test]
+		public void DecorateProductWithSticker()
+		{
+			IStatue stickerBaseStatue = new StickerDecorator(_baseStatue);
+
+			_descriptionWords = stickerBaseStatue.GetDescription().Split();
+
+			//Sticker will be added after the word "Statue"
+			Assert.IsTrue(Enum.IsDefined(typeof(Stickers), _descriptionWords[1]));
+		}
+
+		[Test]
+		public void DecorateProductWithJewel()
+		{
+			IStatue jewelBaseStatue = new JewelDecorator(_baseStatue);
+
+			_descriptionWords = jewelBaseStatue.GetDescription().Split();
+
+			//Jewel will be added before the word "Statue"
+			Assert.IsTrue(Enum.IsDefined(typeof(Jewels), _descriptionWords[0]));
+		}
 	}
 }
