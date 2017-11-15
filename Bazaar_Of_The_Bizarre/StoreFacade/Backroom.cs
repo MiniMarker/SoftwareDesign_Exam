@@ -8,12 +8,12 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade
 	class Backroom
 	{
 
-
-		private IStatue _statue = new Statue();
 		private readonly Random _random = new Random();
 
 		public IStatue CreateProduct(int numberOfDecorations)
 		{
+			IStatue statue = new Statue();
+
 			for (var i = 0; i < numberOfDecorations; i++)
 			{
 				var value = _random.Next(1, 4);
@@ -21,35 +21,35 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade
 				switch (value)
 				{
 					case 1:
-						if (CanUseDecoration(_statue.GetDescription(), "jewel"))
+						if (CanUseDecoration(statue.GetDescription(), "jewel"))
 						{
-							IStatue jewelDecoratedStatue = new JewelDecorator(_statue);
-							_statue = jewelDecoratedStatue;
+							IStatue jewelDecoratedStatue = new JewelDecorator(statue);
+							statue = jewelDecoratedStatue;
 							break;
 						}
 						i--;
 						break;
 					case 2:
-						if (CanUseDecoration(_statue.GetDescription(), "sticker"))
+						if (CanUseDecoration(statue.GetDescription(), "sticker"))
 						{
-							IStatue stickerDecoratedStatue = new StickerDecorator(_statue);
-							_statue = stickerDecoratedStatue;
+							IStatue stickerDecoratedStatue = new StickerDecorator(statue);
+							statue = stickerDecoratedStatue;
 							break;
 						}
 						i--;
 						break;
 					case 3:
-						if (CanUseDecoration(_statue.GetDescription(), "color"))
+						if (CanUseDecoration(statue.GetDescription(), "color"))
 						{
-							IStatue colorDecoratedStatue = new ColorDecorator(_statue);
-							_statue = colorDecoratedStatue;
+							IStatue colorDecoratedStatue = new ColorDecorator(statue);
+							statue = colorDecoratedStatue;
 							break;
 						}
 						i--;
 						break;
 				}
 			}
-			return _statue;
+			return statue;
 		}
 
 		public List<IStatue> CreateMultipleStatues(int numberOfStatuesToBeCreated)
@@ -58,11 +58,8 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade
 
 			for (var i = 0; i < numberOfStatuesToBeCreated; i++)
 			{
-				var numberOfDecorations = _random.Next(5, 10);
-				Console.WriteLine("number of decorations: " + numberOfDecorations);
+				var numberOfDecorations = _random.Next(5, 9);
 				var product = CreateProduct(numberOfDecorations);
-				Console.WriteLine(product.GetDescription());
-				Console.WriteLine(product.GetPrice());
 				statueList.Add(product);
 			}
 			return statueList;

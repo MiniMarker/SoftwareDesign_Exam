@@ -31,7 +31,7 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
             //Creates new account with random sum.
 	        
 	        int sum = _random.Next(1,250);
-            BankAccount newAccount = new BankAccount(sum);
+            var newAccount = new BankAccount(sum);
 
             //Adds account to _account dictionary if customer hasn't an existing account.
 	        if (!_accounts.ContainsKey(CustomerId))
@@ -54,7 +54,6 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
 	        {
 	            BankAccount customerAccount = _accounts[customerId];
 	            bool result = customerAccount.Withdrawal(sum);
-				Console.WriteLine(customerId);
 	            return result;
 	        }
 	        else

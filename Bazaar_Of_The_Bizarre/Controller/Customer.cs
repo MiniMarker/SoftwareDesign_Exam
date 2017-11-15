@@ -43,7 +43,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 	    {
 	        foreach(var item in ItemsPurchased)
 	        {
-	            Console.WriteLine(item.ToString());
+		        Console.WriteLine(item.GetDescription());
 	        }
 
 	    }

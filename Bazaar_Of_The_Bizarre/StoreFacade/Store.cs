@@ -24,7 +24,6 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 			Quota = quota;
 			Shop = ShopFactory.ShopFactory.CreateShop(typeOfShop);
 			Name = Shop.GetName();
-			Console.WriteLine("Name of store: " + Name);
 			Backroom = new Backroom();
 //			_productsForSale = new List<IStatue>();
 			_productsForSale = Backroom.CreateMultipleStatues(5);
@@ -73,7 +72,6 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		//TODO insert ThreadLock
 		public IStatue SellProduct(int socialSecurityNumber) {
 			var bank = Bank.BankFlyweight.BankFactory.GetBank("DNB");
-			Console.WriteLine(_productsForSale.Count);
 			
 			var product = _productsForSale[0];
 			var price = product.GetPrice();
