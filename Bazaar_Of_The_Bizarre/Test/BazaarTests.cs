@@ -1,8 +1,7 @@
 ﻿using System;
 using Bazaar_Of_The_Bizarre.controller;
-using Bazaar_Of_The_Bizarre.StoreFacade;
-using Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory;
 using NUnit.Framework;
+using NUnit.Mocks;
 
 namespace Bazaar_Of_The_Bizarre.Test
 {
@@ -17,7 +16,10 @@ namespace Bazaar_Of_The_Bizarre.Test
 
 			Assert.AreEqual(bazaar.GetStores().Count, 4);
 			Assert.IsTrue(bazaar.GetStores().ContainsKey("TestStore1"));
-			Assert.IsFalse(bazaar.GetStores().ContainsKey("TestStore10"));
+			Assert.IsTrue(bazaar.GetStores().ContainsKey("TestStore2"));
+			Assert.IsTrue(bazaar.GetStores().ContainsKey("TestStore3"));
+			Assert.IsTrue(bazaar.GetStores().ContainsKey("TestStore4"));
+			//Assert.IsFalse(bazaar.GetStores().ContainsKey("TestStore10"));
 		}
 
 	}
