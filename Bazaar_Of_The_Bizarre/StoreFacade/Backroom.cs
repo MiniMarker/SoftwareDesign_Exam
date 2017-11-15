@@ -59,12 +59,12 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade
 			for (var i = 0; i < numberOfStatuesToBeCreated; i++)
 			{
 				var numberOfDecorations = _random.Next(5, 10);
-
-				CreateProduct(numberOfDecorations);
-				_statue = new Statue();
-				statueList.Add(_statue);
+				Console.WriteLine("number of decorations: " + numberOfDecorations);
+				var product = CreateProduct(numberOfDecorations);
+				Console.WriteLine(product.GetDescription());
+				Console.WriteLine(product.GetPrice());
+				statueList.Add(product);
 			}
-			Console.WriteLine(statueList[0].ToString());
 			return statueList;
 		}
 
