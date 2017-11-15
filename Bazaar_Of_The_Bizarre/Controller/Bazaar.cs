@@ -18,19 +18,18 @@ namespace Bazaar_Of_The_Bizarre.controller {
 
 		//If the store exist and customer has sufficent funds a product is returned.
 		public IStatue GetProductFromStoreForCustomer(int socialSecurityNumber) {
-			IStatue productToSell = null;
-
 
 			var storeToShopFrom = GetRandomStore();
-			//			    ProductToSell = StoreToShopFrom.SellProduct(socialSecurityNumber);
-
-			return productToSell;
+			while(!storeToShopFrom.StoreIsOpen) {
+				storeToShopFrom = GetRandomStore();
+			}
+			return storeToShopFrom.SellProduct(socialSecurityNumber);
 		}
 
 		private Store GetRandomStore() {
 			var rnd = new Random();
 
-			return _stores[rnd.Next(1,_stores.Count)];
+			return _stores[rnd.Next(1, _stores.Count)];
 
 		}
 		//Creates four different stores and adds them i _stores list.
