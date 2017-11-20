@@ -7,55 +7,45 @@ using System.Threading.Tasks;
 namespace Bazaar_Of_The_Bizarre {
 	class BankAccount
 	{
-<<<<<<< Updated upstream
-	    public double Sum { get; private set; }
-=======
-<<<<<<< Updated upstream
 	    private double _sum { get; set; }
->>>>>>> Stashed changes
-
-	    public BankAccount(double sum)
-=======
-	    private int _sum { get; set; }
 	    private readonly Object _lock = new Object();
 
-
-
-        public BankAccount(int sum)
->>>>>>> Stashed changes
+	    public BankAccount(double sum)
 	    {
-	        Sum = sum;
+	        _sum = sum;
 	    }
 
-        // Withdrawal tries to subtract SumToWithdraw if there is enough funds.
+	    // Withdrawal tries to subtract SumToWithdraw if there is enough funds.
         public bool Withdrawal(double SumToWithdraw)
 	    {
-<<<<<<< Updated upstream
             //If the sum is smaller or equal to current Sum, a withdrawal of sum is performed.
-	        if (Sum >= SumToWithdraw)
+	        if (_sum >= SumToWithdraw)
 	        {
-	            Sum -= SumToWithdraw;
-                Console.WriteLine("Withdrawal of {0} from account has been made. Current balance of account is {1} kr.", SumToWithdraw, Sum );
+	            _sum -= SumToWithdraw;
+	            Console.WriteLine("Withdrawal of {0} from account has been made. Current balance of account is {1} kr.",
+	                SumToWithdraw, _sum);
 	            return true;
 	        }
 	        else
-=======
-            //If the sum is smaller or equal to current _sum, a withdrawal of sum is performed
-	        lock (_lock)
->>>>>>> Stashed changes
 	        {
-	            if (_sum >= SumToWithdraw)
+	            //If the sum is smaller or equal to current _sum, a withdrawal of sum is performed
+	            lock (_lock)
 	            {
-	                _sum -= SumToWithdraw;
-	                Console.WriteLine("Withdrawal of {0} from account has been made. Current balance of account is {1} kr.", SumToWithdraw, _sum);
-	                return true;
+	                if (_sum >= SumToWithdraw)
+	                {
+	                    _sum -= SumToWithdraw;
+	                    Console.WriteLine(
+	                        "Withdrawal of {0} from account has been made. Current balance of account is {1} kr.",
+	                        SumToWithdraw, _sum);
+	                    return true;
+	                }
+	                else
+	                {
+	                    Console.WriteLine("Not enough funds. Withdrawal was cancelled.");
+	                    return false;
+	                }
 	            }
-	            else
-	            {
-	                Console.WriteLine("Not enough funds. Withdrawal was cancelled.");
-	                return false;
-	            }
-            }
+	        }
 	    }
 	}
 }
