@@ -18,9 +18,10 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 
 		private List<IStatue> _productsForSale;
 		private List<IStatue> _productsSold;
-		private readonly Random _rnd = new Random();
+        private readonly Random _rnd = new Random();
+	    private readonly Object _lock = new Object();
 
-		public Store(int quota, ShopType typeOfShop) {
+        public Store(int quota, ShopType typeOfShop) {
 			Quota = quota;
 			Shop = ShopFactory.ShopFactory.CreateShop(typeOfShop);
 			Name = Shop.GetName();
@@ -76,14 +77,18 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 			var product = _productsForSale[0];
 			var price = product.GetPrice();
 
-			if(bank.Transaction(price, socialSecurityNumber)) {
-				_productsSold.Add(product);
-				_productsForSale.Remove(product);
-				CheckIfStoreShouldClose();
-				return product;
-			}
+		    lock(_lock)
+		    {
+		        if (bank.Transaction(price, socialSecurityNumber))
+		        {
+		            _productsSold.Add(product);
+		            _productsForSale.Remove(product);
+		            CheckIfStoreShouldClose();
+		            return product;
+		        }
+		    }
 
-			return null;
+		    return null;
 		}
 
 		/*//Creates a shop based on given type of shop.
