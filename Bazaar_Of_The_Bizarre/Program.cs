@@ -23,24 +23,31 @@ namespace Bazaar_Of_The_Bizarre {
 */
 
 			var client = new Client(20);
-			client.StartAllCustomerThreads();
+        
+		    var bazarOpen = true;
+		    while (bazarOpen)
+		    {
+		        client.StartAllCustomerThreads();
+		        client.StartAllStoresThreads();
+		        bazarOpen = client.IsBazarClosed();
+		    }
+            Console.WriteLine("This is closed");
 
 
+		    /*
 
-			/*
-
-						cust1.BuyItem(bazaar);
-						cust1.BuyItem(bazaar);
-						cust2.BuyItem(bazaar);
-						cust2.BuyItem(bazaar);
-						cust3.BuyItem(bazaar);
-						cust3.BuyItem(bazaar);
-						cust3.BuyItem(bazaar);
-						cust4.BuyItem(bazaar);
-						cust4.BuyItem(bazaar);
-						cust4.BuyItem(bazaar);
-						cust4.BuyItem(bazaar);
-			*/
+                        cust1.BuyItem(bazaar);
+                        cust1.BuyItem(bazaar);
+                        cust2.BuyItem(bazaar);
+                        cust2.BuyItem(bazaar);
+                        cust3.BuyItem(bazaar);
+                        cust3.BuyItem(bazaar);
+                        cust3.BuyItem(bazaar);
+                        cust4.BuyItem(bazaar);
+                        cust4.BuyItem(bazaar);
+                        cust4.BuyItem(bazaar);
+                        cust4.BuyItem(bazaar);
+            */
 
 			Console.ReadKey();
 

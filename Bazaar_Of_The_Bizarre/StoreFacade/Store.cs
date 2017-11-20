@@ -65,17 +65,35 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		
 		private void CheckIfStoreShouldClose()
 		{
-			if(_productsForSale.Count == 0) {
+			if(_productsSold.Count == Quota) {
 				StoreIsOpen = false;
 			}
 		}
-		
-		//TODO insert ThreadLock
-		public IStatue SellProduct(int socialSecurityNumber) {
+
+        // TODO Should we add  multie products at a time or just one and one?? 
+	    public void FillProducts()
+	    {
+	        while (_productsSold.Count <= Quota)
+	        {
+	            var amountOfProducts = _rnd.Next(1, 4);
+
+	            if ((_productsSold.Count + amountOfProducts) <= Quota)
+	            {
+	                var listOfProducts = Backroom.CreateMultipleStatues(amountOfProducts);
+	                _productsForSale.AddRange(listOfProducts);
+	            }
+                Thread.Sleep(1000);
+	        }
+	        CheckIfStoreShouldClose();
+            StoreIsOpen = false;
+        }
+
+	    public IStatue SellProduct(int socialSecurityNumber) {
 			var bank = Bank.BankFlyweight.BankFactory.GetBank("DNB");
 			
 			var product = _productsForSale[0];
 			var price = product.GetPrice();
+		    var transactionMade = false;
 
 		    lock(_lock)
 		    {
@@ -84,11 +102,18 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		            _productsSold.Add(product);
 		            _productsForSale.Remove(product);
 		            CheckIfStoreShouldClose();
-		            return product;
+		            transactionMade = true;
+
+                    return product;
 		        }
 		    }
 
-		    return null;
+            //Kill thread if no withdrawal was made
+		    if (!transactionMade)
+		    {
+		        Thread.CurrentThread.Join();
+            }
+            return null;
 		}
 	}
 }

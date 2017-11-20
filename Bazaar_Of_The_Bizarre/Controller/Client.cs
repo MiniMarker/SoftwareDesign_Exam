@@ -13,14 +13,19 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		private readonly Bank.BankFlyweight.Bank _bank;
 		private Bazaar _bazaar;
 		private Customer[] _customers;
-		private Thread[] _customerThreads;
+        private Thread[] _customerThreads;
+	    private Thread[] _storeThreads;
+	    private static int _socialSecurityNumber;
 
-		public Client(int amountOfCustomers) {
+        public Client(int amountOfCustomers) {
 			_bank = BankFactory.GetBank("DNB");
 			_bazaar = new Bazaar();
 
+            _socialSecurityNumber = 120;
+
 			_customers = new Customer[amountOfCustomers];
 			_customerThreads = new Thread[amountOfCustomers];
+		    _storeThreads = new Thread[4];
 		}
 
 		/**
@@ -40,10 +45,10 @@ namespace Bazaar_Of_The_Bizarre.controller {
 
 		private void CreateAllCustomers()
 		{
-			var socialSecurityNumber = 120;
+
 
 			for(var i = 0; i < _customers.Length; i++) {
-				_customers[i] = new Customer(socialSecurityNumber++, "Kunde" + i, _bank, _bazaar);
+				_customers[i] = new Customer(_socialSecurityNumber++, "Kunde" + i, _bank, _bazaar);
 			}
 		}
 
@@ -56,8 +61,41 @@ namespace Bazaar_Of_The_Bizarre.controller {
 			}
 		}
 
+	    public void StartAllStoresThreads()
+	    {
+	        CreateAllStoresThreads();
+	        foreach (var storeThread in _storeThreads)
+	        {
+	            storeThread.Start();
+	        }
+        }
 
+        private void CreateAllStoresThreads()
+        {
+            var storesList = _bazaar.GetStoreList();
 
+            int i = 0;
+            foreach (var store in storesList) {
+                    var thread = new Thread(store.FillProducts);
+                    _storeThreads[i] = thread;
+                    ++i;
+             }
+        }
 
+	    public Boolean IsBazarClosed()
+	    {
+	        var isAnyStoreOpen = false;
+	        var StoresList = _bazaar.GetStoreList();
+	        foreach (var store in StoresList)
+	        {
+	            if (store.StoreIsOpen)
+	            {
+	                isAnyStoreOpen = true;
+	            }
+	        }
+
+	        Console.WriteLine("Hellu I am done now. {0}", isAnyStoreOpen);
+	        return isAnyStoreOpen;
+	    }
 	}
 }

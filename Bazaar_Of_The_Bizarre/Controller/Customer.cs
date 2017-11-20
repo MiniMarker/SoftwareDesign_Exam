@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bazaar_Of_The_Bizarre.Bank.BankFlyweight;
 using Bazaar_Of_The_Bizarre.statueDecorator;
 
 namespace Bazaar_Of_The_Bizarre.controller {
@@ -42,7 +43,8 @@ namespace Bazaar_Of_The_Bizarre.controller {
 			    Console.WriteLine(print.PrintStatueDesc(productBought.GetDescription()));
 			    Console.WriteLine("");
 		    }
-		}
+                 
+	    }
 
 
 		//Prints out all the purchased items.
