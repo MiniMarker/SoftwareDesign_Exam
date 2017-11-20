@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bazaar_Of_The_Bizarre.statueDecorator;
 using Bazaar_Of_The_Bizarre.StatueDecorator;
 
 namespace Bazaar_Of_The_Bizarre {
@@ -12,7 +13,12 @@ namespace Bazaar_Of_The_Bizarre {
 		private List<string> _jewelList;
 		private List<string> _colorList;
 
-		public void SortStatueDescription(string description) {
+		public string SortAndRetrieveProductDescription(IStatue statue) {
+			SortStatueDescription(statue.GetDescription());
+			return FormatProductDescription();
+		}
+
+		private void SortStatueDescription(string description) {
 			_stickerList = new List<string>();
 			_jewelList = new List<string>();
 			_colorList = new List<string>();
@@ -33,33 +39,46 @@ namespace Bazaar_Of_The_Bizarre {
 			}
 		}
 
-		public string PrintStatueDesc(string description) {
-			var colors = "";
-			var jewels = "";
-			var stickers = "";
-			SortStatueDescription(description);
-
-			if(_colorList != null) {
-				foreach(var color in _colorList) {
-					colors += color + ", ";
-				}
-			}
-
-			if(_jewelList != null) {
-
-				foreach(var jewel in _jewelList) {
-					jewels += jewel + ", ";
-				}
-			}
-
-			if(_stickerList != null) {
-
-				foreach(var sticker in _stickerList) {
-					stickers += sticker + ", ";
-				}
-			}
+		private string FormatProductDescription() {
+			var colors = FormatDecorations(_colorList);
+			var jewels = FormatDecorations(_jewelList);
+			var stickers = FormatDecorations(_stickerList);
 
 			return $"{colors} Statue \n " + $"- 'Jewels': {jewels} \n " + $"- Stickers: {stickers}";
 		}
+
+		private string FormatDecorations(List<string> decorationList) {
+			if(decorationList == null)
+				return null;
+
+
+			var decorationsFormatted = "";
+			for(var i = 0; i < decorationList.Count; i++)
+			{
+				var toBeAddedToDescription = "";
+				if(i == 0) {
+					decorationsFormatted += decorationList[i].Substring(0, 1).ToUpper() + decorationList[i].Substring(1);
+					
+				}
+				else {
+					toBeAddedToDescription += decorationList[i];
+					
+				}
+
+				if(decorationList.Count != 0) { 
+					if(decorationList.Count - i > 1 && i != 0) {
+						decorationsFormatted += ", " + toBeAddedToDescription;
+					}
+					else if(decorationList.Count - i == 1 && !toBeAddedToDescription.Equals("")) {
+
+						decorationsFormatted += " and " + toBeAddedToDescription;
+
+					}
+				}
+
+			}
+			return decorationsFormatted;
+		}
+
 	}
 }

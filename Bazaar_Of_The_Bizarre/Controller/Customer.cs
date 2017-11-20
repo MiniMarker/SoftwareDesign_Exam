@@ -40,7 +40,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 
 		    if(productBought != null) {
 			    ItemsPurchased.Add(productBought);
-			    Console.WriteLine(print.PrintStatueDesc(productBought.GetDescription()));
+			    Console.WriteLine(print.SortAndRetrieveProductDescription(productBought));
 			    Console.WriteLine("");
 		    }
                  
