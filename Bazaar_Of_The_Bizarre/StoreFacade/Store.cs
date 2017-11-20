@@ -90,18 +90,5 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 
 		    return null;
 		}
-
-		/*//Creates a shop based on given type of shop.
-		public IShop CreateShop(ShopType shopType) {
-			switch(shopType) {
-				case ShopType.CheapShop:
-					Shop = ShopFactory.ShopFactory.CreateShop(ShopType.CheapShop);
-					break;
-				case ShopType.ExpensiveShop:
-					Shop = ShopFactory.ShopFactory.CreateShop(ShopType.ExpensiveShop);
-					break;
-			}
-			return Shop;
-		}*/
 	}
 }

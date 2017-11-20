@@ -48,7 +48,7 @@ namespace Bazaar_Of_The_Bizarre {
 			if(_jewelList != null) {
 
 				foreach(var jewel in _jewelList) {
-					jewels += jewel + " ,";
+					jewels += jewel + ", ";
 				}
 			}
 
