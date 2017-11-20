@@ -12,8 +12,9 @@ namespace Bazaar_Of_The_Bizarre.Test
     class BankTest
     {
 		[Test]
-	    public void TestCreateAccount()
-	    {
+	    public void CreateAccountTest()
+		{
+			BankAccount account = null;
 		    var DnB = BankFactory.GetBank("DnB");
 
 		    DnB.CreateAccount(007);
@@ -24,7 +25,7 @@ namespace Bazaar_Of_The_Bizarre.Test
 	    }
 
 		[Test]
-	    public void TestWithdrawalSuccess()
+	    public void WithdrawalSuccessTest()
 	    {
 			var account = new BankAccount(150);
 
@@ -34,7 +35,7 @@ namespace Bazaar_Of_The_Bizarre.Test
 	    }
 
 	    [Test]
-	    public void TestWithdrawalFail()
+	    public void WithdrawalFailTest()
 	    {
 		    var account = new BankAccount(150);
 

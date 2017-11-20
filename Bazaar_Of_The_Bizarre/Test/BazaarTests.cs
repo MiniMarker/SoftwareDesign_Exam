@@ -9,13 +9,11 @@ namespace Bazaar_Of_The_Bizarre.Test
 	public class BazaarTests
 	{
 		[Test]
-		public void TestCreateStores()
+		public void CreateStoresTest()
 		{
 			Bazaar bazaar = new Bazaar();
 
 			Assert.AreEqual(bazaar.GetStoreList().Count, 4);
 		}
-		
-
 	}
 }

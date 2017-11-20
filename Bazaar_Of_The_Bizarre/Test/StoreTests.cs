@@ -12,9 +12,9 @@ namespace Bazaar_Of_The_Bizarre.Test
 		[Test]
 		public void TestCreateStore()
 		{
-			Store store = new Store(2, ShopType.CheapShop);
+			var store = new Store(10, ShopType.ExpensiveShop);
 
-
+			store.Backroom.CreateMultipleStatues(10);
 		}
 	}
 }
