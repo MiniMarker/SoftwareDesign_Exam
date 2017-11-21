@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Bazaar_Of_The_Bizarre.controller;
 using Bazaar_Of_The_Bizarre.statueDecorator;
 using Bazaar_Of_The_Bizarre.StatueDecorator;
 
@@ -7,16 +8,13 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade
 {
 	class Backroom
 	{
-
-		private readonly Random _random = new Random();
-
 		public IStatue CreateProduct(int numberOfDecorations)
 		{
 			IStatue statue = new Statue();
 
 			for (var i = 0; i < numberOfDecorations; i++)
 			{
-				var value = _random.Next(1, 4);
+				var value = Program.Rnd.Next(1, 4);
 
 				switch (value)
 				{
@@ -58,7 +56,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade
 
 			for (var i = 0; i < numberOfStatuesToBeCreated; i++)
 			{
-				var numberOfDecorations = _random.Next(5, 9);
+				var numberOfDecorations = Program.Rnd.Next(5, 9);
 				var product = CreateProduct(numberOfDecorations);
 				statueList.Add(product);
 			}
@@ -91,7 +89,6 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade
 			}
 			return possibleDecorations;
 		}
-
 
 		private int GetAmountOfUsedDecorationsOfType(string description, string decorationType)
 		{

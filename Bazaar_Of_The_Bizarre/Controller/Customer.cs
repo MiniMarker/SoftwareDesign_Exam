@@ -14,9 +14,6 @@ namespace Bazaar_Of_The_Bizarre.controller {
 	    public List<IStatue> ItemsPurchased { get; set;}
 		private Bazaar _bazaar;
 
-		//TODO remove this later
-		private PrintHandler print = new PrintHandler();
-
 		/// <summary>
 		/// Constructor 
 		/// </summary>
@@ -30,27 +27,21 @@ namespace Bazaar_Of_The_Bizarre.controller {
 			ItemsPurchased = new List<IStatue>();
 			bank.CreateAccount(SocialSecurityNumber);
 			_bazaar = bazaar;
-
 		}
 
-		// Buys item if sufficient funds on bankaccount. Adds in _itemsPurchased.
-	    public void BuyItem()
-	    {
-		    var productBought = _bazaar.GetProductFromStoreForCustomer(SocialSecurityNumber);
+        // Buys item if sufficient funds on bankaccount. Adds in _itemsPurchased.
+        public void BuyItem()
+        {
+            var productBought = _bazaar.GetProductFromStoreForCustomer(SocialSecurityNumber, Name);
+            if (productBought != null)
+            {
+                ItemsPurchased.Add(productBought);
+            }
+        }
 
-		    if(productBought != null) {
-			    ItemsPurchased.Add(productBought);
-			    Console.WriteLine(print.SortAndRetrieveProductDescription(productBought));
-			    Console.WriteLine("");
-		    }
-                 
-	    }
-
-
-		//Prints out all the purchased items.
-
-		//TODO Move this method when finished with other methods.
-		public void GetItemsPurchased()
+        //TODO Move this method when finished with other methods.
+	    //Prints out all the purchased items.
+        public void GetItemsPurchased()
 	    {
 	        foreach(var item in ItemsPurchased)
 	        {

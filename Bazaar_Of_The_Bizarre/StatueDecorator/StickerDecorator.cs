@@ -7,11 +7,10 @@ using Bazaar_Of_The_Bizarre.StatueDecorator;
 
 namespace Bazaar_Of_The_Bizarre.statueDecorator {
 	class StickerDecorator : StatueDecorator {
-
-		private readonly Random _random;
-
+        
+        //TODO Could this be removed since it's empty?
 		public StickerDecorator(IStatue originalStatue) : base(originalStatue) {
-			_random = new Random();
+		
 		}
 
 		public override double GetPrice() {

@@ -12,11 +12,9 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 	{
 
 		private readonly IStatue _originalStatue;
-		private readonly Random _random;
 
 		protected StatueDecorator(IStatue originalStatue)
 		{
-			_random = new Random();
 			_originalStatue = originalStatue;
 		}
 
@@ -67,17 +65,17 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 		private string GetRandomSticker() {
 			
 			var stickerValues = Enum.GetValues(typeof(Stickers));
-			return stickerValues.GetValue(_random.Next(stickerValues.Length)).ToString();
+			return stickerValues.GetValue(Program.Rnd.Next(stickerValues.Length)).ToString();
 		}
 
 		private string GetRandomColor() { 
 			var colorValues = Enum.GetValues(typeof(Colors));
-			return colorValues.GetValue(_random.Next(colorValues.Length)).ToString();
+			return colorValues.GetValue(Program.Rnd.Next(colorValues.Length)).ToString();
 		}
 
 		private string GetRandomJewel() {
 			var jewelValues = Enum.GetValues(typeof(Jewels));
-			return jewelValues.GetValue(_random.Next(jewelValues.Length)).ToString();
+			return jewelValues.GetValue(Program.Rnd.Next(jewelValues.Length)).ToString();
 		}
 
 
