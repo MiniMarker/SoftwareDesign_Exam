@@ -19,7 +19,6 @@ namespace Bazaar_Of_The_Bizarre.Bank {
 					return true;
 				}
 				else {
-					Console.WriteLine("Rejected purchase. Insufficient funds.{0}", System.Environment.NewLine);
 					return false;
 				}
 			}

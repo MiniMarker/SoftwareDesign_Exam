@@ -6,7 +6,7 @@ using Bazaar_Of_The_Bizarre.controller;
 namespace Bazaar_Of_The_Bizarre.controller {
 	class Client {
 		private readonly Bank.BankFlyweight.Bank _bank;
-		public Bazaar _bazaar;
+		public Bazaar Bazaar;
 		private Customer[] _customers;
         private Thread[] _customerThreads;
 	    private Thread[] _storeThreads;
@@ -14,10 +14,8 @@ namespace Bazaar_Of_The_Bizarre.controller {
 
         public Client(int amountOfCustomers) {
 			_bank = BankFactory.GetBank("DNB");
-			_bazaar = new Bazaar();
-
+			Bazaar = new Bazaar();
             _socialSecurityNumber = 120;
-
 			_customers = new Customer[amountOfCustomers];
 			_customerThreads = new Thread[amountOfCustomers];
 		    _storeThreads = new Thread[4];
@@ -47,7 +45,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 			{
 			    var values = Enum.GetValues(typeof(Names));
                 var customerName = values.GetValue(Program.Rnd.Next(values.Length));
-                _customers[i] = new Customer(_socialSecurityNumber++, customerName.ToString(), _bank, _bazaar);
+                _customers[i] = new Customer(_socialSecurityNumber++, customerName.ToString(), _bank, Bazaar);
             }
 		}
 
@@ -62,7 +60,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 
         private void CreateAllStoresThreads()
         {
-            var storesList = _bazaar.GetStoreList();
+            var storesList = Bazaar.GetStoreList();
 
             int i = 0;
             foreach (var store in storesList) {
@@ -84,14 +82,14 @@ namespace Bazaar_Of_The_Bizarre.controller {
         //Checks if the bazar should be closed.
         public Boolean IsBazarClosed()
 	    {
-	        var result = _bazaar.IsBazarOpen();
+	        var result = Bazaar.IsBazarOpen();
 	        return result;
 	    }
 
         //Prints out all sold of the day by stores.
 	    public void EndOfDay()
 	    {
-	        foreach (var store in _bazaar.GetStoreList())
+	        foreach (var store in Bazaar.GetStoreList())
 	        {
 	            store.ViewSoldProducts();
 	        }

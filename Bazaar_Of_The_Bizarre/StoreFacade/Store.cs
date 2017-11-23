@@ -17,7 +17,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade
         private List<IStatue> _productsForSale;
         private List<IStatue> _productsSold;
         //TODO remove this later
-        private PrintHandler print = new PrintHandler();
+        private PrintHandler _print = new PrintHandler();
 
         public Store(int quota, ShopType typeOfShop)
         {
@@ -75,17 +75,23 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade
                 {
                     var product = _productsForSale[0];
                     var price = product.GetPrice();
-                        if (bank.Transaction(price, socialSecurityNumber))
-                        {
-                            _productsSold.Add(product);
-                            _productsForSale.Remove(product);
-                            CheckIfStoreShouldClose();
-                            transactionMade = true;
-                            Console.WriteLine("Following product was sold to {0} for {1} kr from {2}.{3}{4}{5}", name, price, Name, System.Environment.NewLine, print.SortAndRetrieveProductDescription(product), System.Environment.NewLine);
-                            return product;
-                        }
+                    if (bank.Transaction(price, socialSecurityNumber))
+                    {
+                        _productsSold.Add(product);
+                        _productsForSale.Remove(product);
+                        CheckIfStoreShouldClose();
+                        transactionMade = true;
+                        Console.WriteLine("Following product was sold to {0} for {1} kr from {2}.{3}{4}{5}", name,
+                            price, Name, System.Environment.NewLine, _print.SortAndRetrieveProductDescription(product),
+                            System.Environment.NewLine);
+                        return product;
+                    }
+                    else
+                    {
+                        Console.WriteLine("{0} tried to buy following product at {1} for {2} kr. Withdrawal rejected. Insufficient funds.{3}{4}{5}", name, Name, price, System.Environment.NewLine, _print.SortAndRetrieveProductDescription(product), System.Environment.NewLine);
                     }
                 }
+            }
             //Kill thread if no withdrawal was made
             if (!transactionMade)
             {
