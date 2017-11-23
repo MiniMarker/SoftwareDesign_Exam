@@ -44,7 +44,6 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		    }
 		}
 
-
 		//Prints out all the purchased items.
 
 		//TODO Move this method when finished with other methods.
