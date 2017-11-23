@@ -1,46 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Bazaar_Of_The_Bizarre.Bank.BankFlyweight;
 using Bazaar_Of_The_Bizarre.controller;
-using Bazaar_Of_The_Bizarre.statueDecorator;
-using Bazaar_Of_The_Bizarre.StoreFacade;
 
 namespace Bazaar_Of_The_Bizarre {
 	class Program {
-		public static void Main(string[] args) {
+        //TODO All randoms are refered to by Program.Rnd. Search for this when changing to Random.Rnd
+	    public static readonly Random Rnd = new Random();
 
+        public static void Main(string[] args) {
+			var client = new Client(10);
+            client.StartAllStoresThreads();
 
-			/*
-			var cust1 = new Customer(123,"Henrik", bank, );
-			var cust2 = new Customer(124,"Emma", bank);
-			var cust3 = new Customer(125,"Christian", bank);
-			var cust4 = new Customer(126,"Bosse", bank);
-*/
+            //TODO Should customer shop until their money is none? If then this need to be implemented.
+            while (client._bazaar.IsBazarOpen())
+		    {
+		        client.StartAllCustomerThreads();
+            }
 
-			var client = new Client(20);
-			client.StartAllCustomerThreads();
-
-
-
-			/*
-
-						cust1.BuyItem(bazaar);
-						cust1.BuyItem(bazaar);
-						cust2.BuyItem(bazaar);
-						cust2.BuyItem(bazaar);
-						cust3.BuyItem(bazaar);
-						cust3.BuyItem(bazaar);
-						cust3.BuyItem(bazaar);
-						cust4.BuyItem(bazaar);
-						cust4.BuyItem(bazaar);
-						cust4.BuyItem(bazaar);
-						cust4.BuyItem(bazaar);
-			*/
+            client.EndOfDay();
+           
+            Console.WriteLine("Bazar is now closed.");
 
 			Console.ReadKey();
 

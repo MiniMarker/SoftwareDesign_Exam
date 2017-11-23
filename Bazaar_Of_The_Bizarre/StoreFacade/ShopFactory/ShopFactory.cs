@@ -1,44 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
-
-	class ShopFactory {
-		private static readonly Random _rnd = new Random();
+﻿namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
+	class ShopFactory { 
 		private ShopFactory() { }
 
 		public static IShop CreateShop(ShopType typeOfShop)
 		{
-			//
-//			Thread.Sleep(450);
 			IShop shop = null;
 			switch (typeOfShop)
 			{
 				case ShopType.ExpensiveShop:
-					shop = new ExpensiveShop(ChooseRandomPrice(ShopType.ExpensiveShop), _rnd);
+					shop = new ExpensiveShop(ChooseRandomPrice(ShopType.ExpensiveShop));
 					break;
 				case ShopType.CheapShop:
-					shop = new CheapShop(ChooseRandomPrice(ShopType.CheapShop), _rnd);
+					shop = new CheapShop(ChooseRandomPrice(ShopType.CheapShop));
 					break;
 			}
 			return shop;
 		}
 
-
 		//Chooses a random price for products.
 		private static int ChooseRandomPrice(ShopType shopType)
 		{
-			var productPrice = _rnd.Next(30);
+			var productPrice = Program.Rnd.Next(10, 30);
 			if (shopType == ShopType.ExpensiveShop)
 			{
-				productPrice += 7;
+				productPrice += 20;
 			}
 			return productPrice;
 		}
-
 	}
 }

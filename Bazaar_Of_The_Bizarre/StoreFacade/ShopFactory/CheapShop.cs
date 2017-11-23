@@ -11,17 +11,14 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
 		//TODO make into properties
 		private string _name;
 		private int _price;
-		private readonly Random _random;
 
-
-		public CheapShop(int price, Random random) {
+		public CheapShop(int price) {
 			SetProductPrice(price);
-			_random = random;
 			GenerateName();
 		}
 
 		public void GenerateName() {
-			var chosenStoreName = _random.Next(5);
+			var chosenStoreName = Program.Rnd.Next(5);
 			switch(chosenStoreName) {
 				case 0:
 					SetName("Emma's Cheapskate Shop");
