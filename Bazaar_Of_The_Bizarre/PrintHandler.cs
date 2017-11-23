@@ -51,7 +51,6 @@ namespace Bazaar_Of_The_Bizarre {
 			if(decorationList == null)
 				return null;
 
-
 			var decorationsFormatted = "";
 			for(var i = 0; i < decorationList.Count; i++)
 			{
