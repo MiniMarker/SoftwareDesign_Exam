@@ -15,7 +15,6 @@ namespace Bazaar_Of_The_Bizarre.controller
 		private Thread[] _customerThreads;
 		private Thread[] _storeThreads;
 		private static int _socialSecurityNumber;
-		List<String> nameList = new List<string>();
 
 		public Client(int amountOfCustomers)
 		{
@@ -46,48 +45,42 @@ namespace Bazaar_Of_The_Bizarre.controller
 
 		private void CreateAllCustomers()
 		{
-
+			List<String> nameList = new List<string>();
 
 			for (var i = 0; i < _customers.Length; i++)
 			{
-				_customers[i] = GetCustomerFromList();
-			}
-		}
-
-		private Customer GetCustomerFromList()
-		{
-			var values = Enum.GetValues(typeof(Names));
-			var customerName = values.GetValue(Program.Rnd.Next(0, values.Length));
-			var nameIsTaken = false;
-			Customer customer = null;
-			while (!nameIsTaken && customer == null)
-			{
-				if (nameList.Count != 0)
+				var values = Enum.GetValues(typeof(Names));
+				var customerName = values.GetValue(Program.Rnd.Next(0, values.Length));
+				var nameIsTaken = false;
+				while (!nameIsTaken)
 				{
-					foreach (var name in nameList)
+					if (nameList.Count != 0)
 					{
-						if (name.Equals(customerName.ToString()))
+						foreach (var name in nameList)
 						{
-							nameIsTaken = true;
+							if (name.Equals(customerName.ToString()))
+							{
+								nameIsTaken = true;
+							}
 						}
 					}
-				}
-				if (nameIsTaken)
-				{
-					customerName = values.GetValue(Program.Rnd.Next(values.Length));
-					nameIsTaken = false;
-				}
-				else
-				{
-					nameList.Add(customerName.ToString());
-					customer = new Customer(_socialSecurityNumber++, customerName.ToString(), _bank, Bazaar);
+					if (nameIsTaken)
+					{
+						customerName = values.GetValue(Program.Rnd.Next(values.Length));
+						nameIsTaken = false;
+					}
+					else
+					{
+						nameList.Add(customerName.ToString());
+						_customers[i] = new Customer(_socialSecurityNumber++, customerName.ToString(), _bank, Bazaar);
+						break;
+					}
 				}
 			}
-			return customer;
 		}
 
 
-	private void CreateAllCustomerThreads()
+		private void CreateAllCustomerThreads()
 		{
 			for (var i = 0; i < _customerThreads.Length; i++)
 			{

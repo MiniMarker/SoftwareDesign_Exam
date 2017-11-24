@@ -14,10 +14,8 @@ namespace Bazaar_Of_The_Bizarre {
             while (client.Bazaar.IsBazarOpen())
 		    {
 		        client.StartAllCustomerThreads();
-			    Console.WriteLine("----TEST");
-			}
+            }
 
-	        
             client.EndOfDay();
            
             Console.WriteLine("Bazar is now closed.");
