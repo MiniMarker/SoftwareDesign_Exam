@@ -7,7 +7,7 @@ namespace Bazaar_Of_The_Bizarre {
 	    public static readonly Random Rnd = new Random();
 
         public static void Main(string[] args) {
-			var client = new Client(10);
+			var client = new Client(20);
             client.StartAllStoresThreads();
 
             //TODO Should customer shop until their money is none? If then this need to be implemented.

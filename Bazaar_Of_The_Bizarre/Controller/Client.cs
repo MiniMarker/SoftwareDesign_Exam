@@ -45,40 +45,38 @@ namespace Bazaar_Of_The_Bizarre.controller
 
 		private void CreateAllCustomers()
 		{
-			List<String> nameList = new List<string>();
+			List<string> nameList = new List<string>();
 
 			for (var i = 0; i < _customers.Length; i++)
 			{
-				var values = Enum.GetValues(typeof(Names));
-				var customerName = values.GetValue(Program.Rnd.Next(0, values.Length));
-				var nameIsTaken = false;
-				while (!nameIsTaken)
-				{
-					if (nameList.Count != 0)
-					{
-						foreach (var name in nameList)
-						{
-							if (name.Equals(customerName.ToString()))
-							{
-								nameIsTaken = true;
-							}
-						}
-					}
-					if (nameIsTaken)
-					{
-						customerName = values.GetValue(Program.Rnd.Next(values.Length));
-						nameIsTaken = false;
-					}
-					else
-					{
-						nameList.Add(customerName.ToString());
-						_customers[i] = new Customer(_socialSecurityNumber++, customerName.ToString(), _bank, Bazaar);
-						break;
-					}
-				}
+				_customers[i]  = AddCustomerToList(nameList);
 			}
 		}
 
+		private Customer AddCustomerToList(List<string> nameList)
+		{
+			var values = Enum.GetValues(typeof(Names));
+			var customerName = values.GetValue(Program.Rnd.Next(0, values.Length));
+			var nameIsTaken = false;
+			while(!nameIsTaken) {
+				if(nameList.Count != 0) {
+					foreach(var name in nameList) {
+						if(name.Equals(customerName.ToString())) {
+							nameIsTaken = true;
+						}
+					}
+				}
+				if(nameIsTaken) {
+					customerName = values.GetValue(Program.Rnd.Next(values.Length));
+					nameIsTaken = false;
+				}
+				else {
+					nameList.Add(customerName.ToString());
+					return new Customer(_socialSecurityNumber++, customerName.ToString(), _bank, Bazaar);
+				}
+			}
+			return null;
+		}
 
 		private void CreateAllCustomerThreads()
 		{

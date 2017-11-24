@@ -63,7 +63,6 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 			lock(_productsForSale) lock(_productsSold) {
 					if(StoreIsOpen && _productsForSale.Count > 0) {
 						var product = _productsForSale[0];
-						Console.WriteLine("Amount of products for sale: {0}", _productsForSale.Count);
 						var price = product.GetPrice();
 						if(bank.Transaction(price, socialSecurityNumber)) {
 							_productsSold.Add(product);
