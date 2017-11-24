@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\Names.cs" />
     <Compile Include="PrintHandler.cs" />
     <Compile Include="StatueDecorator\Jewels.cs" />
     <Compile Include="StatueDecorator\JewelDecorator.cs" />
