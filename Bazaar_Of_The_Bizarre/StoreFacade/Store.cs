@@ -14,7 +14,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 
 		private List<IStatue> _productsForSale;
 		private List<IStatue> _productsSold;
-		//TODO remove this later
+		//TODO move this later
 		private PrintHandler _print = new PrintHandler();
 
 		public Store(int quota, ShopType typeOfShop) {
