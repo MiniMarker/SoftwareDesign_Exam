@@ -37,6 +37,14 @@ namespace Bazaar_Of_The_Bizarre {
 					_colorList.Add(word);
 				}
 			}
+
+			if(_stickerList.Count == 0) {
+				_stickerList.Add("none");
+			}
+
+			if(_jewelList.Count == 0) {
+				_jewelList.Add("none");
+			}
 		}
 
 		private string FormatProductDescription() {
@@ -52,19 +60,18 @@ namespace Bazaar_Of_The_Bizarre {
 				return null;
 
 			var decorationsFormatted = "";
-			for(var i = 0; i < decorationList.Count; i++)
-			{
+			for(var i = 0; i < decorationList.Count; i++) {
 				var toBeAddedToDescription = "";
 				if(i == 0) {
 					decorationsFormatted += decorationList[i].Substring(0, 1).ToUpper() + decorationList[i].Substring(1);
-					
+
 				}
 				else {
 					toBeAddedToDescription += decorationList[i];
-					
+
 				}
 
-				if(decorationList.Count != 0) { 
+				if(decorationList.Count != 0) {
 					if(decorationList.Count - i > 1 && i != 0) {
 						decorationsFormatted += ", " + toBeAddedToDescription;
 					}
@@ -76,6 +83,7 @@ namespace Bazaar_Of_The_Bizarre {
 				}
 
 			}
+
 			return decorationsFormatted;
 		}
 
