@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
 	class CheapShop : IShop {
-		//TODO make into properties
+		//TODO make into properties Is that possible due to Interface??
 		private string _name;
 		private int _price;
 

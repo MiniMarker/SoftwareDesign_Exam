@@ -9,6 +9,7 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 	class StickerDecorator : StatueDecorator {
         
         //TODO Could this be removed since it's empty?
+		//TODO NO, it can not, it it used multiple places.
 		public StickerDecorator(IStatue originalStatue) : base(originalStatue) {
 		
 		}
