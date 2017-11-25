@@ -37,6 +37,9 @@ namespace Bazaar_Of_The_Bizarre.controller {
 					ItemsPurchased.Add(productBought);
 					Thread.Sleep(1000);
 				}
+				else {
+					Thread.CurrentThread.Join();
+				}
 			}
 		}
 

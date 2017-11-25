@@ -95,9 +95,6 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 						Console.WriteLine("{0} tried to buy a product at {1} for {2} kr. Withdrawal rejected. Insufficient funds.{3}", name, Name, price, System.Environment.NewLine);
 					}
 				}
-
-			
-			Thread.CurrentThread.Join();
 			return null;
 		}
 
