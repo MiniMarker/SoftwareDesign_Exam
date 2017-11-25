@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Bazaar_Of_The_Bizarre.statueDecorator;
 using Bazaar_Of_The_Bizarre.StoreFacade;
 using Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory;
@@ -17,7 +16,10 @@ namespace Bazaar_Of_The_Bizarre.controller {
 			CreateStores(4);
 		}
 
-		// Checks if any store is open, if not the bazar closes.
+        /// <summary>
+        /// Checks if any store is open, if not the bazar closes.
+        /// </summary>
+        /// <returns>Boolean Returns true if a store is open, this means that the bazar is open.</returns>
 		public bool IsBazarOpen() {
 			var isAnyStoreOpen = false;
 			foreach(var store in _listOfAllStores) {
@@ -28,8 +30,13 @@ namespace Bazaar_Of_The_Bizarre.controller {
 			return isAnyStoreOpen;
 		}
 
-		//If there are any open stores in the bazar then the customer can buy a product.
-		public IStatue GetProductFromStoreForCustomer(int socialSecurityNumber, string name) {
+        /// <summary>
+        /// If there are any open stores in the bazar then the customer can buy a product.
+        /// </summary>
+        /// <param name="socialSecurityNumber"></param>
+        /// <param name="name"></param>
+        /// <returns>IStatue Returns product from store to customer.</returns>
+        public IStatue GetProductFromStoreForCustomer(int socialSecurityNumber, string name) {
 			if(IsBazarOpen()) {
 				var storeToShopFrom = GetRandomStore();
 				return storeToShopFrom.SellProduct(socialSecurityNumber, name);
@@ -37,10 +44,12 @@ namespace Bazaar_Of_The_Bizarre.controller {
 			return null;
 		}
 
-		// Gets random store, if it's not open, gets the first open store.
-		private Store GetRandomStore() {
+        /// <summary>
+        /// Gets random store, if it's not open, gets the first open store.
+        /// </summary>
+        /// <returns>Store Returns random open store</returns>
+        private Store GetRandomStore() {
 			var store = _listOfAllStores[Client.Rnd.Next(1, _listOfAllStores.Count)];
-
 			if(!store.StoreIsOpen) {
 				for(int i = 0; i < _listOfAllStores.Count; i++) {
 					if(_listOfAllStores[i].StoreIsOpen) {
@@ -64,8 +73,11 @@ namespace Bazaar_Of_The_Bizarre.controller {
 			}
 		}
 
-		//Returns a list of the different stores.
-		public List<Store> GetStoreList() {
+        /// <summary>
+        /// /Returns a list of the different stores.
+        /// </summary>
+        /// <returns>List Returns list of all stores</returns>
+        public List<Store> GetStoreList() {
 			return _listOfAllStores;
 		}
 	}
