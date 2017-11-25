@@ -15,9 +15,11 @@ namespace Bazaar_Of_The_Bizarre.Controller
 	    private static int _socialSecurityNumber;
 
         /// <summary>
-        /// Constructor
+        ///		Constructor
         /// </summary>
-        /// <param name="amountOfCustomers"></param>
+        /// <param name="amountOfCustomers">
+        ///		Amount of customers to be created
+        /// </param>
 	    public ThreadHandler(int amountOfCustomers)
 	    {
 	        Customers = new Customer[amountOfCustomers];
@@ -27,10 +29,14 @@ namespace Bazaar_Of_The_Bizarre.Controller
         }
 
         /// <summary>
-        /// Starts all Customer Threads
+        ///		Starts all Customer Threads
         /// </summary>
-        /// <param name="bank"></param>
-        /// <param name="bazaar"></param>
+        /// <param name="bank">
+        ///		object of Cank to be sed
+        /// </param>
+        /// <param name="bazaar">
+        ///		object of Bazaar to be used
+        /// </param>
 	    public void StartAllCustomerThreads(Bank.BankFlyweight.Bank bank, Bazaar bazaar)
         {
             CreateAllCustomers(bank, bazaar);
@@ -43,9 +49,11 @@ namespace Bazaar_Of_The_Bizarre.Controller
         }
 
 	    /// <summary>
-	    /// Starts all store threads
+	    ///		Starts all store threads
 	    /// </summary>
-	    /// <param name="bazaar"></param>
+	    /// <param name="bazaar">
+	    ///		object of Bazaar to be used
+	    /// </param>
 	    public void StartAllStoresThreads(Bazaar bazaar)
 	    {
 	        CreateAllStoresThreads(bazaar);
@@ -56,10 +64,14 @@ namespace Bazaar_Of_The_Bizarre.Controller
 	    }
 
         /// <summary>
-        /// Creates All Customers
+        ///		Creates All Customers
         /// </summary>
-        /// <param name="bank"></param>
-        /// <param name="bazaar"></param>
+        /// <param name="bank">
+        ///		object of Bank to be used
+        /// </param>
+        /// <param name="bazaar">
+        ///		object of Bazaar to be used
+        /// </param>
 	    private void CreateAllCustomers(Bank.BankFlyweight.Bank bank, Bazaar bazaar)
         {
 			List<String> nameList = new List<string>();
@@ -70,14 +82,20 @@ namespace Bazaar_Of_The_Bizarre.Controller
             }
         }
 
-        /// <summary>
-        /// This method is to avoid deadlock in the sense that stores have products to sell but customer does not have any money. Creates four customer and threads. Start thread after x milliseconds.
-        /// </summary>
-        /// <param name="bank"></param>
-        /// <param name="bazaar"></param>
-	    public void GenerateExtraCustomers(Bank.BankFlyweight.Bank bank, Bazaar bazaar)
+		/// <summary>
+		///		This method is to avoid deadlock in the sense that stores have products to sell but customer does not have any money. 
+		///		Creates four customer and threads. Start thread after x milliseconds.
+		/// </summary>
+		/// <param name="bank">
+		///		object of Bank to be used
+		/// </param>
+		/// <param name="bazaar">
+		///		object of Bazaar to be used
+		/// </param>
+		public void GenerateExtraCustomers(Bank.BankFlyweight.Bank bank, Bazaar bazaar)
 	    {
 	        Thread[] extraCostumerThreads = new Thread[5];
+
             var custom = new Customer(115, "John", bank, bazaar);
             var custom1 = new Customer(116, "Hans", bank, bazaar);
 	        var custom2 = new Customer(117, "Leila", bank, bazaar);
