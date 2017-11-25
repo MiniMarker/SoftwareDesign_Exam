@@ -1,37 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
-using System.Text;
-using System.Threading.Tasks;
-using Bazaar_Of_The_Bizarre.StatueDecorator;
-
-namespace Bazaar_Of_The_Bizarre.statueDecorator
+﻿namespace Bazaar_Of_The_Bizarre.statueDecorator
 {
-	class ColorDecorator : StatueDecorator
-	{
+	internal class ColorDecorator : StatueDecorator {
 
-
-		public ColorDecorator(IStatue originalStatue) : base(originalStatue)
-		{
+		/// <summary>
+		///		Empty Constructor
+		/// </summary>
+		/// <param name="originalStatue">
+		///		Object of statue to be decorated
+		/// </param>
+		public ColorDecorator(IStatue originalStatue) : base(originalStatue) {
 		}
 
-		public override double GetPrice()
-		{
+		/// <summary>
+		///		Adds expence to the base Statue
+		/// </summary>
+		/// <returns>
+		///		Adds 5kr to the price of base.statue
+		/// </returns>
+		public override double GetPrice() {
 			return base.GetPrice() + 5.0;
 		}
 
-		public override string GetDescription()
-		{
+		/// <summary>
+		///		Adds a random color from enum by using a helpingmethod
+		/// </summary>
+		/// <returns>
+		///		An updated description of statue with added description word to be formatted later
+		/// </returns>
+		public override string GetDescription() {
 			var description = base.GetDescription();
+
 			if (description.Equals("Statue"))
-			{
 				description = GetRandomDecoration("color") + " statue";
-			}
 			else
-			{
 				description = AddDecorationToDescription(description, "color");
-			}
 			return description;
 		}
 	}

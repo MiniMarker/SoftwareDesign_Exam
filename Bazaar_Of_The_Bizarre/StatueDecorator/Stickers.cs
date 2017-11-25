@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bazaar_Of_The_Bizarre.StatueDecorator
-{
-	enum Stickers
-	{
+namespace Bazaar_Of_The_Bizarre.StatueDecorator {
+
+	/// <summary>
+	///		List of all possible stickers
+	/// </summary>
+	enum Stickers {
 		Mario,
 		Luigi,
 		Superman,
@@ -21,6 +23,20 @@ namespace Bazaar_Of_The_Bizarre.StatueDecorator
 		cake,
 		GLaDOS,
 		Wheatley,
-		portalgun
+		portalgun,
+		StarWars,
+		Batman,
+		cow,
+		Joker,
+		ace,
+		baseball,
+		basketball,
+		Lego,
+		flag,
+		pacman,
+		ghost,
+		car,
+		truck,
+		tractor
 	}
 }
