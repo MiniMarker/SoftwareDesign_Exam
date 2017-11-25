@@ -31,7 +31,7 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
         /// <returns>Bool Returns true if account was created</returns>
         public bool CreateAccount(int customerId) {
 			//Creates new account with random sum.    
-			var sum = Client.Rnd.Next(200, 300);
+			var sum = Client.Rnd.Next(100, 200);
 			var newAccount = new BankAccount(sum);
 
 			//Adds account to _account dictionary if customer hasn't an existing account.

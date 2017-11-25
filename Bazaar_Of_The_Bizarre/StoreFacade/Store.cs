@@ -44,7 +44,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
         /// <summary>
         /// When products sold is equal to quota the store closes.
         /// </summary>
-        private void CheckIfStoreShouldClose() {
+        public void CheckIfStoreShouldClose() {
 			if(_productsSold.Count == Quota) {
 				StoreIsOpen = false;
 			}
@@ -87,7 +87,9 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 						Console.WriteLine("{0} tried to buy a product at {1} for {2} kr. Withdrawal rejected. Insufficient funds.{3}", name, Name, price, System.Environment.NewLine);
 					}
 				}
-			return null;
+            CheckIfStoreShouldClose();
+
+            return null;
 		}
 
         /// <summary>
