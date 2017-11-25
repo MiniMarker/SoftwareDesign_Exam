@@ -1,19 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Bazaar_Of_The_Bizarre.statueDecorator;
 using Bazaar_Of_The_Bizarre.StatueDecorator;
 
 namespace Bazaar_Of_The_Bizarre {
-	class PrintHandler {
+	sealed class PrintHandler
+	{
+	    private static PrintHandler _instance;
+	    private static readonly object _lock = new object();
+        private List<string> _stickerList;
+	    private List<string> _jewelList;
+        private List<string> _colorList;
 
-		private List<string> _stickerList;
-		private List<string> _jewelList;
-		private List<string> _colorList;
+        /// <summary>
+        /// Constructor
+        /// </summary>
+	    private PrintHandler()
+	    {
+	    }
 
-		public string SortAndRetrieveProductDescription(IStatue statue) {
+        /// <summary>
+        /// Returns PrintHandler if there is none, if it already exists it returns it.
+        /// </summary>
+        /// <returns>PrintHandler Returns existing PrintHandler </returns>
+	    public static PrintHandler GetInstance()
+	    {
+	        if (_instance == null)
+	        {
+	            lock (_lock)
+	            {
+	                _instance = new PrintHandler();
+	            }
+	        }
+	        return _instance;
+	    }
+
+	    public string SortAndRetrieveProductDescription(IStatue statue) {
 			SortStatueDescription(statue.GetDescription());
 			return FormatProductDescription();
 		}
