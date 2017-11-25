@@ -7,14 +7,15 @@ using Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory;
 
 namespace Bazaar_Of_The_Bizarre.StoreFacade {
 	class Store {
+
 		public IShop Shop;
 		public Backroom Backroom { get; set; }
 		public bool StoreIsOpen { get; private set; }
 		public string Name { get; set; }
 		public int Quota { get; set; }
-		private List<IStatue> _productsForSale;
-		//TODO fix this hack
-		public List<IStatue> _productsSold;
+		private readonly List<IStatue> _productsForSale;
+		private readonly List<IStatue> _productsSold;
+
 	    private object SyncLock = new object();
 
         /// <summary>
