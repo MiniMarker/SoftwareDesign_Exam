@@ -8,30 +8,23 @@ using Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory;
 namespace Bazaar_Of_The_Bizarre.controller {
 	class Bazaar {
 		private List<Store> _listOfAllStores;
-		private Boolean _bazarClosed;
 
 		/// <summary>
 		/// Constructor 
 		/// </summary>
 		public Bazaar() {
 			_listOfAllStores = new List<Store>();
-			_bazarClosed = false;
 			CreateStores(4);
 		}
 
 		// Checks if any store is open, if not the bazar closes.
-		public Boolean IsBazarOpen() {
+		public bool IsBazarOpen() {
 			var isAnyStoreOpen = false;
 			foreach(var store in _listOfAllStores) {
 				if(store.StoreIsOpen) {
 					isAnyStoreOpen = true;
 				}
 			}
-
-			if(isAnyStoreOpen == false) {
-				_bazarClosed = true;
-			}
-			//TODO don't need to use _bazaarclosed as it is not being returned? 
 			return isAnyStoreOpen;
 		}
 

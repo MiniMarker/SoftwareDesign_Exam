@@ -15,6 +15,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 
 		private List<IStatue> _productsForSale;
 		private List<IStatue> _productsSold;
+
 		//TODO move this when printhandler becomes a singleton
 		private PrintHandler _print = new PrintHandler();
 
@@ -74,12 +75,11 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 								System.Environment.NewLine);
 							return product;
 						}
-						Console.WriteLine("{0} tried to buy following product at {1} for {2} kr. Withdrawal rejected. Insufficient funds.{3}{4}{5}", name, Name, price, System.Environment.NewLine, _print.SortAndRetrieveProductDescription(product), System.Environment.NewLine);
+						Console.WriteLine("{0} tried to buy a product at {1} for {2} kr. Withdrawal rejected. Insufficient funds.{3}", name, Name, price, System.Environment.NewLine);
 					}
 				}
 
 			//Kill thread if it is unable to buy a product??
-			//TODO go over this
 			Thread.CurrentThread.Join();
 			return null;
 		}

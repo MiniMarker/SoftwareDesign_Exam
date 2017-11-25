@@ -26,37 +26,5 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 			}
 			return description;
 		}
-
-
-		private string AddStickerToDecoratedStatue(string currentDescription) {
-			var currentDescriptionWords = currentDescription.Split();
-			foreach(var desc in currentDescriptionWords) {
-				if(Enum.IsDefined(typeof(Stickers), desc)) {
-				}
-			}
-
-			var revisedDescription = "";
-			var stickerIsAdded = false;
-			var stickerToBeAdded = GetRandomDecoration("sticker");
-
-
-			while(!stickerIsAdded) {
-				if(!CheckIfDecorationHasBeenUsedInCurrentDescription(stickerToBeAdded, currentDescription)) {
-
-					stickerIsAdded = true;
-				}
-				else {
-					stickerToBeAdded = GetRandomDecoration("sticker");
-				}
-			}
-			//Sort all stickers out.
-			//Add all colors first.
-			//Then add stickers.
-			//Then add jewels
-			revisedDescription += "Statue with ";
-
-			return revisedDescription;
-		}
-
 	}
 }

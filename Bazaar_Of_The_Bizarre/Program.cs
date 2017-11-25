@@ -8,7 +8,7 @@ namespace Bazaar_Of_The_Bizarre {
 			var client = new Client(20);
             client.StartAllStoresThreads();
 
-            //TODO Should customer shop until their money is none? If then this need to be implemented.
+            //TODO Should customer shop until their money is gone? If then this need to be implemented.
             while (client.Bazaar.IsBazarOpen())
 		    {
 		        client.StartAllCustomerThreads();
