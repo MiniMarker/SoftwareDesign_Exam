@@ -16,7 +16,7 @@ namespace Bazaar_Of_The_Bizarre.Bank {
 		/// <summary>
 		/// Withdrawal tries to subtract sumToWithdraw if there is enough funds.
 		/// </summary>
-		/// <param name="sumToWithdraw"></param>
+		/// <param name="sumToWithdraw">Sum to withdraw from account</param>
 		/// <returns>Boolean Returns true if withdrawal was made</returns>
 		public bool Withdrawal(double sumToWithdraw) {
 			//If the sum is smaller or equal to current Sum, a withdrawal of sum is performed.
