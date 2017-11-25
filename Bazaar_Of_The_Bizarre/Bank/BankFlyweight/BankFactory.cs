@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
 	class BankFactory {
-	    private static Dictionary<String, Bazaar_Of_The_Bizarre.Bank.BankFlyweight.Bank> _bankMap = new Dictionary<string, Bazaar_Of_The_Bizarre.Bank.BankFlyweight.Bank>();
+	    private static Dictionary<String, Bank> _bankMap = new Dictionary<string, Bank>();
 
         /// <summary>
         ///  Creates new bank if it does not exist and returns it. Otherwise existing bank is returned.
         /// </summary>
         /// <param name="name"></param>
         /// <returns>Bank Returns bank</returns>
-	    public static Bazaar_Of_The_Bizarre.Bank.BankFlyweight.Bank GetBank(String name)
+	    public static Bank GetBank(String name)
 	    {
 	        if (!_bankMap.ContainsKey(name))
 	        {
@@ -29,6 +29,5 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
 	            Console.WriteLine("Name = {0}, Bank = {1}", Pair.Key, Pair.Value);
 	        }
 	    }
-
     }
 }
