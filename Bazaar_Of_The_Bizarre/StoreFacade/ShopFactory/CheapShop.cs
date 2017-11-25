@@ -27,7 +27,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
 					SetName("Christian's Supercheap Shop");
 					break;
 				case 2:
-					SetName("Olav's Cheap Viking Souvenirs");
+					SetName("Olav V's Cheap Viking Souvenirs");
 					break;
 				case 3:
 					SetName("Henke's Cheap Statue Shop");
