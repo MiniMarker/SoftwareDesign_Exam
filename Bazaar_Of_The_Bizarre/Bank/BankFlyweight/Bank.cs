@@ -7,8 +7,12 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
 		public string Name { get; set; }
 		public int Customers { get; set; }
 		public int Capital { get; set; }
-		private readonly Dictionary<int, BankAccount> _accounts = new Dictionary<int, BankAccount>();
+        private readonly Dictionary<int, BankAccount> _accounts = new Dictionary<int, BankAccount>();
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="name"></param>
 		public Bank(string name) {
 			Name = name;
 		}
@@ -16,13 +20,16 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
 		/// <summary>
 		/// Prints out information about the bank.
 		/// </summary>
-		//Shows information about bank.
 		public void PrintBankInformation() {
 			Console.WriteLine("The bank {0} as {1} customers and a capital of {2} kr.", Name, Customers, Capital);
 		}
 
-		//Creates a new account, if customer does not have one, and adds it to _accounts.
-		public bool CreateAccount(int customerId) {
+        /// <summary>
+        /// Creates a new account, if customer does not have one, and adds it to _accounts.
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <returns>Bool Returns true if account was created</returns>
+        public bool CreateAccount(int customerId) {
 			//Creates new account with random sum.    
 			var sum = Client.Rnd.Next(1, 250);
 			var newAccount = new BankAccount(sum);
@@ -38,8 +45,13 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
 
 		}
 
-		//Performs a withdrawal if customer has account and sufficient funds.
-		public bool Transaction(double sum, int customerId) {
+        /// <summary>
+        /// Performs a withdrawal if customer has account and sufficient funds.
+        /// </summary>
+        /// <param name="sum"></param>
+        /// <param name="customerId"></param>
+        /// <returns>Bool returns true if transaction was made</returns>
+        public bool Transaction(double sum, int customerId) {
 			if(_accounts.ContainsKey(customerId)) {
 				BankAccount customerAccount = _accounts[customerId];
 				var result = customerAccount.Withdrawal(sum);
@@ -49,14 +61,20 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
 			return false;
 		}
 
-		//Prints out all accounts in _accounts.
-		public void PrintAccounts() {
+        /// <summary>
+        /// Prints out all accounts in _accounts.
+        /// </summary>
+        public void PrintAccounts() {
 			foreach(KeyValuePair<int, BankAccount> pair in _accounts) {
 				Console.WriteLine("Customer = {0}, Account = {1}", pair.Key, pair.Value);
 			}
 		}
 
-        //Returns current fund for a specifik bankaccount.
+        /// <summary>
+        /// Returns current fund for a specifik bankaccount.
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <returns>Double Returns current fund of the bankaccount</returns>
 	    public double CheckFunds(int customerId)
 	    {
 	        if (_accounts.ContainsKey(customerId))
@@ -68,7 +86,10 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
 	        return 0;
 	    }
 
-	    //Returns accounts.
+	    /// <summary>
+        /// Returns account
+        /// </summary>
+        /// <returns>Dictionary of int,BankAccount Returns dictionary with bankaccounts.</returns>
 		public Dictionary<int, BankAccount> GetAccounts() {
 			return _accounts;
 		}

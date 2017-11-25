@@ -8,6 +8,11 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade
 {
 	class Backroom
 	{
+        /// <summary>
+        /// Creates a product and returns it
+        /// </summary>
+        /// <param name="numberOfDecorations"></param>
+        /// <returns>IStatue Returns a product</returns>
 		public IStatue CreateProduct(int numberOfDecorations)
 		{
 			IStatue statue = new Statue();
@@ -50,6 +55,11 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade
 			return statue;
 		}
 
+        /// <summary>
+        /// Creates multiple products and returns it in a list
+        /// </summary>
+        /// <param name="numberOfStatuesToBeCreated"></param>
+        /// <returns>List Returns a list with products</returns>
 		public List<IStatue> CreateMultipleStatues(int numberOfStatuesToBeCreated)
 		{
 			var statueList = new List<IStatue>();
