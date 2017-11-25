@@ -9,6 +9,7 @@ namespace Bazaar_Of_The_Bizarre.controller
 {
 	class Client
 	{
+		public static readonly Random Rnd = new Random();
 		private readonly Bank.BankFlyweight.Bank _bank;
 		public Bazaar Bazaar;
 		private Customer[] _customers;
@@ -45,40 +46,38 @@ namespace Bazaar_Of_The_Bizarre.controller
 
 		private void CreateAllCustomers()
 		{
-			List<String> nameList = new List<string>();
+			List<string> nameList = new List<string>();
 
 			for (var i = 0; i < _customers.Length; i++)
 			{
-				var values = Enum.GetValues(typeof(Names));
-				var customerName = values.GetValue(Program.Rnd.Next(0, values.Length));
-				var nameIsTaken = false;
-				while (!nameIsTaken)
-				{
-					if (nameList.Count != 0)
-					{
-						foreach (var name in nameList)
-						{
-							if (name.Equals(customerName.ToString()))
-							{
-								nameIsTaken = true;
-							}
-						}
-					}
-					if (nameIsTaken)
-					{
-						customerName = values.GetValue(Program.Rnd.Next(values.Length));
-						nameIsTaken = false;
-					}
-					else
-					{
-						nameList.Add(customerName.ToString());
-						_customers[i] = new Customer(_socialSecurityNumber++, customerName.ToString(), _bank, Bazaar);
-						break;
-					}
-				}
+				_customers[i]  = AddCustomerToList(nameList);
 			}
 		}
 
+		private Customer AddCustomerToList(List<string> nameList)
+		{
+			var values = Enum.GetValues(typeof(Names));
+			var customerName = values.GetValue(Rnd.Next(0, values.Length));
+			var nameIsTaken = false;
+			while(!nameIsTaken) {
+				if(nameList.Count != 0) {
+					foreach(var name in nameList) {
+						if(name.Equals(customerName.ToString())) {
+							nameIsTaken = true;
+						}
+					}
+				}
+				if(nameIsTaken) {
+					customerName = values.GetValue(Rnd.Next(values.Length));
+					nameIsTaken = false;
+				}
+				else {
+					nameList.Add(customerName.ToString());
+					return new Customer(_socialSecurityNumber++, customerName.ToString(), _bank, Bazaar);
+				}
+			}
+			return null;
+		}
 
 		private void CreateAllCustomerThreads()
 		{
@@ -94,7 +93,7 @@ namespace Bazaar_Of_The_Bizarre.controller
 		{
 			var storesList = Bazaar.GetStoreList();
 
-			int i = 0;
+			var i = 0;
 			foreach (var store in storesList)
 			{
 				var thread = new Thread(store.FillProducts);
@@ -113,7 +112,7 @@ namespace Bazaar_Of_The_Bizarre.controller
 		}
 
 		//Checks if the bazar should be closed.
-		public Boolean IsBazarClosed()
+		public bool IsBazarClosed()
 		{
 			var result = Bazaar.IsBazarOpen();
 			return result;

@@ -1,4 +1,5 @@
 ﻿using System;
+using Bazaar_Of_The_Bizarre.controller;
 
 namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
 	class ExpensiveShop : IShop {
@@ -11,7 +12,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
 		}
 
 		public void GenerateName() {
-			var chosenStore = Program.Rnd.Next(4);
+			var chosenStore = Client.Rnd.Next(4);
 			switch(chosenStore) {
 				case 0:
 					SetName("Santom's Amazingly Expensive Shop");

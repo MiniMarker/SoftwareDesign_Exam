@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using Bazaar_Of_The_Bizarre.controller;
 using Bazaar_Of_The_Bizarre.statueDecorator;
 using Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory;
 
@@ -14,7 +15,8 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 
 		private List<IStatue> _productsForSale;
 		private List<IStatue> _productsSold;
-		//TODO remove this later
+
+		//TODO move this when printhandler becomes a singleton
 		private PrintHandler _print = new PrintHandler();
 
 		public Store(int quota, ShopType typeOfShop) {
@@ -46,7 +48,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		public void FillProducts() {
 			while(StoreIsOpen) {
 				CheckIfStoreShouldClose();
-				RecieveProductsForSaleFromBackroom(Program.Rnd.Next(1, 10));
+				RecieveProductsForSaleFromBackroom(Client.Rnd.Next(1, 10));
 				Thread.Sleep(1000);
 			}
 			Thread.CurrentThread.Join();
@@ -63,7 +65,6 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 			lock(_productsForSale) lock(_productsSold) {
 					if(StoreIsOpen && _productsForSale.Count > 0) {
 						var product = _productsForSale[0];
-						Console.WriteLine("Amount of products for sale: {0}", _productsForSale.Count);
 						var price = product.GetPrice();
 						if(bank.Transaction(price, socialSecurityNumber)) {
 							_productsSold.Add(product);
@@ -74,12 +75,11 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 								System.Environment.NewLine);
 							return product;
 						}
-						Console.WriteLine("{0} tried to buy following product at {1} for {2} kr. Withdrawal rejected. Insufficient funds.{3}{4}{5}", name, Name, price, System.Environment.NewLine, _print.SortAndRetrieveProductDescription(product), System.Environment.NewLine);
+						Console.WriteLine("{0} tried to buy a product at {1} for {2} kr. Withdrawal rejected. Insufficient funds.{3}", name, Name, price, System.Environment.NewLine);
 					}
 				}
 
 			//Kill thread if it is unable to buy a product??
-			//TODO go over this
 			Thread.CurrentThread.Join();
 			return null;
 		}

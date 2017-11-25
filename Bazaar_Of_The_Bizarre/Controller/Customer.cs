@@ -39,7 +39,6 @@ namespace Bazaar_Of_The_Bizarre.controller {
             }
         }
 
-        //TODO Move this method when finished with other methods.
 	    //Prints out all the purchased items.
         public void GetItemsPurchased()
 	    {

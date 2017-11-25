@@ -18,7 +18,7 @@ namespace Bazaar_Of_The_Bizarre.Test
 		    DnB.CreateAccount(008);
 		    DnB.CreateAccount(009);
 
-		    Assert.AreEqual(DnB.getAccounts().Count, 3);
+		    Assert.AreEqual(DnB.GetAccounts().Count, 3);
 	    }
 
 		[Test]

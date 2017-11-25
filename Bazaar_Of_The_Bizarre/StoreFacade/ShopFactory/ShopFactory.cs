@@ -1,4 +1,6 @@
-﻿namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
+﻿using Bazaar_Of_The_Bizarre.controller;
+
+namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
 	class ShopFactory { 
 		private ShopFactory() { }
 
@@ -20,7 +22,7 @@
 		//Chooses a random price for products.
 		private static int ChooseRandomPrice(ShopType shopType)
 		{
-			var productPrice = Program.Rnd.Next(10, 30);
+			var productPrice = Client.Rnd.Next(10, 30);
 			if (shopType == ShopType.ExpensiveShop)
 			{
 				productPrice += 20;
