@@ -31,8 +31,6 @@ namespace Bazaar_Of_The_Bizarre.controller {
 
 			if(_bazaar.IsBazarOpen()) {
 				_threadHandler.StartAllCustomerThreads(_bank, _bazaar);
-				//TODO MAKE THIS GREAT AGAIN
-
 
 				while(_bazaar.IsBazarOpen()) {
 					_threadHandler.GenerateExtraCustomers(_bank, _bazaar);
