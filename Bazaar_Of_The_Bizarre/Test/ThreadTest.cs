@@ -18,7 +18,7 @@ namespace Bazaar_Of_The_Bizarre.Test
 		public void CreateCustomerTest()
 		{
 			var threadHandler = new ThreadHandler(10);
-			Assert.IsTrue(threadHandler.Customers.Length == 10);
+			Assert.IsTrue(threadHandler.Customers.Count == 10);
 		}
 
 		[Test]
@@ -29,11 +29,11 @@ namespace Bazaar_Of_The_Bizarre.Test
 			var DnB = BankFactory.GetBank("DnB");
 			threadHandler.StartAllCustomerThreads(DnB, bazaar);
 
-			for (var i = 0; i < threadHandler.Customers.Length-1; i++)
+			for (var i = 0; i < threadHandler.Customers.Count - 1; i++)
 			{
 				var iName = threadHandler.Customers[i].Name;
 
-				for (int j = i + 1; j < threadHandler.Customers.Length; j++)
+				for (int j = i + 1; j < threadHandler.Customers.Count; j++)
 				{
 					var jName = threadHandler.Customers[j].Name;
 					Assert.AreNotEqual(iName, jName);

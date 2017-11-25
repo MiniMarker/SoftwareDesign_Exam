@@ -34,7 +34,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 				_threadHandler.StartAllCustomerThreads(_bank, _bazaar);
 
 				while(_bazaar.IsBazarOpen()) {
-					_threadHandler.GenerateExtraCustomers(_bank, _bazaar);
+					_threadHandler.GenerateExtraCustomerIfNeeded(_bank, _bazaar);
 
 				}
 				EndOfDay();
