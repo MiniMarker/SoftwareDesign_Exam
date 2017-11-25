@@ -8,10 +8,14 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
         private ShopFactory() { }
 
         /// <summary>
-        /// Creates an expensive shop or cheap shop
+        ///     Creates a shop
         /// </summary>
-        /// <param name="typeOfShop"></param>
-        /// <returns>IShop Returns a shop</returns>
+        /// <param name="typeOfShop">
+        ///     Type of shop created depends on this parameter
+        /// </param>
+        /// <returns>
+        ///     IShop Returns a shop
+        /// </returns>
 		public static IShop CreateShop(ShopType typeOfShop)
 		{
 			IShop shop = null;
@@ -28,10 +32,14 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
 		}
 
         /// <summary>
-        /// Choses a random price for product
+        ///     Choses a random price for product
         /// </summary>
-        /// <param name="shopType"></param>
-        /// <returns>int Returns price for product</returns>
+        /// <param name="shopType">
+        ///     Type of shop created depends on this parameter
+        /// </param>
+        /// <returns>
+        ///     int Returns price for product
+        /// </returns>
 		private static int ChooseRandomPrice(ShopType shopType)
 		{
 			var productPrice = Client.Rnd.Next(10, 30);

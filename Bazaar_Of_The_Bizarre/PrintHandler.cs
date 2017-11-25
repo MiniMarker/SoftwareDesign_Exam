@@ -10,11 +10,11 @@ namespace Bazaar_Of_The_Bizarre {
 		private List<string> _stickerList;
 		private List<string> _jewelList;
 		private List<string> _colorList;
-
-		/// <summary>
-		/// Constructor
-		/// </summary>
-		private PrintHandler() {
+	    //TODO xml
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        private PrintHandler() {
 		}
 
 		/// <summary>

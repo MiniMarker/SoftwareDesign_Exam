@@ -16,12 +16,23 @@
 			_description = description;
 			_price = price;
 		}
-
+        /// <summary>
+        /// Returns description
+        /// </summary>
+        /// <returns>
+        ///     String Returns string that is description
+        /// </returns>
 		public virtual string GetDescription() {
 			return _description;
 		}
 
-		public virtual double GetPrice() {
+        /// <summary>
+        /// Returns Price
+        /// </summary>
+        /// <returns>
+        ///     double Returns double that is description
+        /// </returns>
+        public virtual double GetPrice() {
 			return _price;
 		}
 	}

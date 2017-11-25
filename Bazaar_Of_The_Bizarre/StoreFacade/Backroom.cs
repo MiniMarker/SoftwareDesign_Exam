@@ -8,10 +8,14 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 	class Backroom {
 
 		/// <summary>
-		/// Creates a product and returns it
+		///     Creates a product and returns it
 		/// </summary>
-		/// <param name="numberOfDecorations"></param>
-		/// <returns>IStatue Returns a product</returns>
+		/// <param name="numberOfDecorations">
+		///     How many decorations to have on statue
+		/// </param>
+		/// <returns>
+		///     IStatue Returns a product
+		/// </returns>
 		public IStatue CreateProduct(int numberOfDecorations) {
 			IStatue statue = new Statue();
 
@@ -51,8 +55,12 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		/// <summary>
 		/// Creates multiple products and returns it in a list
 		/// </summary>
-		/// <param name="numberOfStatuesToBeCreated"></param>
-		/// <returns>List Returns a list with products</returns>
+		/// <param name="numberOfStatuesToBeCreated">
+		///     How many statues to be created
+		/// </param>
+		/// <returns>
+		///     List Returns a list with products
+		/// </returns>
 		public List<IStatue> CreateMultipleStatues(int numberOfStatuesToBeCreated) {
 			var statueList = new List<IStatue>();
 
@@ -64,13 +72,36 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 			return statueList;
 		}
 
-		private bool CanUseDecoration(string description, string decorationType) {
-			if(GetAmountOfUsedDecorationsOfType(description, decorationType) < GetAmountOfPossibleDecorations(decorationType)) {
-				return true;
-			}
-			return false;
-		}
+        /// <summary>
+        ///     Checks if there is more of a specific decoration type available
+        /// </summary>
+        /// <param name="description">
+        ///     Description for the statue
+        /// </param>
+        /// <param name="decorationType">
+        ///     The type to check available decoration types
+        /// </param>
+        /// <returns>
+        ///     Returns true if there are more available decoration types
+        /// </returns>
+		private bool CanUseDecoration(string description, string decorationType)
+        {
+            if (GetAmountOfUsedDecorationsOfType(description, decorationType) < GetAmountOfPossibleDecorations(decorationType))
+            {
+                return true;
+            }
+            return false;
+        }
 
+        /// <summary>
+        ///     Checks how many available decorations there are
+        /// </summary>
+        /// <param name="decoration">
+        ///     If the decoration is a sticker, jewels or color.
+        /// </param>
+        /// <returns>
+        ///     Returns an int how how many available decorations for each type.
+        /// </returns>
 		private int GetAmountOfPossibleDecorations(string decoration) {
 			var possibleDecorations = 0;
 			switch(decoration) {
@@ -87,6 +118,18 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 			return possibleDecorations;
 		}
 
+        /// <summary>
+        ///     Checks how many decoration of a specific type a statue has
+        /// </summary>
+        /// <param name="description">
+        ///     The statues description
+        /// </param>
+        /// <param name="decorationType">
+        ///     The type of decoration to check how many occurences there are
+        /// </param>
+        /// <returns>
+        ///     Returns int that is how many times a decoration on a statue is occuring
+        /// </returns>
 		private int GetAmountOfUsedDecorationsOfType(string description, string decorationType) {
 			var descriptionWords = description.Split();
 
