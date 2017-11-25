@@ -8,8 +8,12 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
         /// <summary>
         ///  Creates new bank if it does not exist and returns it. Otherwise existing bank is returned.
         /// </summary>
-        /// <param name="name">Name of the bank</param>
-        /// <returns>Bank Returns bank</returns>
+        /// <param name="name">
+        ///     Name of the bank
+        /// </param>
+        /// <returns>
+        ///     Bank Returns bank
+        /// </returns>
 	    public static Bank GetBank(String name)
 	    {
 	        if (!_bankMap.ContainsKey(name))

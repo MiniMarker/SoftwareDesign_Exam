@@ -6,18 +6,24 @@ namespace Bazaar_Of_The_Bizarre.Bank {
 		private readonly Object _lock = new Object();
 
 		/// <summary>
-		/// Constructor
+		///     Constructor
 		/// </summary>
-		/// <param name="sum"></param>
+		/// <param name="sum">
+		///     Sum on account
+		/// </param>
 		public BankAccount(double sum) {
 			_sum = sum;
 		}
 
 		/// <summary>
-		/// Withdrawal tries to subtract sumToWithdraw if there is enough funds.
+		///     Withdrawal tries to subtract sumToWithdraw if there is enough funds.
 		/// </summary>
-		/// <param name="sumToWithdraw">Sum to withdraw from account</param>
-		/// <returns>Boolean Returns true if withdrawal was made</returns>
+		/// <param name="sumToWithdraw">
+		///     Sum to withdraw from account
+		/// </param>
+		/// <returns>
+		///     Boolean Returns true if withdrawal was made
+		/// </returns>
 		public bool Withdrawal(double sumToWithdraw) {
 			//If the sum is smaller or equal to current Sum, a withdrawal of sum is performed.
 			lock(_lock) {
@@ -30,9 +36,11 @@ namespace Bazaar_Of_The_Bizarre.Bank {
 		}
 
 		/// <summary>
-		/// Returns sum of the account.
+		///     Returns sum of the account.
 		/// </summary>
-		/// <returns>Double Returns current sum of account.</returns>
+		/// <returns>
+		///     Double Returns current sum of account.
+		/// </returns>
 		public double GetSum() {
 			return _sum;
 		}

@@ -14,10 +14,18 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		/// <summary>
 		/// Constructor 
 		/// </summary>
-		/// <param name="socialSecurityNumber">Unique Identifier for customer</param>
-		/// <param name="name">Name of customer</param>
-		/// <param name="bank">Name of bank</param>
-		/// <param name="bazaar">Name of bazaar</param>
+		/// <param name="socialSecurityNumber">
+		///     Unique Identifier for customer
+		/// </param>
+		/// <param name="name">
+		///     Name of customer
+		/// </param>
+		/// <param name="bank">
+		///     Name of bank
+		/// </param>
+		/// <param name="bazaar">
+		///     Name of bazaar
+		/// </param>
 		public Customer(int socialSecurityNumber, string name, Bank.BankFlyweight.Bank bank, Bazaar bazaar) {
 			Name = name;
 			SocialSecurityNumber = socialSecurityNumber;
@@ -28,7 +36,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		}
 
 		/// <summary>
-		/// Buys item if sufficient funds on bankaccount. Adds in _itemsPurchased.
+		///     Buys item if sufficient funds on bankaccount. Adds in _itemsPurchased.
 		/// </summary>
 		public void BuyItem() {
 			while(CheckIfEnoughFunds()) {
@@ -44,7 +52,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		}
 
 		/// <summary>
-		/// Prints out all the purchased items.
+		///     Prints out all the purchased items.
 		/// </summary>
 		public void GetItemsPurchased() {
 			foreach(var item in ItemsPurchased) {
@@ -53,9 +61,11 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		}
 
 		/// <summary>
-		/// Checks funds in bankaccount.
+		///     Checks funds in bankaccount.
 		/// </summary>
-		/// <returns>Bool Returns true if customer has any funds available.</returns>
+		/// <returns>
+		///     Bool Returns true if customer has any funds available.
+		/// </returns>
 		public bool CheckIfEnoughFunds() {
 			var funds = _bank.CheckFunds(SocialSecurityNumber);
 			if(funds > 30) {
