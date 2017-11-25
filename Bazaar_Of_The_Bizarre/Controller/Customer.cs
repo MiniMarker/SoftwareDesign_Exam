@@ -8,8 +8,8 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		public int SocialSecurityNumber { get; set; }
 		public string Name { get; set; }
 		public List<IStatue> ItemsPurchased { get; set; }
-		private Bazaar _bazaar;
-		private Bank.BankFlyweight.Bank _bank;
+		private readonly Bazaar _bazaar;
+		private readonly Bank.BankFlyweight.Bank _bank;
 
 		/// <summary>
 		/// Constructor 

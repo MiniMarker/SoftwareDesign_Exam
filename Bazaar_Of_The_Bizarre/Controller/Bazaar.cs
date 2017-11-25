@@ -16,17 +16,17 @@ namespace Bazaar_Of_The_Bizarre.controller {
 			CreateStores(4);
 		}
 
-        /// <summary>
-        ///		Checks if any store is open, if not the bazar closes.
-        /// </summary>
-        /// <returns>
-        ///		Boolean Returns true if a store is open, this means that the bazar is open.
-        /// </returns>
+		/// <summary>
+		///		Checks if any store is open, if not the bazar closes.
+		/// </summary>
+		/// <returns>
+		///		Boolean Returns true if a store is open, this means that the bazar is open.
+		/// </returns>
 		public bool IsBazarOpen() {
 			var isAnyStoreOpen = false;
 
 			foreach(var store in ListOfAllStores) {
-                store.CheckIfStoreShouldClose();
+				store.CheckIfStoreShouldClose();
 
 				if(store.StoreIsOpen) {
 					isAnyStoreOpen = true;
@@ -35,17 +35,17 @@ namespace Bazaar_Of_The_Bizarre.controller {
 			return isAnyStoreOpen;
 		}
 
-        /// <summary>
-        ///		If there are any open stores in the bazar then the customer can buy a product.
-        /// </summary>
-        /// <param name="socialSecurityNumber">
-        ///		socialSecurityNumber is a unique identicator for each customer
-        /// </param>
-        /// <param name="name">
-        ///		name the customer who is buying a product
-        /// </param>
-        /// <returns>IStatue Returns product from store to customer.</returns>
-        public IStatue GetProductFromStoreForCustomer(int socialSecurityNumber, string name) {
+		/// <summary>
+		///		If there are any open stores in the bazar then the customer can buy a product.
+		/// </summary>
+		/// <param name="socialSecurityNumber">
+		///		socialSecurityNumber is a unique identicator for each customer
+		/// </param>
+		/// <param name="name">
+		///		name the customer who is buying a product
+		/// </param>
+		/// <returns>IStatue Returns product from store to customer.</returns>
+		public IStatue GetProductFromStoreForCustomer(int socialSecurityNumber, string name) {
 			if(IsBazarOpen()) {
 				var storeToShopFrom = GetRandomStore();
 				return storeToShopFrom.SellProduct(socialSecurityNumber, name);
@@ -53,18 +53,18 @@ namespace Bazaar_Of_The_Bizarre.controller {
 			return null;
 		}
 
-        /// <summary>
-        ///		Gets random store, if it's not open, gets the first open store.
-        /// </summary>
-        /// <returns>
-        ///		Store Returns random open store
-        /// </returns>
-        private Store GetRandomStore() {
+		/// <summary>
+		///		Gets random store, if it's not open, gets the first open store.
+		/// </summary>
+		/// <returns>
+		///		Store Returns random open store
+		/// </returns>
+		private Store GetRandomStore() {
 			var store = ListOfAllStores[Client.Rnd.Next(1, ListOfAllStores.Count)];
 			if(!store.StoreIsOpen) {
-				for(int i = 0; i < ListOfAllStores.Count; i++) {
-					if(ListOfAllStores[i].StoreIsOpen) {
-						store = ListOfAllStores[i];
+				foreach(var possiblyOpenStore in ListOfAllStores) {
+					if(possiblyOpenStore.StoreIsOpen) {
+						store = possiblyOpenStore;
 						break;
 					}
 				}

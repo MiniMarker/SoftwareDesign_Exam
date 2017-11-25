@@ -2,7 +2,7 @@
 
 namespace Bazaar_Of_The_Bizarre.Bank {
 	class BankAccount {
-		private double _sum { get; set; }
+		private double Sum { get; set; }
 		private readonly Object _lock = new Object();
 
 		/// <summary>
@@ -12,7 +12,7 @@ namespace Bazaar_Of_The_Bizarre.Bank {
 		///     Sum on account
 		/// </param>
 		public BankAccount(double sum) {
-			_sum = sum;
+			Sum = sum;
 		}
 
 		/// <summary>
@@ -27,8 +27,8 @@ namespace Bazaar_Of_The_Bizarre.Bank {
 		public bool Withdrawal(double sumToWithdraw) {
 			//If the sum is smaller or equal to current Sum, a withdrawal of sum is performed.
 			lock(_lock) {
-				if(_sum >= sumToWithdraw) {
-					_sum -= sumToWithdraw;
+				if(Sum >= sumToWithdraw) {
+					Sum -= sumToWithdraw;
 					return true;
 				}
 				return false;
@@ -42,7 +42,7 @@ namespace Bazaar_Of_The_Bizarre.Bank {
 		///     Double Returns current sum of account.
 		/// </returns>
 		public double GetSum() {
-			return _sum;
+			return Sum;
 		}
 	}
 }

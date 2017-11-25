@@ -5,6 +5,7 @@ using Bazaar_Of_The_Bizarre.Controller;
 
 namespace Bazaar_Of_The_Bizarre.controller {
 	class Client {
+
 		public static readonly Random Rnd = new Random();
 		public static readonly PrintHandler PrintProduct = PrintHandler.GetInstance();
 		private readonly Bank.BankFlyweight.Bank _bank;
