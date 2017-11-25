@@ -15,7 +15,6 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		public int Quota { get; set; }
 		private readonly List<IStatue> _productsForSale;
 		private readonly List<IStatue> _productsSold;
-
 	    private object SyncLock = new object();
 
         /// <summary>

@@ -8,7 +8,6 @@ using Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory;
 namespace Bazaar_Of_The_Bizarre.controller {
 	class Bazaar {
 		public List<Store> ListOfAllStores { get; set; }
-		//List<Store> ListOfAllStores;
 
 		/// <summary>
 		///		Constructor
