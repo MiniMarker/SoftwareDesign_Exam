@@ -82,7 +82,5 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
         public string GetName() {
 			return _name;
 		}
-
-        //TODO Set explaination on singleton and flyweight
 	}
 }
