@@ -5,7 +5,11 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
 	class BankFactory {
 	    private static Dictionary<String, Bazaar_Of_The_Bizarre.Bank.BankFlyweight.Bank> BANKMAP = new Dictionary<string, Bazaar_Of_The_Bizarre.Bank.BankFlyweight.Bank>();
 
-        //GetBank creates new bank if it does not exist and returns it. Otherwise existing bank is returned.
+        /// <summary>
+        ///  Creates new bank if it does not exist and returns it. Otherwise existing bank is returned.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>Bank Returns bank</returns>
 	    public static Bazaar_Of_The_Bizarre.Bank.BankFlyweight.Bank GetBank(String name)
 	    {
 	        if (!BANKMAP.ContainsKey(name))
@@ -15,7 +19,9 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
 	        return BANKMAP[name];
 	    }
 
-        //prints out all banks.
+        /// <summary>
+        /// Prints out all banks.
+        /// </summary>
 	    public static void PrintBanks()
 	    {
 	        foreach (KeyValuePair<String, Bazaar_Of_The_Bizarre.Bank.BankFlyweight.Bank> Pair in BANKMAP)
