@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading;
 using Bazaar_Of_The_Bizarre.Bank.BankFlyweight;
-using Bazaar_Of_The_Bizarre.controller;
 using Bazaar_Of_The_Bizarre.Controller;
 
 namespace Bazaar_Of_The_Bizarre.controller {
@@ -40,7 +39,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 
 
 		private void CreateAllCustomers() {
-			List<string> nameList = new List<string>();
+			var nameList = new List<string>();
 
 			for(var i = 0; i < _customers.Length; i++) {
 				_customers[i] = AddCustomerToList(nameList);
@@ -60,6 +59,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 						}
 					}
 				}
+
 				if(nameIsTaken) {
 					customerName = values.GetValue(Rnd.Next(values.Length));
 					nameIsTaken = false;

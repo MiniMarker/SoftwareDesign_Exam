@@ -96,7 +96,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 					}
 				}
 
-			//Kill thread if it is unable to buy a product??
+			
 			Thread.CurrentThread.Join();
 			return null;
 		}
