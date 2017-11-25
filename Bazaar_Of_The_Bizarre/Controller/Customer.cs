@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bazaar_Of_The_Bizarre.Bank.BankFlyweight;
 using Bazaar_Of_The_Bizarre.statueDecorator;
 
 namespace Bazaar_Of_The_Bizarre.controller {
@@ -13,6 +9,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 	    public string Name { get; set; }
 	    public List<IStatue> ItemsPurchased { get; set;}
 		private Bazaar _bazaar;
+	    private Bank.BankFlyweight.Bank _bank;
 
 		/// <summary>
 		/// Constructor 
@@ -25,7 +22,8 @@ namespace Bazaar_Of_The_Bizarre.controller {
 			Name = name;
 			SocialSecurityNumber = socialSecurityNumber;
 			ItemsPurchased = new List<IStatue>();
-			bank.CreateAccount(SocialSecurityNumber);
+			_bank.CreateAccount(SocialSecurityNumber);
+		    _bank = bank;
 			_bazaar = bazaar;
 		}
 
@@ -47,5 +45,20 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		        Console.WriteLine(item.GetDescription());
 	        }
 		}
+
+        //Checks funds in bankaccount.
+	    public bool FundInBank()
+	    {
+	        var funds = _bank.CheckFunds(SocialSecurityNumber);
+
+	        if(funds > 19)
+	        {
+	            return true;
+	        }
+	        else
+	        {
+	            return false;
+	        }
+	    }
 	}
 }

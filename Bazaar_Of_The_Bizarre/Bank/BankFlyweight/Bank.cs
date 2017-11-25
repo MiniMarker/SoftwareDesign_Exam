@@ -56,7 +56,19 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
 			}
 		}
 
-		//Returns accounts.
+        //Returns current fund for a specifik bankaccount.
+	    public double CheckFunds(int customerId)
+	    {
+	        if (_accounts.ContainsKey(customerId))
+	        {
+	            BankAccount customerAccount = _accounts[customerId];
+	            var result = customerAccount.GetSum();
+	            return result;
+	        }
+	        return 0;
+	    }
+
+	    //Returns accounts.
 		public Dictionary<int, BankAccount> GetAccounts() {
 			return _accounts;
 		}
