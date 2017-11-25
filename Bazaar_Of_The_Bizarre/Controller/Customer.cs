@@ -49,7 +49,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
         //Checks funds in bankaccount.
 	    public bool FundInBank()
 	    {
-	       var funds = _bank.CheckFunds(SocialSecurityNumber)
+	        var funds = _bank.CheckFunds(SocialSecurityNumber);
 
 	        if(funds > 19)
 	        {
