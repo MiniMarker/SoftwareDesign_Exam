@@ -44,7 +44,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
         ///		socialSecurityNumber is a unique identicator for each customer
         /// </param>
         /// <param name="name">
-        ///		name from client
+        ///		name the customer who is buying a product
         /// </param>
         /// <returns>IStatue Returns product from store to customer.</returns>
         public IStatue GetProductFromStoreForCustomer(int socialSecurityNumber, string name) {

@@ -19,10 +19,14 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 	    private object SyncLock = new object();
 
         /// <summary>
-        /// Constructor
+        ///		Constructor
         /// </summary>
-        /// <param name="quota"></param>
-        /// <param name="typeOfShop"></param>
+        /// <param name="quota">
+        ///		Sets the quota for product to be made for each backroom
+        /// </param>
+        /// <param name="typeOfShop">
+        ///		Enum of types of shop to be created.
+        /// </param>
 		public Store(int quota, ShopType typeOfShop) {
 			Quota = quota;
 			Shop = ShopFactory.ShopFactory.CreateShop(typeOfShop);
@@ -34,9 +38,11 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		}
 
         /// <summary>
-        /// Makes backroom create a product and adds it to _productsForSale
+        ///		Makes backroom create a product and adds it to _productsForSale
         /// </summary>
-        /// <param name="numberOfDecorations"></param>
+        /// <param name="numberOfDecorations">
+        ///		number of times a random decoration should be added to the statue
+        /// </param>
 		private void RecieveProductsForSaleFromBackroom(int numberOfDecorations) {
 			if(_productsForSale.Count + _productsSold.Count < Quota) {
 				var result = Backroom.CreateProduct(numberOfDecorations);
@@ -45,7 +51,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		}
 
         /// <summary>
-        /// When products sold is equal to quota the store closes.
+        ///		When products sold is equal to quota the store closes.
         /// </summary>
         public void CheckIfStoreShouldClose() {
             lock (SyncLock)
@@ -61,7 +67,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
         }
 
         /// <summary>
-        /// Creates a new product every second until qouta is full.
+        ///		Creates a new product every second until qouta is full.
         /// </summary>
         public void FillProducts() {
 			while(StoreIsOpen) {
@@ -72,15 +78,22 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 			Thread.CurrentThread.Join();
 		}
 
-        /// <summary>
-        /// If the store is open and there is products for sale a customer buys it.
-        /// </summary>
-        /// <param name="socialSecurityNumber"></param>
-        /// <param name="name"></param>
-        /// <returns>IStatue returns product if transaction was true</returns>
-        public IStatue SellProduct(int socialSecurityNumber, string name) {
+		/// <summary>
+		///		If the store is open and there is products for sale a customer buys it.
+		/// </summary>
+		/// <param name="socialSecurityNumber">
+		///		socialSecurityNumber is a unique identicator for each customer
+		/// </param>
+		/// <param name="name">
+		///		name the customer who is buying a product
+		/// </param>
+		/// <returns>
+		///		IStatue returns product if transaction was true
+		/// </returns>
+		public IStatue SellProduct(int socialSecurityNumber, string name) {
 			var bank = Bank.BankFlyweight.BankFactory.GetBank("DNB");
-			lock(_productsForSale) lock(_productsSold) {
+			lock(_productsForSale)
+				lock(_productsSold) {
 			        CheckIfStoreShouldClose();
                     if (StoreIsOpen && _productsForSale.Count > 0) {
 						var product = _productsForSale[0];
@@ -102,7 +115,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		}
 
         /// <summary>
-        /// Prints out amount of products sold and total income.
+        ///		Prints out amount of products sold and total income.
         /// </summary>
 		public void ViewSoldProducts() {
 			var sumOfDay = 0.0;
