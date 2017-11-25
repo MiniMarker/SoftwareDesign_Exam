@@ -8,9 +8,11 @@ namespace Bazaar_Of_The_Bizarre.Controller
 {
 	class ThreadHandler
 	{
-	    private Customer[] _customers;
-	    private Thread[] _customerThreads;
-        private Thread[] _storeThreads;
+		public Customer[] Customers { get; private set; }
+		public Thread[] CustomerThreads { get; private set; }
+		public Thread[] StoreThreads { get; private set; }
+	    //private Thread[] _customerThreads;
+        //private Thread[] _storeThreads;
 	    private static int _socialSecurityNumber;
 
         /// <summary>
@@ -19,9 +21,9 @@ namespace Bazaar_Of_The_Bizarre.Controller
         /// <param name="amountOfCustomers"></param>
 	    public ThreadHandler(int amountOfCustomers)
 	    {
-	        _customers = new Customer[amountOfCustomers];
-	        _customerThreads = new Thread[amountOfCustomers];
-            _storeThreads = new Thread[4];
+	        Customers = new Customer[amountOfCustomers];
+	        CustomerThreads = new Thread[amountOfCustomers];
+            StoreThreads = new Thread[4];
 	        _socialSecurityNumber = 120;
         }
 
@@ -35,7 +37,7 @@ namespace Bazaar_Of_The_Bizarre.Controller
             CreateAllCustomers(bank, bazaar);
             CreateAllCustomerThreads();
 
-            foreach (var customerThread in _customerThreads)
+            foreach (var customerThread in CustomerThreads)
             {
                 customerThread.Start();
             }
@@ -48,7 +50,7 @@ namespace Bazaar_Of_The_Bizarre.Controller
 	    public void StartAllStoresThreads(Bazaar bazaar)
 	    {
 	        CreateAllStoresThreads(bazaar);
-	        foreach (var storeThread in _storeThreads)
+	        foreach (var storeThread in StoreThreads)
 	        {
 	            storeThread.Start();
 	        }
@@ -61,9 +63,11 @@ namespace Bazaar_Of_The_Bizarre.Controller
         /// <param name="bazaar"></param>
 	    private void CreateAllCustomers(Bank.BankFlyweight.Bank bank, Bazaar bazaar)
         {
-            for (var i = 0; i < _customers.Length; i++)
+			List<String> nameList = new List<string>();
+
+            for (var i = 0; i < Customers.Length; i++)
             {
-                _customers[i] = AddCustomerToList(bank, bazaar);
+                Customers[i] = AddCustomerToList(nameList, bank, bazaar);
             }
         }
 
@@ -106,19 +110,19 @@ namespace Bazaar_Of_The_Bizarre.Controller
         /// <param name="bank"></param>
         /// <param name="bazaar"></param>
         /// <returns>Customer Returns a customer if created successfully</returns>
-	    private Customer AddCustomerToList(Bank.BankFlyweight.Bank bank, Bazaar bazaar )
+	    private Customer AddCustomerToList(List<String> nameList ,Bank.BankFlyweight.Bank bank, Bazaar bazaar )
 	    {
 	        var values = Enum.GetValues(typeof(Names));
 	        var customerName = values.GetValue(Client.Rnd.Next(0, values.Length));
 	        var nameIsTaken = false;
 	        while (!nameIsTaken)
 	        {
-	            if (_customers.Length == 0)
+	            if (nameList.Count != 0)
 	            {
 
-	                foreach (var customer in _customers)
+	                foreach (var name in nameList)
 	                {
-	                    if (customer.Name.Equals(customerName.ToString()))
+	                    if (name.Equals(customerName.ToString()))
 	                    {
 	                        nameIsTaken = true;
 	                    }
@@ -131,7 +135,7 @@ namespace Bazaar_Of_The_Bizarre.Controller
 	            }
 	            else
 	            {
-
+					nameList.Add(customerName.ToString());
 	                return new Customer(_socialSecurityNumber++, customerName.ToString(), bank, bazaar);
 	            }
 	        }
@@ -143,11 +147,11 @@ namespace Bazaar_Of_The_Bizarre.Controller
         /// </summary>
 	    private void CreateAllCustomerThreads()
 	    {
-	        for (var i = 0; i < _customerThreads.Length; i++)
+	        for (var i = 0; i < CustomerThreads.Length; i++)
 	        {
-	            var customer = _customers[i];
+	            var customer = Customers[i];
 	            var thread = new Thread(customer.BuyItem);
-	            _customerThreads[i] = thread;
+	            CustomerThreads[i] = thread;
 	        }
 	    }
 
@@ -163,7 +167,7 @@ namespace Bazaar_Of_The_Bizarre.Controller
 	        foreach (var store in storesList)
 	        {
 	            var thread = new Thread(store.FillProducts);
-	            _storeThreads[i] = thread;
+	            StoreThreads[i] = thread;
 	            ++i;
 	        }
 	    }
@@ -175,7 +179,7 @@ namespace Bazaar_Of_The_Bizarre.Controller
 	    public bool AnyThreadRunning()
 	    {
 	        bool threadIsRunning = false;
-	        foreach (var customerThread in _customerThreads)
+	        foreach (var customerThread in CustomerThreads)
 	        {
 	            if (customerThread.IsAlive)
 	            {
