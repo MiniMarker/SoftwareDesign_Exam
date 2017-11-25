@@ -11,7 +11,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		//List<Store> ListOfAllStores;
 
 		/// <summary>
-		/// Constructor
+		///		Constructor
 		/// </summary>
 		public Bazaar() {
 			ListOfAllStores = new List<Store>();
@@ -19,9 +19,11 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		}
 
         /// <summary>
-        /// Checks if any store is open, if not the bazar closes.
+        ///		Checks if any store is open, if not the bazar closes.
         /// </summary>
-        /// <returns>Boolean Returns true if a store is open, this means that the bazar is open.</returns>
+        /// <returns>
+        ///		Boolean Returns true if a store is open, this means that the bazar is open.
+        /// </returns>
 		public bool IsBazarOpen() {
 			var isAnyStoreOpen = false;
 
