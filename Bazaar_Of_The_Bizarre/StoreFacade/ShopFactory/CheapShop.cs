@@ -1,5 +1,4 @@
-﻿
-using Bazaar_Of_The_Bizarre.controller;
+﻿using Bazaar_Of_The_Bizarre.controller;
 
 namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
 	class CheapShop : IShop {
