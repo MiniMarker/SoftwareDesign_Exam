@@ -6,7 +6,8 @@ using Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory;
 
 namespace Bazaar_Of_The_Bizarre.controller {
 	class Bazaar {
-		private List<Store> _listOfAllStores;
+		public List<Store> _listOfAllStores { get; set; }
+		//List<Store> _listOfAllStores;
 
 		/// <summary>
 		/// Constructor 

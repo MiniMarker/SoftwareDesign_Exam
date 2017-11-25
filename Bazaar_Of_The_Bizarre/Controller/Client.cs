@@ -13,9 +13,10 @@ namespace Bazaar_Of_The_Bizarre.controller {
         private readonly Bank.BankFlyweight.Bank _bank;
 		public Bazaar Bazaar;
 	    public static readonly PrintHandler PrintProduct = PrintHandler.GetInstance();
-        private Customer[] _customers;
-		private Thread[] _customerThreads;
-		private Thread[] _storeThreads;
+		
+		public Customer[] _customers { get; private set; }
+		public Thread[] _customerThreads { get; private set; }
+		public Thread[] _storeThreads { get; private set; }
 		private static int _socialSecurityNumber;
 
 		public Client(int amountOfCustomers) {
@@ -25,6 +26,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 			_customers = new Customer[amountOfCustomers];
 			_customerThreads = new Thread[amountOfCustomers];
 			_storeThreads = new Thread[4];
+			CreateAllCustomers();
 		}
 
 		/**
@@ -33,7 +35,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		 */
 		public void StartAllCustomerThreads() {
 
-			CreateAllCustomers();
+
 			CreateAllCustomerThreads();
 
 			foreach(var customerThread in _customerThreads) {
@@ -43,21 +45,27 @@ namespace Bazaar_Of_The_Bizarre.controller {
 
 
 		private void CreateAllCustomers() {
+
+			List<String> nameList = new List<string>();
+
 			for(var i = 0; i < _customers.Length; i++) {
-				_customers[i] = AddCustomerToList();
+				_customers[i] = AddCustomerToList(nameList);
 				Console.WriteLine("Name " + _customers[i].Name + " ; SocialSecurityNumber: " + _customers[i].SocialSecurityNumber);
 			}
 		}
 
-		private Customer AddCustomerToList() {
+		private Customer AddCustomerToList(List<String> nameList) {
 			var values = Enum.GetValues(typeof(Names));
 			var customerName = values.GetValue(Rnd.Next(0, values.Length));
 			var nameIsTaken = false;
-			while(!nameIsTaken) {
-				if(_customers.Length == 0) {
 
-					foreach(var customer in _customers) {
-						if(customer.Name.Equals(customerName.ToString())) {
+			while(!nameIsTaken) {
+				if (nameList.Count != 0)
+				{
+					foreach (var name in nameList)
+					{
+						if (name.Equals(customerName.ToString()))
+						{
 							nameIsTaken = true;
 						}
 					}
@@ -67,7 +75,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 					nameIsTaken = false;
 				}
 				else {
-
+					nameList.Add(customerName.ToString());
 					return new Customer(_socialSecurityNumber++, customerName.ToString(), _bank, Bazaar);
 				}
 			}
