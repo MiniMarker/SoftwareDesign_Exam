@@ -45,24 +45,26 @@ namespace Bazaar_Of_The_Bizarre.controller
 
 
 		private void CreateAllCustomers()
-		{
-			List<string> nameList = new List<string>();
-
+		{ 
 			for (var i = 0; i < _customers.Length; i++)
 			{
-				_customers[i]  = AddCustomerToList(nameList);
+				_customers[i]  = AddCustomerToList();
+				Console.WriteLine(_customers[i].Name + " " + _customers[i].SocialSecurityNumber);
 			}
 		}
 
-		private Customer AddCustomerToList(List<string> nameList)
+		private Customer AddCustomerToList()
 		{
 			var values = Enum.GetValues(typeof(Names));
 			var customerName = values.GetValue(Rnd.Next(0, values.Length));
 			var nameIsTaken = false;
 			while(!nameIsTaken) {
-				if(nameList.Count != 0) {
-					foreach(var name in nameList) {
-						if(name.Equals(customerName.ToString())) {
+				if(_customers.Length == 0) {
+
+					foreach (var customer in _customers)
+					{
+						if (customer.Name.Equals(customerName.ToString()))
+						{
 							nameIsTaken = true;
 						}
 					}
@@ -72,7 +74,7 @@ namespace Bazaar_Of_The_Bizarre.controller
 					nameIsTaken = false;
 				}
 				else {
-					nameList.Add(customerName.ToString());
+
 					return new Customer(_socialSecurityNumber++, customerName.ToString(), _bank, Bazaar);
 				}
 			}

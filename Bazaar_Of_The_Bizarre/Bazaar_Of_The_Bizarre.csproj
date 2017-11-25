@@ -64,7 +64,6 @@
     <Compile Include="StatueDecorator\StickerDecorator.cs" />
     <Compile Include="Controller\Client.cs" />
     <Compile Include="StatueDecorator\ColorDecorator.cs" />
-    <Compile Include="Controller\Configuration.cs" />
     <Compile Include="Controller\Customer.cs" />
     <Compile Include="StoreFacade\ShopFactory\ExpensiveShop.cs" />
     <Compile Include="Bank\BankFlyweight\IBank.cs" />
