@@ -1,13 +1,13 @@
 ﻿namespace Bazaar_Of_The_Bizarre.statueDecorator {
 	internal class JewelDecorator : StatueDecorator {
-
-		/// <summary>
-		///		Empty Constructor
-		/// </summary>
-		/// <param name="originalStatue">
-		///		Object of statue to be decorated
-		/// </param>
-		public JewelDecorator(IStatue originalStatue) : base(originalStatue) {
+	    //TODO xml
+        /// <summary>
+        ///		Empty Constructor
+        /// </summary>
+        /// <param name="originalStatue">
+        ///		Object of statue to be decorated
+        /// </param>
+        public JewelDecorator(IStatue originalStatue) : base(originalStatue) {
 		}
 
 		/// <summary>

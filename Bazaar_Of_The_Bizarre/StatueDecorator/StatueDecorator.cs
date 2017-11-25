@@ -6,18 +6,36 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 	internal class StatueDecorator : IStatue {
 		private readonly IStatue _originalStatue;
 
+        /// <summary>
+        ///     Constructor
+        /// </summary>
+        /// <param name="originalStatue">
+        ///     Object of statue to be decorated
+        /// </param>
 		protected StatueDecorator(IStatue originalStatue) {
 			_originalStatue = originalStatue;
 		}
-
+        //TODO xml
+        /// <summary>
+        ///      Returns description of statue
+        /// </summary>
+        /// <returns>
+        ///     String that is the description
+        /// </returns>
 		public virtual string GetDescription() {
 			return _originalStatue.GetDescription();
 		}
 
-		public virtual double GetPrice() {
+	    /// <summary>
+	    ///      Returns price of statue
+	    /// </summary>
+	    /// <returns>
+	    ///     double that is the price
+	    /// </returns>
+        public virtual double GetPrice() {
 			return _originalStatue.GetPrice();
 		}
-		//TODO add XML Doc here
+		
 		protected bool CheckIfDecorationHasBeenUsedInCurrentDescription(string decoration, string currentDescriptionOfStatue) {
 			var currentDescription = currentDescriptionOfStatue.Split();
 			var decorationHasBeenUsed = false;
@@ -58,7 +76,6 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 			var jewelValues = Enum.GetValues(typeof(Jewels));
 			return jewelValues.GetValue(Client.Rnd.Next(jewelValues.Length)).ToString();
 		}
-
 
 		protected string AddDecorationToDescription(string currentDescription, string decoration) {
 			var currentDescriptionWords = currentDescription.Split();
