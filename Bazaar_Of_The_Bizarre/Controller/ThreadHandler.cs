@@ -162,7 +162,7 @@ namespace Bazaar_Of_The_Bizarre.Controller
         /// <param name="bazaar"></param>
 	    private void CreateAllStoresThreads(Bazaar bazaar)
 	    {
-	        var storesList = bazaar.GetStoreList();
+	        var storesList = bazaar.ListOfAllStores;
 
 	        var i = 0;
 	        foreach (var store in storesList)
