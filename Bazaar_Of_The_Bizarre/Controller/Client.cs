@@ -45,7 +45,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		/// Prints out all sold of the day by stores.
 		/// </summary>
 		private void EndOfDay() {
-			foreach(var store in _bazaar.GetStoreList()) {
+			foreach(var store in _bazaar.ListOfAllStores) {
 				store.ViewSoldProducts();
 			}
 		}
