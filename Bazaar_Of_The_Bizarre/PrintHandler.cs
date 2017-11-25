@@ -4,38 +4,33 @@ using Bazaar_Of_The_Bizarre.statueDecorator;
 using Bazaar_Of_The_Bizarre.StatueDecorator;
 
 namespace Bazaar_Of_The_Bizarre {
-	sealed class PrintHandler
-	{
-	    private static PrintHandler _instance;
-	    private static readonly object _lock = new object();
-        private List<string> _stickerList;
-	    private List<string> _jewelList;
-        private List<string> _colorList;
+	sealed class PrintHandler {
+		private static PrintHandler _instance;
+		private static readonly object _lock = new object();
+		private List<string> _stickerList;
+		private List<string> _jewelList;
+		private List<string> _colorList;
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
-	    private PrintHandler()
-	    {
-	    }
+		/// <summary>
+		/// Constructor
+		/// </summary>
+		private PrintHandler() {
+		}
 
-        /// <summary>
-        /// Returns PrintHandler if there is none, if it already exists it returns it.
-        /// </summary>
-        /// <returns>PrintHandler Returns existing PrintHandler </returns>
-	    public static PrintHandler GetInstance()
-	    {
-	        if (_instance == null)
-	        {
-	            lock (_lock)
-	            {
-	                _instance = new PrintHandler();
-	            }
-	        }
-	        return _instance;
-	    }
+		/// <summary>
+		/// Returns PrintHandler if there is none, if it already exists it returns it.
+		/// </summary>
+		/// <returns>PrintHandler Returns existing PrintHandler </returns>
+		public static PrintHandler GetInstance() {
+			if(_instance == null) {
+				lock(_lock) {
+					_instance = new PrintHandler();
+				}
+			}
+			return _instance;
+		}
 
-	    public string SortAndRetrieveProductDescription(IStatue statue) {
+		public string SortAndRetrieveProductDescription(IStatue statue) {
 			SortStatueDescription(statue.GetDescription());
 			return FormatProductDescription();
 		}
@@ -69,7 +64,7 @@ namespace Bazaar_Of_The_Bizarre {
 			}
 		}
 
-	    public string FormatProductDescription() {
+		public string FormatProductDescription() {
 			var colors = FormatDecorations(_colorList);
 			var jewels = FormatDecorations(_jewelList);
 			var stickers = FormatDecorations(_stickerList);
@@ -77,7 +72,7 @@ namespace Bazaar_Of_The_Bizarre {
 			return $"{colors} Statue \n " + $"- 'Jewels': {jewels} \n " + $"- Stickers: {stickers}";
 		}
 
-	    public string FormatDecorations(List<string> decorationList) {
+		public string FormatDecorations(List<string> decorationList) {
 			if(decorationList == null)
 				return null;
 
@@ -100,12 +95,9 @@ namespace Bazaar_Of_The_Bizarre {
 					else if(decorationList.Count - i == 1 && !toBeAddedToDescription.Equals("")) {
 
 						decorationsFormatted += " and " + toBeAddedToDescription;
-
 					}
 				}
-
 			}
-
 			return decorationsFormatted;
 		}
 

@@ -37,10 +37,9 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
 			//Adds account to _account dictionary if customer hasn't an existing account.
 			if(!_accounts.ContainsKey(customerId)) {
 				_accounts.Add(customerId, newAccount);
-				//Console.WriteLine("Account has been added.");
 				return true;
 			}
-			Console.WriteLine("Customer already has an account.");
+//			Console.WriteLine("Customer already has an account.");
 			return false;
 
 		}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using Bazaar_Of_The_Bizarre.Controller;
 using Bazaar_Of_The_Bizarre.statueDecorator;
 
 namespace Bazaar_Of_The_Bizarre.controller {

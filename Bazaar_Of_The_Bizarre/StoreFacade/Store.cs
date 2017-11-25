@@ -13,7 +13,8 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		public string Name { get; set; }
 		public int Quota { get; set; }
 		private List<IStatue> _productsForSale;
-        private List<IStatue> _productsSold;
+		//TODO fix this hack
+		public List<IStatue> _productsSold;
 	    private object SyncLock = new object();
 
         /// <summary>
@@ -52,7 +53,6 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
                 {
                     if (_productsSold.Count == Quota)
                     {
-                        Console.WriteLine(Name);
                         StoreIsOpen = false;
                     }
                 }                

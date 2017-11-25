@@ -27,7 +27,8 @@ namespace Bazaar_Of_The_Bizarre.controller {
 			foreach(var store in _listOfAllStores) {
                 store.CheckIfStoreShouldClose();
 				if(store.StoreIsOpen) {
-                    Console.WriteLine("{0} is open so Bazaar won't stop.", store.Name);
+
+					//                    Console.WriteLine("{0} is open so Bazaar won't stop.", store.Name);
 					isAnyStoreOpen = true;
 				}
 			}
@@ -71,7 +72,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		/// <param name="amountOfStores"></param>
 		public void CreateStores(int amountOfStores) {
 			for(var i = 0; i < amountOfStores; i++) {
-				//TODO how much should the quota be? Change here.
+				//TODO how much should the be? Change here.
 				var quota = Client.Rnd.Next(5, 10);
 				_listOfAllStores.Add(i % 2 == 0 ? new Store(quota, ShopType.ExpensiveShop) : new Store(quota, ShopType.CheapShop));
 			}
