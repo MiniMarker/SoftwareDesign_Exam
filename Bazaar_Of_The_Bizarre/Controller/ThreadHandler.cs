@@ -7,8 +7,6 @@ using Bazaar_Of_The_Bizarre.controller;
 
 namespace Bazaar_Of_The_Bizarre.Controller {
 	class ThreadHandler {
-		//		public Customer[] Customers { get; private set; }
-		//		public Thread[] CustomerThreads { get; private set; }
 		public Thread[] StoreThreads { get; private set; }
 
 		public List<Customer> Customers { get; private set; }
@@ -25,8 +23,6 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 		///		Amount of customers to be created
 		/// </param>
 		public ThreadHandler(int amountOfCustomers) {
-			//			Customers = new Customer[amountOfCustomers];
-			//			CustomerThreads = new Thread[amountOfCustomers];
 			AmountOfCustomers = amountOfCustomers;
 			Customers = new List<Customer>();
 			CustomerThreads = new List<Thread>();
@@ -81,9 +77,10 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 			}
 		}
 
+
+		//TODO TEST THIS BEFORE DOING ANY CHANGES
 		/// <summary>
-		///		This method is to avoid deadlock in the sense that stores have products to sell but customer does not have any money. 
-		///		Creates four customer and threads. Start thread after x milliseconds.
+		///		Creates another if it is needed to complete the sales of the day.
 		/// </summary>
 		/// <param name="bank">
 		///		object of Bank to be used
