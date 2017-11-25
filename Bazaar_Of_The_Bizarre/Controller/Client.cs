@@ -12,9 +12,11 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		private readonly ThreadHandler _threadHandler;
 
 		/// <summary>
-		/// Constructor
+		///		Constructor
 		/// </summary>
-		/// <param name="amountOfCustomers"></param>
+		/// <param name="amountOfCustomers">
+		///		Number of customer to be created
+		/// </param>
 		public Client(int amountOfCustomers) {
 			_bank = BankFactory.GetBank("DNB");
 			_bazaar = new Bazaar();
@@ -22,9 +24,9 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		}
 
 		/// <summary>
-		/// Runs the whole game and start threads
+		///		Starts the whole prosess of creating threads of customers and stores
 		/// </summary>
-		public void RunGame() {
+		public void StartBazaar() {
 			_threadHandler.StartAllStoresThreads(_bazaar);
 
 			if(_bazaar.IsBazarOpen()) {
@@ -42,7 +44,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		}
 
 		/// <summary>
-		/// Prints out all sold of the day by stores.
+		///		Prints out an receipt of all sold product of the day for each store.
 		/// </summary>
 		private void EndOfDay() {
 			foreach(var store in _bazaar.ListOfAllStores) {
