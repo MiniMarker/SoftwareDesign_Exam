@@ -24,5 +24,11 @@ namespace Bazaar_Of_The_Bizarre.Bank {
 			}
 
 		}
+
+        //Returns sum of the account.
+	    public double GetSum()
+	    {
+	        return _sum;
+	    }
 	}
 }
