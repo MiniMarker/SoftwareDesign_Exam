@@ -15,7 +15,9 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
         /// <param name="name">Name of bank</param>
 		public Bank(string name) {
 			Name = name;
-		}
+            Customers = Client.Rnd.Next(20, 10000);
+            Capital = Client.Rnd.Next(20000, 100000);
+        }
 
 		/// <summary>
 		/// Prints out information about the bank.

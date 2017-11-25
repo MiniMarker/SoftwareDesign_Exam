@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using Bazaar_Of_The_Bizarre.Controller;
 using Bazaar_Of_The_Bizarre.statueDecorator;
 
 namespace Bazaar_Of_The_Bizarre.controller {
@@ -15,10 +14,10 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		/// <summary>
 		/// Constructor 
 		/// </summary>
-		/// <param name="socialSecurityNumber"></param>
-		/// <param name="name"></param>
-		/// <param name="bank"></param>
-		/// <param name="bazaar"></param>
+		/// <param name="socialSecurityNumber">Unique Identifier for customer</param>
+		/// <param name="name">Name of customer</param>
+		/// <param name="bank">Name of bank</param>
+		/// <param name="bazaar">Name of bazaar</param>
 		public Customer(int socialSecurityNumber, string name, Bank.BankFlyweight.Bank bank, Bazaar bazaar) {
 			Name = name;
 			SocialSecurityNumber = socialSecurityNumber;
