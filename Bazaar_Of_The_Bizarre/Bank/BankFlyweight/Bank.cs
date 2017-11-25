@@ -12,7 +12,7 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="name">Name of bank</param>
 		public Bank(string name) {
 			Name = name;
 		}
@@ -27,7 +27,7 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
         /// <summary>
         /// Creates a new account, if customer does not have one, and adds it to _accounts.
         /// </summary>
-        /// <param name="customerId"></param>
+        /// <param name="customerId">Unique identifier for a customer.</param>
         /// <returns>Bool Returns true if account was created</returns>
         public bool CreateAccount(int customerId) {
 			//Creates new account with random sum.    
@@ -47,8 +47,8 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
         /// <summary>
         /// Performs a withdrawal if customer has account and sufficient funds.
         /// </summary>
-        /// <param name="sum"></param>
-        /// <param name="customerId"></param>
+        /// <param name="sum">Sum to withdraw</param>
+        /// <param name="customerId">Unique identifier for a customer.</param>
         /// <returns>Bool returns true if transaction was made</returns>
         public bool Transaction(double sum, int customerId) {
 			if(_accounts.ContainsKey(customerId)) {
@@ -72,7 +72,7 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
         /// <summary>
         /// Returns current fund for a specifik bankaccount.
         /// </summary>
-        /// <param name="customerId"></param>
+        /// <param name="customerId">Unique identifier for a customer.</param>
         /// <returns>Double Returns current fund of the bankaccount</returns>
 	    public double CheckFunds(int customerId)
 	    {
