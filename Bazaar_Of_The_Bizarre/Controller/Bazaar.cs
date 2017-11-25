@@ -25,6 +25,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		public bool IsBazarOpen() {
 			var isAnyStoreOpen = false;
 			foreach(var store in _listOfAllStores) {
+                store.CheckIfStoreShouldClose();
 				if(store.StoreIsOpen) {
 					isAnyStoreOpen = true;
 				}
