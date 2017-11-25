@@ -11,8 +11,7 @@ namespace Bazaar_Of_The_Bizarre.Controller
 		public Customer[] Customers { get; private set; }
 		public Thread[] CustomerThreads { get; private set; }
 		public Thread[] StoreThreads { get; private set; }
-	    //private Thread[] _customerThreads;
-        //private Thread[] _storeThreads;
+
 	    private static int _socialSecurityNumber;
 
         /// <summary>
@@ -78,12 +77,14 @@ namespace Bazaar_Of_The_Bizarre.Controller
         /// <param name="bazaar"></param>
 	    public void GenerateExtraCustomers(Bank.BankFlyweight.Bank bank, Bazaar bazaar)
 	    {
-	        Thread[] extraCostumerThreads = new Thread[4];
+	        Thread[] extraCostumerThreads = new Thread[5];
+            var custom = new Customer(115, "John", bank, bazaar);
             var custom1 = new Customer(116, "Hans", bank, bazaar);
 	        var custom2 = new Customer(117, "Leila", bank, bazaar);
 	        var custom3 = new Customer(118, "Tina", bank, bazaar);
 	        var custom4 = new Customer(119, "Ringo", bank, bazaar);
             var customerList = new List<Customer>();
+            customerList.Add(custom);
             customerList.Add(custom1);
             customerList.Add(custom2);
             customerList.Add(custom3);

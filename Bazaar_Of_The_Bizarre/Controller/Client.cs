@@ -36,8 +36,6 @@ namespace Bazaar_Of_The_Bizarre.controller {
 					_threadHandler.GenerateExtraCustomers(_bank, _bazaar);
 
 				}
-
-
 				EndOfDay();
 				Console.WriteLine("Bazar is now closed.");
 			}
