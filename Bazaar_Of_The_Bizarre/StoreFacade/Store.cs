@@ -13,7 +13,8 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		public string Name { get; set; }
 		public int Quota { get; set; }
 		private List<IStatue> _productsForSale;
-		private List<IStatue> _productsSold;
+        private List<IStatue> _productsSold;
+	    private object SyncLock = new object();
 
         /// <summary>
         /// Constructor
@@ -45,10 +46,18 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
         /// When products sold is equal to quota the store closes.
         /// </summary>
         public void CheckIfStoreShouldClose() {
-			if(_productsSold.Count == Quota) {
-				StoreIsOpen = false;
-			}
-		}
+            lock (SyncLock)
+            {
+                if (StoreIsOpen)
+                {
+                    if (_productsSold.Count == Quota)
+                    {
+                        Console.WriteLine(Name);
+                        StoreIsOpen = false;
+                    }
+                }                
+            }
+        }
 
         /// <summary>
         /// Creates a new product every second until qouta is full.
@@ -70,9 +79,9 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
         /// <returns>IStatue returns product if transaction was true</returns>
         public IStatue SellProduct(int socialSecurityNumber, string name) {
 			var bank = Bank.BankFlyweight.BankFactory.GetBank("DNB");
-			CheckIfStoreShouldClose();
 			lock(_productsForSale) lock(_productsSold) {
-					if(StoreIsOpen && _productsForSale.Count > 0) {
+			        CheckIfStoreShouldClose();
+                    if (StoreIsOpen && _productsForSale.Count > 0) {
 						var product = _productsForSale[0];
 						var price = product.GetPrice();
 						if(bank.Transaction(price, socialSecurityNumber)) {
@@ -87,7 +96,6 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 						Console.WriteLine("{0} tried to buy a product at {1} for {2} kr. Withdrawal rejected. Insufficient funds.{3}", name, Name, price, System.Environment.NewLine);
 					}
 				}
-            CheckIfStoreShouldClose();
 
             return null;
 		}

@@ -27,6 +27,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 			foreach(var store in _listOfAllStores) {
                 store.CheckIfStoreShouldClose();
 				if(store.StoreIsOpen) {
+                    Console.WriteLine("{0} is open so Bazaar won't stop.", store.Name);
 					isAnyStoreOpen = true;
 				}
 			}
