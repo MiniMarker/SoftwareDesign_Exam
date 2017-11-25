@@ -12,12 +12,8 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		public bool StoreIsOpen { get; private set; }
 		public string Name { get; set; }
 		public int Quota { get; set; }
-
 		private List<IStatue> _productsForSale;
 		private List<IStatue> _productsSold;
-
-		//TODO move this when printhandler becomes a singleton
-		private PrintHandler _print = new PrintHandler();
 
         /// <summary>
         /// Constructor
@@ -88,7 +84,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 							_productsForSale.Remove(product);
 							CheckIfStoreShouldClose();
 							Console.WriteLine("Following product was sold to {0} for {1} kr from {2}.{3}{4}{5}", name,
-								price, Name, System.Environment.NewLine, _print.SortAndRetrieveProductDescription(product),
+								price, Name, System.Environment.NewLine, Client.PrintProduct.SortAndRetrieveProductDescription(product),
 								System.Environment.NewLine);
 							return product;
 						}

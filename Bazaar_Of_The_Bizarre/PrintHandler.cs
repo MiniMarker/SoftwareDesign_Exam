@@ -40,7 +40,7 @@ namespace Bazaar_Of_The_Bizarre {
 			return FormatProductDescription();
 		}
 
-		private void SortStatueDescription(string description) {
+		public void SortStatueDescription(string description) {
 			_stickerList = new List<string>();
 			_jewelList = new List<string>();
 			_colorList = new List<string>();
@@ -69,7 +69,7 @@ namespace Bazaar_Of_The_Bizarre {
 			}
 		}
 
-		private string FormatProductDescription() {
+	    public string FormatProductDescription() {
 			var colors = FormatDecorations(_colorList);
 			var jewels = FormatDecorations(_jewelList);
 			var stickers = FormatDecorations(_stickerList);
@@ -77,7 +77,7 @@ namespace Bazaar_Of_The_Bizarre {
 			return $"{colors} Statue \n " + $"- 'Jewels': {jewels} \n " + $"- Stickers: {stickers}";
 		}
 
-		private string FormatDecorations(List<string> decorationList) {
+	    public string FormatDecorations(List<string> decorationList) {
 			if(decorationList == null)
 				return null;
 

@@ -8,9 +8,10 @@ using Bazaar_Of_The_Bizarre.Controller;
 namespace Bazaar_Of_The_Bizarre.controller {
 	class Client {
 		public static readonly Random Rnd = new Random();
-		private readonly Bank.BankFlyweight.Bank _bank;
+        private readonly Bank.BankFlyweight.Bank _bank;
 		public Bazaar Bazaar;
-		private Customer[] _customers;
+	    public static readonly PrintHandler PrintProduct = PrintHandler.GetInstance();
+        private Customer[] _customers;
 		private Thread[] _customerThreads;
 		private Thread[] _storeThreads;
 		private static int _socialSecurityNumber;
