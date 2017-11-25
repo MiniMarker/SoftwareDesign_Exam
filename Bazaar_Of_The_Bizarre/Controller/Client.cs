@@ -7,6 +7,8 @@ using Bazaar_Of_The_Bizarre.Controller;
 
 namespace Bazaar_Of_The_Bizarre.controller {
 	class Client {
+
+		//TODO add threadhandler
 		public static readonly Random Rnd = new Random();
         private readonly Bank.BankFlyweight.Bank _bank;
 		public Bazaar Bazaar;
