@@ -3,8 +3,6 @@ using Bazaar_Of_The_Bizarre.controller;
 
 namespace Bazaar_Of_The_Bizarre {
 	class Program {
-        //TODO All randoms are refered to by Program.Rnd. Search for this when changing to Random.Rnd
-	    public static readonly Random Rnd = new Random();
 
         public static void Main(string[] args) {
 			var client = new Client(20);

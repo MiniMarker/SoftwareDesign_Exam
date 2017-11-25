@@ -9,6 +9,7 @@ namespace Bazaar_Of_The_Bizarre.controller
 {
 	class Client
 	{
+		public static readonly Random Rnd = new Random();
 		private readonly Bank.BankFlyweight.Bank _bank;
 		public Bazaar Bazaar;
 		private Customer[] _customers;
@@ -56,7 +57,7 @@ namespace Bazaar_Of_The_Bizarre.controller
 		private Customer AddCustomerToList(List<string> nameList)
 		{
 			var values = Enum.GetValues(typeof(Names));
-			var customerName = values.GetValue(Program.Rnd.Next(0, values.Length));
+			var customerName = values.GetValue(Rnd.Next(0, values.Length));
 			var nameIsTaken = false;
 			while(!nameIsTaken) {
 				if(nameList.Count != 0) {
@@ -67,7 +68,7 @@ namespace Bazaar_Of_The_Bizarre.controller
 					}
 				}
 				if(nameIsTaken) {
-					customerName = values.GetValue(Program.Rnd.Next(values.Length));
+					customerName = values.GetValue(Rnd.Next(values.Length));
 					nameIsTaken = false;
 				}
 				else {
@@ -92,7 +93,7 @@ namespace Bazaar_Of_The_Bizarre.controller
 		{
 			var storesList = Bazaar.GetStoreList();
 
-			int i = 0;
+			var i = 0;
 			foreach (var store in storesList)
 			{
 				var thread = new Thread(store.FillProducts);
@@ -111,7 +112,7 @@ namespace Bazaar_Of_The_Bizarre.controller
 		}
 
 		//Checks if the bazar should be closed.
-		public Boolean IsBazarClosed()
+		public bool IsBazarClosed()
 		{
 			var result = Bazaar.IsBazarOpen();
 			return result;

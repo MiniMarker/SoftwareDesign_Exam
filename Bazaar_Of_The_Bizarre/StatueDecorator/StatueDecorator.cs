@@ -5,6 +5,7 @@ using System.Security.AccessControl;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Bazaar_Of_The_Bizarre.controller;
 using Bazaar_Of_The_Bizarre.StatueDecorator;
 
 namespace Bazaar_Of_The_Bizarre.statueDecorator {
@@ -65,17 +66,17 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 		private string GetRandomSticker() {
 			
 			var stickerValues = Enum.GetValues(typeof(Stickers));
-			return stickerValues.GetValue(Program.Rnd.Next(stickerValues.Length)).ToString();
+			return stickerValues.GetValue(Client.Rnd.Next(stickerValues.Length)).ToString();
 		}
 
 		private string GetRandomColor() { 
 			var colorValues = Enum.GetValues(typeof(Colors));
-			return colorValues.GetValue(Program.Rnd.Next(colorValues.Length)).ToString();
+			return colorValues.GetValue(Client.Rnd.Next(colorValues.Length)).ToString();
 		}
 
 		private string GetRandomJewel() {
 			var jewelValues = Enum.GetValues(typeof(Jewels));
-			return jewelValues.GetValue(Program.Rnd.Next(jewelValues.Length)).ToString();
+			return jewelValues.GetValue(Client.Rnd.Next(jewelValues.Length)).ToString();
 		}
 
 

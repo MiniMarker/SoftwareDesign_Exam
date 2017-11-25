@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using Bazaar_Of_The_Bizarre.controller;
 using Bazaar_Of_The_Bizarre.statueDecorator;
 using Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory;
 
@@ -14,7 +15,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 
 		private List<IStatue> _productsForSale;
 		private List<IStatue> _productsSold;
-		//TODO move this later
+		//TODO move this when printhandler becomes a singleton
 		private PrintHandler _print = new PrintHandler();
 
 		public Store(int quota, ShopType typeOfShop) {
@@ -46,7 +47,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		public void FillProducts() {
 			while(StoreIsOpen) {
 				CheckIfStoreShouldClose();
-				RecieveProductsForSaleFromBackroom(Program.Rnd.Next(1, 10));
+				RecieveProductsForSaleFromBackroom(Client.Rnd.Next(1, 10));
 				Thread.Sleep(1000);
 			}
 			Thread.CurrentThread.Join();

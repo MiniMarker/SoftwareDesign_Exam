@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Bazaar_Of_The_Bizarre.controller;
 
 namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
 	class CheapShop : IShop {
-		//TODO make into properties Is that possible due to Interface??
 		private string _name;
 		private int _price;
 
@@ -18,7 +18,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade.ShopFactory {
 		}
 
 		public void GenerateName() {
-			var chosenStoreName = Program.Rnd.Next(5);
+			var chosenStoreName = Client.Rnd.Next(5);
 			switch(chosenStoreName) {
 				case 0:
 					SetName("Emma's Cheapskate Shop");

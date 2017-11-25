@@ -11,7 +11,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		private Boolean _bazarClosed;
 
 		/// <summary>
-		/// Constructor for 
+		/// Constructor 
 		/// </summary>
 		public Bazaar() {
 			_listOfAllStores = new List<Store>();
@@ -31,7 +31,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 			if(isAnyStoreOpen == false) {
 				_bazarClosed = true;
 			}
-
+			//TODO don't need to use _bazaarclosed as it is not being returned? 
 			return isAnyStoreOpen;
 		}
 
@@ -46,9 +46,8 @@ namespace Bazaar_Of_The_Bizarre.controller {
 
 		// Gets random store, if it's not open, gets the first open store.
 		private Store GetRandomStore() {
-			var store = _listOfAllStores[Program.Rnd.Next(1, _listOfAllStores.Count)];
+			var store = _listOfAllStores[Client.Rnd.Next(1, _listOfAllStores.Count)];
 
-			//TODO  If the first random store is not open, take the first open store. Should it be random?
 			if(!store.StoreIsOpen) {
 				for(int i = 0; i < _listOfAllStores.Count; i++) {
 					if(_listOfAllStores[i].StoreIsOpen) {
@@ -67,7 +66,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		public void CreateStores(int amountOfStores) {
 			for(var i = 0; i < amountOfStores; i++) {
 				//TODO how much should the quota be? Change here.
-				var quota = Program.Rnd.Next(5, 10);
+				var quota = Client.Rnd.Next(5, 10);
 				_listOfAllStores.Add(i % 2 == 0 ? new Store(quota, ShopType.ExpensiveShop) : new Store(quota, ShopType.CheapShop));
 			}
 		}

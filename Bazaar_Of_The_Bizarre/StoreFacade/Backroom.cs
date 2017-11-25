@@ -14,7 +14,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade
 
 			for (var i = 0; i < numberOfDecorations; i++)
 			{
-				var value = Program.Rnd.Next(1, 4);
+				var value = Client.Rnd.Next(1, 4);
 
 				switch (value)
 				{
@@ -56,7 +56,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade
 
 			for (var i = 0; i < numberOfStatuesToBeCreated; i++)
 			{
-				var numberOfDecorations = Program.Rnd.Next(5, 9);
+				var numberOfDecorations = Client.Rnd.Next(5, 9);
 				var product = CreateProduct(numberOfDecorations);
 				statueList.Add(product);
 			}
