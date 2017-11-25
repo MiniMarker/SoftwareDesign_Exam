@@ -5,8 +5,10 @@ using Bazaar_Of_The_Bizarre.Bank.BankFlyweight;
 using Bazaar_Of_The_Bizarre.controller;
 using Bazaar_Of_The_Bizarre.Controller;
 
-namespace Bazaar_Of_The_Bizarre.controller {
-	class Client {
+namespace Bazaar_Of_The_Bizarre.controller
+{
+	class Client
+	{
 		public static readonly Random Rnd = new Random();
 		private readonly Bank.BankFlyweight.Bank _bank;
 		public Bazaar Bazaar;
@@ -15,7 +17,8 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		private Thread[] _storeThreads;
 		private static int _socialSecurityNumber;
 
-		public Client(int amountOfCustomers) {
+		public Client(int amountOfCustomers)
+		{
 			_bank = BankFactory.GetBank("DNB");
 			Bazaar = new Bazaar();
 			_socialSecurityNumber = 120;
@@ -28,34 +31,40 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		 * App has to run threads until customer has less money than x
 		 * App has to run threads until stores are no longer open.  
 		 */
-		public void StartAllCustomerThreads() {
+		public void StartAllCustomerThreads()
+		{
 
 			CreateAllCustomers();
 			CreateAllCustomerThreads();
 
-			foreach(var customerThread in _customerThreads) {
+			foreach (var customerThread in _customerThreads)
+			{
 				customerThread.Start();
 			}
 		}
 
 
-		private void CreateAllCustomers() {
-			List<string> nameList = new List<string>();
-
-			for(var i = 0; i < _customers.Length; i++) {
-				_customers[i] = AddCustomerToList(nameList);
+		private void CreateAllCustomers()
+		{ 
+			for (var i = 0; i < _customers.Length; i++)
+			{
+				_customers[i]  = AddCustomerToList();
+				Console.WriteLine(_customers[i].Name + " " + _customers[i].SocialSecurityNumber);
 			}
 		}
 
-		private Customer AddCustomerToList(List<string> nameList) {
+		private Customer AddCustomerToList()
+		{
 			var values = Enum.GetValues(typeof(Names));
 			var customerName = values.GetValue(Rnd.Next(0, values.Length));
 			var nameIsTaken = false;
-
 			while(!nameIsTaken) {
-				if(nameList.Count != 0) {
-					foreach(var name in nameList) {
-						if(name.Equals(customerName.ToString())) {
+				if(_customers.Length == 0) {
+
+					foreach (var customer in _customers)
+					{
+						if (customer.Name.Equals(customerName.ToString()))
+						{
 							nameIsTaken = true;
 						}
 					}
@@ -65,48 +74,57 @@ namespace Bazaar_Of_The_Bizarre.controller {
 					nameIsTaken = false;
 				}
 				else {
-					nameList.Add(customerName.ToString());
+
 					return new Customer(_socialSecurityNumber++, customerName.ToString(), _bank, Bazaar);
 				}
 			}
 			return null;
 		}
 
-		private void CreateAllCustomerThreads() {
-			for(var i = 0; i < _customerThreads.Length; i++) {
+		private void CreateAllCustomerThreads()
+		{
+			for (var i = 0; i < _customerThreads.Length; i++)
+			{
 				var customer = _customers[i];
 				var thread = new Thread(customer.BuyItem);
 				_customerThreads[i] = thread;
 			}
 		}
 
-		private void CreateAllStoresThreads() {
+		private void CreateAllStoresThreads()
+		{
 			var storesList = Bazaar.GetStoreList();
 
 			var i = 0;
-			foreach(var store in storesList) {
+			foreach (var store in storesList)
+			{
 				var thread = new Thread(store.FillProducts);
 				_storeThreads[i] = thread;
 				++i;
 			}
 		}
 
-		public void StartAllStoresThreads() {
+		public void StartAllStoresThreads()
+		{
 			CreateAllStoresThreads();
-			foreach(var storeThread in _storeThreads) {
+			foreach (var storeThread in _storeThreads)
+			{
 				storeThread.Start();
 			}
 		}
 
 		//Checks if the bazar should be closed.
-		public bool IsBazarClosed() {
+		public bool IsBazarClosed()
+		{
 			var result = Bazaar.IsBazarOpen();
 			return result;
 		}
 
 		//Prints out all sold of the day by stores.
-		public void EndOfDay() {
-			foreach(var store in Bazaar.GetStoreList()) {
+		public void EndOfDay()
+		{
+			foreach (var store in Bazaar.GetStoreList())
+			{
 				store.ViewSoldProducts();
 			}
 		}
