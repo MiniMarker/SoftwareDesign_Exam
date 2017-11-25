@@ -71,10 +71,6 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
         public IStatue SellProduct(int socialSecurityNumber, string name) {
 			var bank = Bank.BankFlyweight.BankFactory.GetBank("DNB");
 			CheckIfStoreShouldClose();
-
-			// Logic with lock here. There are two threads dealing with _productsForSale and _productsSold. 
-			// If lock is not here then they can make changes to both on same time = wrong. Therefor lock on one.
-			//Does it matter if there is not a lock on productssold
 			lock(_productsForSale) lock(_productsSold) {
 					if(StoreIsOpen && _productsForSale.Count > 0) {
 						var product = _productsForSale[0];
