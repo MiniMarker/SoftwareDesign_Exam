@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using Bazaar_Of_The_Bizarre.statueDecorator;
 using Bazaar_Of_The_Bizarre.StatueDecorator;
 
+/// <summary>
+/// This class uses design pattern Singleton. Due to that PrintHandler is only used one time this is not necessery. Singleton was implemented to show understanding of the specific design pattern.
+/// </summary>
+
 namespace Bazaar_Of_The_Bizarre {
 	sealed class PrintHandler {
 		private static PrintHandler _instance;
