@@ -122,9 +122,12 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		public void ViewSoldProducts() {
 			var sumOfDay = 0.0;
 			var amountOfProducts = 0;
-			foreach(var product in _productsSold) {
-				amountOfProducts++;
-				sumOfDay += product.GetPrice();
+			lock (_syncLock)
+			{
+				foreach(var product in _productsSold) {
+					amountOfProducts++;
+					sumOfDay += product.GetPrice();
+				}
 			}
 			Console.WriteLine("Store {0} is now closed. {1} products were sold, quota of the day was {2} and generated {3} kr.", Name, amountOfProducts, Quota, sumOfDay);
 		}
