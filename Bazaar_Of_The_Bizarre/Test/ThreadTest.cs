@@ -12,8 +12,7 @@ using NUnit.Framework.Internal;
 namespace Bazaar_Of_The_Bizarre.Test {
 
 	[TestFixture]
-	class ThreadTest
-	{
+	class ThreadTest {
 		private Bazaar _bazaar;
 		private Bank.BankFlyweight.Bank _bank;
 
@@ -24,12 +23,12 @@ namespace Bazaar_Of_The_Bizarre.Test {
 
 		}
 
-
-
 		[Test]
 		public void CreateCustomerTest() {
 			var threadHandler = new ThreadHandler(10);
-			threadHandler.GenerateExtraCustomerIfNeeded(_bank, _bazaar);
+			for(var i = 0; i < threadHandler.AmountOfCustomers; i++) {
+				threadHandler.GenerateExtraCustomerIfNeeded(_bank, _bazaar);
+			}
 			Assert.IsTrue(threadHandler.Customers.Count == 10);
 		}
 

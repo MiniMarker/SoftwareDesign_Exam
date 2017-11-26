@@ -11,10 +11,10 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 
 		public List<Customer> Customers { get; private set; }
 		public List<Thread> CustomerThreads { get; private set; }
-		private int AmountOfCustomers { get; set; }
+		public int AmountOfCustomers { get; private set; }
 
 		private static int _socialSecurityNumber;
-		public List<string> NameList = new List<string>();
+		private readonly List<string> _nameList = new List<string>();
 
 		/// <summary>
 		///		Constructor
@@ -41,7 +41,6 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 		/// </param>
 		public void StartAllCustomerThreads(Bank.BankFlyweight.Bank bank, Bazaar bazaar) {
 			CreateAllCustomers(bank, bazaar);
-			//			CreateAllCustomerThreads();
 			AddThreadsForAllCustomers();
 			StartAllCustomerThreads();
 		}
@@ -110,8 +109,8 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 			var customerName = values.GetValue(Client.Rnd.Next(0, values.Length));
 			var nameIsTaken = false;
 			while(!nameIsTaken) {
-				if(NameList.Count != 0) {
-					foreach(var name in NameList) {
+				if(_nameList.Count != 0) {
+					foreach(var name in _nameList) {
 						if(name.Equals(customerName.ToString())) {
 							nameIsTaken = true;
 						}
@@ -122,7 +121,7 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 					nameIsTaken = false;
 				}
 				else {
-					NameList.Add(customerName.ToString());
+					_nameList.Add(customerName.ToString());
 					return new Customer(_socialSecurityNumber++, customerName.ToString(), bank, bazaar);
 				}
 			}
