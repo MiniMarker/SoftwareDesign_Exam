@@ -85,9 +85,22 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 		///		object of Bazaar to be used
 		/// </param>
 		public void GenerateExtraCustomerIfNeeded(Bank.BankFlyweight.Bank bank, Bazaar bazaar) {
+			//			Customers.Add(AddCustomerToList(bank, bazaar));
+			//			AddThreadsForAllCustomers();
+			//			StartAllCustomerThreads();
+
 			Customers.Add(AddCustomerToList(bank, bazaar));
-			AddThreadsForAllCustomers();
-			StartAllCustomerThreads();
+			var backupThreads = new List<Thread>();
+
+			foreach(var customer in Customers) {
+				var thread = new Thread(customer.BuyItem);
+				backupThreads.Add(thread);
+			}
+
+			foreach(var customerThread in backupThreads) {
+				customerThread.Start();
+
+			}
 		}
 
 		/// <summary>
