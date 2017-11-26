@@ -12,19 +12,19 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		private readonly Bank.BankFlyweight.Bank _bank;
 
 		/// <summary>
-		/// Constructor 
+		///		Constructor 
 		/// </summary>
 		/// <param name="socialSecurityNumber">
 		///     Unique Identifier for customer
 		/// </param>
 		/// <param name="name">
-		///     Name of customer
+		///     Name of customer to be created
 		/// </param>
 		/// <param name="bank">
-		///     Name of bank
+		///     Object of bank to be used
 		/// </param>
 		/// <param name="bazaar">
-		///     Name of bazaar
+		///     Object of Bazaar to b used
 		/// </param>
 		public Customer(int socialSecurityNumber, string name, Bank.BankFlyweight.Bank bank, Bazaar bazaar) {
 			Name = name;

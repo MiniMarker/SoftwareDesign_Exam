@@ -44,7 +44,9 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		/// <param name="name">
 		///		name the customer who is buying a product
 		/// </param>
-		/// <returns>IStatue Returns product from store to customer.</returns>
+		/// <returns>
+		///		IStatue Returns product from store to customer.
+		/// </returns>
 		public IStatue GetProductFromStoreForCustomer(int socialSecurityNumber, string name) {
 			if(IsBazarOpen()) {
 				var storeToShopFrom = GetRandomStore();

@@ -6,7 +6,7 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
 		private static readonly Dictionary<string, Bank> BankMap = new Dictionary<string, Bank>();
 
 		/// <summary>
-		///  Creates new bank if it does not exist and returns it. Otherwise existing bank is returned.
+		///		Creates new bank if it does not exist and returns it. Otherwise existing bank is returned.
 		/// </summary>
 		/// <param name="name">
 		///     Name of the bank
@@ -22,7 +22,7 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
 		}
 
 		/// <summary>
-		/// Prints out all banks.
+		///		Prints out all banks.
 		/// </summary>
 		public static void PrintBanks() {
 			foreach(var pair in BankMap) {

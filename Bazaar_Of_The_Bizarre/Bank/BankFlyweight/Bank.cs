@@ -10,7 +10,7 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
 		private readonly Dictionary<int, BankAccount> _accounts = new Dictionary<int, BankAccount>();
 
 		/// <summary>
-		/// Constructor
+		///		Constructor
 		/// </summary>
 		/// <param name="name">
 		///     Name of bank
