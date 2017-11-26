@@ -117,12 +117,10 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		public void PrintDailyRevenue() {
 			var sumOfDay = 0.0;
 			var amountOfProducts = 0;
-			lock(_syncLock) {
 				foreach(var product in ProductsSold) {
 					amountOfProducts++;
 					sumOfDay += product.GetPrice();
 				}
-			}
 			Console.WriteLine("Store {0} is now closed. {1} products were sold, quota of the day was {2} and generated {3} kr.", Name, amountOfProducts, Quota, sumOfDay);
 		}
 	}
