@@ -15,17 +15,17 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		public int Quota { get; set; }
 		private readonly List<IStatue> _productsForSale;
 		private readonly List<IStatue> _productsSold;
-	    private readonly object _syncLock = new object();
+		private readonly object _syncLock = new object();
 
-        /// <summary>
-        ///		Constructor
-        /// </summary>
-        /// <param name="quota">
-        ///		Sets the quota for product to be made for each backroom
-        /// </param>
-        /// <param name="typeOfShop">
-        ///		Enum of types of shop to be created.
-        /// </param>
+		/// <summary>
+		///		Constructor
+		/// </summary>
+		/// <param name="quota">
+		///		Sets the quota for product to be made for each backroom
+		/// </param>
+		/// <param name="typeOfShop">
+		///		Enum of types of shop to be created.
+		/// </param>
 		public Store(int quota, ShopType typeOfShop) {
 			Quota = quota;
 			Shop = ShopFactory.ShopFactory.CreateShop(typeOfShop);
@@ -36,43 +36,38 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 			StoreIsOpen = true;
 		}
 
-        /// <summary>
-        ///		Makes backroom create a product and adds it to _productsForSale
-        /// </summary>
-        /// <param name="numberOfDecorations">
-        ///		number of times a random decoration should be added to the statue
-        /// </param>
-		private void RecieveProductsForSaleFromBackroom(int numberOfDecorations)
-        {
-	        lock (_syncLock)
-	        {
-		        if(_productsForSale.Count + _productsSold.Count < Quota) {
-			        var result = Backroom.CreateProduct(numberOfDecorations);
-			        _productsForSale.Add(result);
-		        }
-	        }
-        }
+		/// <summary>
+		///		Makes backroom create a product and adds it to _productsForSale
+		/// </summary>
+		/// <param name="numberOfDecorations">
+		///		number of times a random decoration should be added to the statue
+		/// </param>
+		private void RecieveProductsForSaleFromBackroom(int numberOfDecorations) {
+			lock(_syncLock) {
+				if(_productsForSale.Count + _productsSold.Count < Quota) {
+					var result = Backroom.CreateProduct(numberOfDecorations);
+					_productsForSale.Add(result);
+				}
+			}
+		}
 
-        /// <summary>
-        ///		When products sold is equal to quota the store closes.
-        /// </summary>
-        public void CheckIfStoreShouldClose() {
-            lock (_syncLock)
-            {
-                if (StoreIsOpen)
-                {
-                    if (_productsSold.Count == Quota)
-                    {
-                        StoreIsOpen = false;
-                    }
-                }                
-            }
-        }
+		/// <summary>
+		///		When products sold is equal to quota the store closes.
+		/// </summary>
+		public void CheckIfStoreShouldClose() {
+			lock(_syncLock) {
+				if(StoreIsOpen) {
+					if(_productsSold.Count == Quota) {
+						StoreIsOpen = false;
+					}
+				}
+			}
+		}
 
-        /// <summary>
-        ///		Creates a new product every second until qouta is full.
-        /// </summary>
-        public void FillProducts() {
+		/// <summary>
+		///		Creates a new product every second until qouta is full.
+		/// </summary>
+		public void FillProducts() {
 			while(StoreIsOpen) {
 				CheckIfStoreShouldClose();
 				RecieveProductsForSaleFromBackroom(Client.Rnd.Next(1, 10));
@@ -97,8 +92,8 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 			var bank = Bank.BankFlyweight.BankFactory.GetBank("DNB");
 			lock(_productsForSale)
 				lock(_productsSold) {
-			        CheckIfStoreShouldClose();
-                    if (StoreIsOpen && _productsForSale.Count > 0) {
+					CheckIfStoreShouldClose();
+					if(StoreIsOpen && _productsForSale.Count > 0) {
 						var product = _productsForSale[0];
 						var price = product.GetPrice();
 						if(bank.Transaction(price, socialSecurityNumber)) {
@@ -113,17 +108,16 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 						Console.WriteLine("{0} tried to buy a product at {1} for {2} kr. Withdrawal rejected. Insufficient funds.{3}", name, Name, price, System.Environment.NewLine);
 					}
 				}
-            return null;
+			return null;
 		}
 
-        /// <summary>
-        ///		Prints out amount of products sold and total income.
-        /// </summary>
-		public void ViewSoldProducts() {
+		/// <summary>
+		///		Prints out amount of products sold and total income.
+		/// </summary>
+		public void PrintDailyRevenue() {
 			var sumOfDay = 0.0;
 			var amountOfProducts = 0;
-			lock (_syncLock)
-			{
+			lock(_syncLock) {
 				foreach(var product in _productsSold) {
 					amountOfProducts++;
 					sumOfDay += product.GetPrice();

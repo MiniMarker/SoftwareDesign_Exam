@@ -68,11 +68,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		/// </returns>
 		public bool CheckIfEnoughFunds() {
 			var funds = _bank.CheckFunds(SocialSecurityNumber);
-			if(funds > 30) {
-				return true;
-			}
-			return false;
-
+			return funds > 30;
 		}
 	}
 }

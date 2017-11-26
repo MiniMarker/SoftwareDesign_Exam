@@ -99,7 +99,6 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 
 			foreach(var customerThread in backupThreads) {
 				customerThread.Start();
-
 			}
 		}
 
@@ -108,7 +107,6 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 		///		The name is unique for each customer to be made.
 		///		If a name is used by another customer, choose a new one from Enum
 		/// </summary>
-
 		///	<param name="bank">
 		///		Object of Bank to be used by the Customer
 		/// </param>
@@ -168,22 +166,6 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 				StoreThreads[i] = thread;
 				++i;
 			}
-		}
-
-		/// <summary>
-		///		Checks if there is any thread running
-		/// </summary>
-		/// <returns>
-		///		Boolean Returns true if there is a running thread.
-		///	</returns>
-		public bool AnyThreadRunning() {
-			bool threadIsRunning = false;
-			foreach(var customerThread in CustomerThreads) {
-				if(customerThread.IsAlive) {
-					threadIsRunning = true;
-				}
-			}
-			return threadIsRunning;
 		}
 	}
 }
