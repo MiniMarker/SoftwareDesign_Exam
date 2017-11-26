@@ -7,17 +7,17 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 		private readonly IStatue _originalStatue;
 
 		/// <summary>
-		/// Constructor
+		///		Constructor
 		/// </summary>
 		/// <param name="originalStatue">
-		/// The original statue
+		///		The original statue
 		/// </param>
 		protected StatueDecorator(IStatue originalStatue) {
 			_originalStatue = originalStatue;
 		}
 
 		/// <summary>
-		/// Gets the description of the statue
+		///		Gets the description of the statue
 		/// </summary>
 		/// <returns></returns>
 		public virtual string GetDescription() {
@@ -25,7 +25,7 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 		}
 
 		/// <summary>
-		/// Gets the price of the statue
+		///		Gets the price of the statue
 		/// </summary>
 		/// <returns></returns>
 		public virtual double GetPrice() {
@@ -34,16 +34,16 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 		
 
 		/// <summary>
-		/// Checks if a decoration has been used in the description of the statue.
+		///		Checks if a decoration has been used in the description of the statue.
 		/// </summary>
 		/// <param name="decoration">
-		/// The decoration that can be added
+		///		The decoration that can be added
 		/// </param>
 		/// <param name="currentDescriptionOfStatue">
-		/// The current description of the statue
+		///		The current description of the statue
 		/// </param>
 		/// <returns>
-		/// True if the description has been used. 
+		///		True if the description has been used. 
 		/// </returns>
 		protected bool CheckIfDecorationHasBeenUsedInCurrentDescription(string decoration, string currentDescriptionOfStatue) {
 			var currentDescription = currentDescriptionOfStatue.Split();
@@ -79,10 +79,10 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 		}
 
 		/// <summary>
-		/// Gets a random sticker from the enum
+		///		Gets a random sticker from the enum
 		/// </summary>
 		/// <returns>
-		/// The random sticker
+		///		The random sticker
 		/// </returns>
 		private string GetRandomSticker() {
 			var stickerValues = Enum.GetValues(typeof(Stickers));
@@ -90,21 +90,21 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 		}
 
 		/// <summary>
-		/// Gets a random color from the enum
+		///		Gets a random color from the enum
 		/// </summary>
 		/// <returns>
-		/// The random color
-		/// </returns>
+		///		The random color
+		///	</returns>
 		private string GetRandomColor() {
 			var colorValues = Enum.GetValues(typeof(Colors));
 			return colorValues.GetValue(Client.Rnd.Next(colorValues.Length)).ToString();
 		}
 
 		/// <summary>
-		/// Gets a random jewel from the enum
+		///		Gets a random jewel from the enum
 		/// </summary>
 		/// <returns>
-		/// The random jewel
+		///		The random jewel
 		/// </returns>
 		private string GetRandomJewel() {
 			var jewelValues = Enum.GetValues(typeof(Jewels));
@@ -112,15 +112,17 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 		}
 
 		/// <summary>
-		/// Adds a decoration to the description
+		///		Adds a decoration to the description
 		/// </summary>
 		/// <param name="currentDescription">
-		/// The current description
+		///		The current description
 		/// </param>
 		/// <param name="decoration">
-		/// Decoration to be added.
+		///		Decoration to be added.
 		/// </param>
-		/// <returns></returns>
+		/// <returns>
+		///		An updated statue description
+		/// </returns>
 		protected string AddDecorationToDescription(string currentDescription, string decoration) {
 			var currentDescriptionWords = currentDescription.Split();
 			var decorationIsAdded = false;

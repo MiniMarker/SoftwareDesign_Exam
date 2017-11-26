@@ -1,7 +1,7 @@
 ﻿namespace Bazaar_Of_The_Bizarre.statueDecorator {
 	internal class JewelDecorator : StatueDecorator {
 		/// <summary>
-		/// Constructor
+		///		Constructor
 		/// </summary>
 		/// <param name="originalStatue">
 		///		Object of statue to be decorated
