@@ -43,11 +43,9 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		///		number of times a random decoration should be added to the statue
 		/// </param>
 		private void RecieveProductsForSaleFromBackroom(int numberOfDecorations) {
-			lock(_syncLock) {
-				if(ProductsForSale.Count + ProductsSold.Count < Quota) {
-					var result = Backroom.CreateProduct(numberOfDecorations);
-					ProductsForSale.Add(result);
-				}
+			if(ProductsForSale.Count + ProductsSold.Count < Quota) {
+				var result = Backroom.CreateProduct(numberOfDecorations);
+				ProductsForSale.Add(result);
 			}
 		}
 
@@ -117,10 +115,10 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		public void PrintDailyRevenue() {
 			var sumOfDay = 0.0;
 			var amountOfProducts = 0;
-				foreach(var product in ProductsSold) {
-					amountOfProducts++;
-					sumOfDay += product.GetPrice();
-				}
+			foreach(var product in ProductsSold) {
+				amountOfProducts++;
+				sumOfDay += product.GetPrice();
+			}
 			Console.WriteLine("Store {0} is now closed. {1} products were sold, quota of the day was {2} and generated {3} kr.", Name, amountOfProducts, Quota, sumOfDay);
 		}
 	}
