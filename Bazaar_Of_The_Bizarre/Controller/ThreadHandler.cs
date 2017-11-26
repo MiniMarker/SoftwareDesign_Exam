@@ -6,19 +6,23 @@ using Bazaar_Of_The_Bizarre.controller;
 
 namespace Bazaar_Of_The_Bizarre.Controller {
 	class ThreadHandler {
-		public Customer[] Customers { get; private set; }
-		public Thread[] CustomerThreads { get; private set; }
 		public Thread[] StoreThreads { get; private set; }
 
+		public List<Customer> Customers { get; private set; }
+		public List<Thread> CustomerThreads { get; private set; }
+		public int AmountOfCustomers { get; private set; }
+
 		private static int _socialSecurityNumber;
+		private readonly List<string> _nameList = new List<string>();
 
 		/// <summary>
 		/// Constructor
 		/// </summary>
 		/// <param name="amountOfCustomers"></param>
 		public ThreadHandler(int amountOfCustomers) {
-			Customers = new Customer[amountOfCustomers];
-			CustomerThreads = new Thread[amountOfCustomers];
+			AmountOfCustomers = amountOfCustomers;
+			Customers = new List<Customer>();
+			CustomerThreads = new List<Thread>();
 			StoreThreads = new Thread[4];
 			_socialSecurityNumber = 120;
 		}
