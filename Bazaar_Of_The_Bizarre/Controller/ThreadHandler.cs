@@ -67,33 +67,30 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 		/// <param name="bank"></param>
 		/// <param name="bazaar"></param>
 		public void GenerateExtraCustomers(Bank.BankFlyweight.Bank bank, Bazaar bazaar) {
-			//			Thread[] extraCostumerThreads = new Thread[5];
-			//			var custom = new Customer(115, "John", bank, bazaar);
-			//			var custom1 = new Customer(116, "Hans", bank, bazaar);
-			//			var custom2 = new Customer(117, "Leila", bank, bazaar);
-			//			var custom3 = new Customer(118, "Tina", bank, bazaar);
-			//			var custom4 = new Customer(119, "Ringo", bank, bazaar);
-			//			var customerList = new List<Customer>();
-			//			customerList.Add(custom);
-			//			customerList.Add(custom1);
-			//			customerList.Add(custom2);
-			//			customerList.Add(custom3);
-			//			customerList.Add(custom4);
-			//
-			//			for(var i = 0; i < customerList.Count; i++) {
-			//				var customer = customerList[i];
-			//				var thread = new Thread(customer.BuyItem);
-			//				extraCostumerThreads[i] = thread;
-			//			}
-			//
-			//			foreach(var customerThread in extraCostumerThreads) {
-			//				customerThread.Start();
-			//				Thread.Sleep(200);
-			//			}
+			var extraCostumerThreads = new Thread[5];
+			var custom = new Customer(115, "John", bank, bazaar);
+			var custom1 = new Customer(116, "Hans", bank, bazaar);
+			var custom2 = new Customer(117, "Leila", bank, bazaar);
+			var custom3 = new Customer(118, "Tina", bank, bazaar);
+			var custom4 = new Customer(119, "Ringo", bank, bazaar);
+			var customerList = new List<Customer>();
+			customerList.Add(custom);
+			customerList.Add(custom1);
+			customerList.Add(custom2);
+			customerList.Add(custom3);
+			customerList.Add(custom4);
 
-			Customers.Add(AddCustomerToList(bank, bazaar));
-			AddThreadsForAllCustomers();
-			StartAllCustomerThreads();
+			for(var i = 0; i < customerList.Count; i++) {
+				var customer = customerList[i];
+				var thread = new Thread(customer.BuyItem);
+				extraCostumerThreads[i] = thread;
+			}
+
+			foreach(var customerThread in extraCostumerThreads) {
+				customerThread.Start();
+				Thread.Sleep(200);
+			}
+
 
 
 		}
