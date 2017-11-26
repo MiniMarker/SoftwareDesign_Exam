@@ -60,7 +60,7 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 		private void CreateAllCustomers(Bank.BankFlyweight.Bank bank, Bazaar bazaar) {
 			List<String> nameList = new List<string>();
 
-			for(var i = 0; i < Customers.Length; i++) {
+			for(var i = 0; i < AmountOfCustomers-1; i++) {
 				Customers[i] = AddCustomerToList(nameList, bank, bazaar);
 			}
 		}
@@ -132,7 +132,7 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 		/// Creates all customer threads
 		/// </summary>
 		private void CreateAllCustomerThreads() {
-			for(var i = 0; i < CustomerThreads.Length; i++) {
+			for(var i = 0; i < AmountOfCustomers-1; i++) {
 				var customer = Customers[i];
 				var thread = new Thread(customer.BuyItem);
 				CustomerThreads[i] = thread;
