@@ -41,11 +41,9 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 		/// </param>
 		public void StartAllCustomerThreads(Bank.BankFlyweight.Bank bank, Bazaar bazaar) {
 			CreateAllCustomers(bank, bazaar);
-			CreateAllCustomerThreads();
-
-			foreach(var customerThread in CustomerThreads) {
-				customerThread.Start();
-			}
+			//			CreateAllCustomerThreads();
+			AddThreadsForAllCustomers();
+			StartAllCustomerThreads();
 		}
 
 		/// <summary>
@@ -62,7 +60,7 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 		}
 
 		/// <summary>
-		///		Creates All Customers
+		///		Creates all Customers
 		/// </summary>
 		/// <param name="bank">
 		///		object of Bank to be used
@@ -77,10 +75,9 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 			}
 		}
 
-
-		//TODO TEST THIS BEFORE DOING ANY CHANGES
 		/// <summary>
 		///		Creates another if it is needed to complete the sales of the day.
+		///		Also adds a thread and starts it.
 		/// </summary>
 		/// <param name="bank">
 		///		object of Bank to be used
@@ -90,16 +87,8 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 		/// </param>
 		public void GenerateExtraCustomerIfNeeded(Bank.BankFlyweight.Bank bank, Bazaar bazaar) {
 			Customers.Add(AddCustomerToList(bank, bazaar));
-			var backupThreads = new List<Thread>();
-
-			foreach(var customer in Customers) {
-				var thread = new Thread(customer.BuyItem);
-				backupThreads.Add(thread);
-			}
-
-			foreach(var customerThread in backupThreads) {
-				customerThread.Start();
-			}
+			AddThreadsForAllCustomers();
+			StartAllCustomerThreads();
 		}
 
 		/// <summary>
@@ -141,17 +130,6 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 		}
 
 		/// <summary>
-		///		Creates all customer threads
-		/// </summary>
-		private void CreateAllCustomerThreads() {
-			for(var i = 0; i < AmountOfCustomers - 1; i++) {
-				var customer = Customers[i];
-				var thread = new Thread(customer.BuyItem);
-				CustomerThreads.Add(thread);
-			}
-		}
-
-		/// <summary>
 		///		Creates all store threads
 		/// </summary>
 		/// <param name="bazaar">
@@ -165,6 +143,27 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 				var thread = new Thread(store.FillProducts);
 				StoreThreads[i] = thread;
 				++i;
+			}
+		}
+
+		/// <summary>
+		/// adds threads for all customers
+		/// </summary>
+		private void AddThreadsForAllCustomers() {
+			foreach(var customer in Customers) {
+				var thread = new Thread(customer.BuyItem);
+				CustomerThreads.Add(thread);
+			}
+		}
+
+		/// <summary>
+		/// Starts all threads for customers
+		/// </summary>
+		private void StartAllCustomerThreads() {
+			foreach(var customerThread in CustomerThreads) {
+				if((customerThread.ThreadState & ThreadState.Unstarted) != 0) {
+					customerThread.Start();
+				}
 			}
 		}
 	}

@@ -7,7 +7,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 	class Customer {
 		public int SocialSecurityNumber { get; set; }
 		public string Name { get; set; }
-		public List<IStatue> ItemsPurchased { get; set; }
+		public List<string> ItemsPurchased { get; set; }
 		private readonly Bazaar _bazaar;
 		private readonly Bank.BankFlyweight.Bank _bank;
 
@@ -29,7 +29,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		public Customer(int socialSecurityNumber, string name, Bank.BankFlyweight.Bank bank, Bazaar bazaar) {
 			Name = name;
 			SocialSecurityNumber = socialSecurityNumber;
-			ItemsPurchased = new List<IStatue>();
+			ItemsPurchased = new List<string>();
 			_bazaar = bazaar;
 			_bank = bank;
 			_bank.CreateAccount(SocialSecurityNumber);
@@ -42,7 +42,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 			while(CheckIfEnoughFunds()) {
 				var productBought = _bazaar.GetProductFromStoreForCustomer(SocialSecurityNumber, Name);
 				if(productBought != null) {
-					ItemsPurchased.Add(productBought);
+					ItemsPurchased.Add(productBought.GetDescription());
 					Thread.Sleep(1000);
 				}
 				else {
@@ -56,7 +56,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		/// </summary>
 		public void GetItemsPurchased() {
 			foreach(var item in ItemsPurchased) {
-				Console.WriteLine(item.GetDescription());
+				Console.WriteLine(item);
 			}
 		}
 
