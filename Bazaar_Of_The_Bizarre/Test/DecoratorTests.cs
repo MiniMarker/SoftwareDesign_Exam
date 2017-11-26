@@ -5,17 +5,14 @@ using NUnit.Framework;
 using NUnit.Framework.Internal;
 using System.Linq;
 
-namespace Bazaar_Of_The_Bizarre.Test
-{
+namespace Bazaar_Of_The_Bizarre.Test {
 	[TestFixture]
-	public class DecoratorTests
-	{
+	public class DecoratorTests {
 		private readonly IStatue _baseStatue = new Statue();
 		private string[] _descriptionWords;
 
 		[Test]
-		public void DecorateProductWithColorTest()
-		{
+		public void DecorateProductWithColorTest() {
 			IStatue colorBaseStatue = new ColorDecorator(_baseStatue);
 
 			_descriptionWords = colorBaseStatue.GetDescription().Split();
@@ -25,8 +22,7 @@ namespace Bazaar_Of_The_Bizarre.Test
 		}
 
 		[Test]
-		public void DecorateProductWithStickerTest()
-		{
+		public void DecorateProductWithStickerTest() {
 			IStatue stickerBaseStatue = new StickerDecorator(_baseStatue);
 
 			_descriptionWords = stickerBaseStatue.GetDescription().Split();
@@ -36,8 +32,7 @@ namespace Bazaar_Of_The_Bizarre.Test
 		}
 
 		[Test]
-		public void DecorateProductWithJewelTest()
-		{
+		public void DecorateProductWithJewelTest() {
 			IStatue jewelBaseStatue = new JewelDecorator(_baseStatue);
 
 			_descriptionWords = jewelBaseStatue.GetDescription().Split();

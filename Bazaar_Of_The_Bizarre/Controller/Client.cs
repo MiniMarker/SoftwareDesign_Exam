@@ -38,7 +38,9 @@ namespace Bazaar_Of_The_Bizarre.controller {
 
 				}
 				EndOfDay();
-				Console.WriteLine("Bazar is now closed.");
+				Console.WriteLine("---------------------");
+				Console.WriteLine("Bazaar is now closed.");
+				Console.WriteLine("---------------------");
 			}
 		}
 
@@ -47,7 +49,7 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		/// </summary>
 		private void EndOfDay() {
 			foreach(var store in _bazaar.ListOfAllStores) {
-				store.ViewSoldProducts();
+				store.PrintDailyRevenue();
 			}
 		}
 	}

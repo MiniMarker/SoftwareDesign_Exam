@@ -32,7 +32,6 @@ namespace Bazaar_Of_The_Bizarre.statueDecorator {
 			return _originalStatue.GetPrice();
 		}
 		
-
 		/// <summary>
 		///		Checks if a decoration has been used in the description of the statue.
 		/// </summary>

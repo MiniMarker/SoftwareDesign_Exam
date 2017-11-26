@@ -11,10 +11,10 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 
 		public List<Customer> Customers { get; private set; }
 		public List<Thread> CustomerThreads { get; private set; }
-		private int AmountOfCustomers { get; set; }
+		public int AmountOfCustomers { get; private set; }
 
 		private static int _socialSecurityNumber;
-		public List<string> NameList = new List<string>();
+		private readonly List<string> _nameList = new List<string>();
 
 		/// <summary>
 		///		Constructor
@@ -41,11 +41,8 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 		/// </param>
 		public void StartAllCustomerThreads(Bank.BankFlyweight.Bank bank, Bazaar bazaar) {
 			CreateAllCustomers(bank, bazaar);
-			CreateAllCustomerThreads();
-
-			foreach(var customerThread in CustomerThreads) {
-				customerThread.Start();
-			}
+			AddThreadsForAllCustomers();
+			StartAllCustomerThreads();
 		}
 
 		/// <summary>
@@ -62,7 +59,7 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 		}
 
 		/// <summary>
-		///		Creates All Customers
+		///		Creates all Customers
 		/// </summary>
 		/// <param name="bank">
 		///		object of Bank to be used
@@ -77,10 +74,9 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 			}
 		}
 
-
-		//TODO TEST THIS BEFORE DOING ANY CHANGES
 		/// <summary>
 		///		Creates another if it is needed to complete the sales of the day.
+		///		Also adds a thread and starts it.
 		/// </summary>
 		/// <param name="bank">
 		///		object of Bank to be used
@@ -90,17 +86,8 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 		/// </param>
 		public void GenerateExtraCustomerIfNeeded(Bank.BankFlyweight.Bank bank, Bazaar bazaar) {
 			Customers.Add(AddCustomerToList(bank, bazaar));
-			var backupThreads = new List<Thread>();
-
-			foreach(var customer in Customers) {
-				var thread = new Thread(customer.BuyItem);
-				backupThreads.Add(thread);
-			}
-
-			foreach(var customerThread in backupThreads) {
-				customerThread.Start();
-
-			}
+			AddThreadsForAllCustomers();
+			StartAllCustomerThreads();
 		}
 
 		/// <summary>
@@ -108,7 +95,6 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 		///		The name is unique for each customer to be made.
 		///		If a name is used by another customer, choose a new one from Enum
 		/// </summary>
-
 		///	<param name="bank">
 		///		Object of Bank to be used by the Customer
 		/// </param>
@@ -123,8 +109,8 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 			var customerName = values.GetValue(Client.Rnd.Next(0, values.Length));
 			var nameIsTaken = false;
 			while(!nameIsTaken) {
-				if(NameList.Count != 0) {
-					foreach(var name in NameList) {
+				if(_nameList.Count != 0) {
+					foreach(var name in _nameList) {
 						if(name.Equals(customerName.ToString())) {
 							nameIsTaken = true;
 						}
@@ -135,22 +121,11 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 					nameIsTaken = false;
 				}
 				else {
-					NameList.Add(customerName.ToString());
+					_nameList.Add(customerName.ToString());
 					return new Customer(_socialSecurityNumber++, customerName.ToString(), bank, bazaar);
 				}
 			}
 			return null;
-		}
-
-		/// <summary>
-		///		Creates all customer threads
-		/// </summary>
-		private void CreateAllCustomerThreads() {
-			for(var i = 0; i < AmountOfCustomers - 1; i++) {
-				var customer = Customers[i];
-				var thread = new Thread(customer.BuyItem);
-				CustomerThreads.Add(thread);
-			}
 		}
 
 		/// <summary>
@@ -171,19 +146,24 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 		}
 
 		/// <summary>
-		///		Checks if there is any thread running
+		/// adds threads for all customers
 		/// </summary>
-		/// <returns>
-		///		Boolean Returns true if there is a running thread.
-		///	</returns>
-		public bool AnyThreadRunning() {
-			bool threadIsRunning = false;
+		private void AddThreadsForAllCustomers() {
+			foreach(var customer in Customers) {
+				var thread = new Thread(customer.BuyItem);
+				CustomerThreads.Add(thread);
+			}
+		}
+
+		/// <summary>
+		/// Starts all threads for customers
+		/// </summary>
+		private void StartAllCustomerThreads() {
 			foreach(var customerThread in CustomerThreads) {
-				if(customerThread.IsAlive) {
-					threadIsRunning = true;
+				if((customerThread.ThreadState & ThreadState.Unstarted) != 0) {
+					customerThread.Start();
 				}
 			}
-			return threadIsRunning;
 		}
 	}
 }
