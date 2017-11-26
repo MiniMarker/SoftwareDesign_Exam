@@ -1,10 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Bazaar_Of_The_Bizarre.controller;
 using NUnit.Framework;
 
 namespace Bazaar_Of_The_Bizarre.Test {
+
 	[TestFixture]
-	public class BazaarTests {
+	class CustomerTests {
 
 		private Bank.BankFlyweight.Bank _bank;
 		private Bazaar _bazaar;
@@ -18,15 +24,14 @@ namespace Bazaar_Of_The_Bizarre.Test {
 		}
 
 		[Test]
-		public void CreateBazaarCreates4StoresTest() {
-			Assert.AreEqual(4, _bazaar.ListOfAllStores.Count);
+		public void ConfirmThatCustomerIsCreatedWithEnoughFunds() {
+			Assert.True(_customer.CheckIfEnoughFunds());
 		}
 
 		[Test]
-		public void GetProductFromStoreForCustomer()
-		{
-			var statue = _bazaar.GetProductFromStoreForCustomer(1, "TestyTest");
-			Assert.NotNull(statue);
+		public void TestBuyItem() {
+			_customer.BuyItem();
+			Assert.True(_customer.ItemsPurchased.Count > 0);
 		}
 	}
 }

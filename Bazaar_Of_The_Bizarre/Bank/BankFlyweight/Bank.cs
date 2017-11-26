@@ -51,7 +51,6 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
 				_accounts.Add(customerId, newAccount);
 				return true;
 			}
-			//			Console.WriteLine("Customer already has an account.");
 			return false;
 
 		}
@@ -75,6 +74,7 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
 				return result;
 			}
 			Console.WriteLine("Person does not have an account.");
+			PrintAccounts();
 			return false;
 		}
 
@@ -82,13 +82,13 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
 		/// Prints out all accounts in _accounts.
 		/// </summary>
 		public void PrintAccounts() {
-			foreach(KeyValuePair<int, BankAccount> pair in _accounts) {
+			foreach(var pair in _accounts) {
 				Console.WriteLine("Customer = {0}, Account = {1}", pair.Key, pair.Value);
 			}
 		}
 
 		/// <summary>
-		/// Returns current fund for a specifik bankaccount.
+		/// Returns current fund for a specific bankaccount.
 		/// </summary>
 		/// <param name="customerId">
 		///     Unique identifier for a customer.

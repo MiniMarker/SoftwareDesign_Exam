@@ -79,6 +79,7 @@
     <Compile Include="StoreFacade\Store.cs" />
     <Compile Include="Test\BankTest.cs" />
     <Compile Include="Test\BazaarTests.cs" />
+    <Compile Include="Test\CustomerTests.cs" />
     <Compile Include="Test\DecoratorTests.cs" />
     <Compile Include="Test\StoreTests.cs" />
     <Compile Include="Test\ThreadTest.cs" />

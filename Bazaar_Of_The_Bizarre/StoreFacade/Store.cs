@@ -13,8 +13,8 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		public bool StoreIsOpen { get; private set; }
 		public string Name { get; set; }
 		public int Quota { get; set; }
-		private readonly List<IStatue> _productsForSale;
-		private readonly List<IStatue> _productsSold;
+		public List<IStatue> ProductsForSale { get; private set; }
+		public List<IStatue> ProductsSold { get; private set; }
 		private readonly object _syncLock = new object();
 
 		/// <summary>
@@ -31,8 +31,8 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 			Shop = ShopFactory.ShopFactory.CreateShop(typeOfShop);
 			Name = Shop.GetName();
 			Backroom = new Backroom();
-			_productsForSale = Backroom.CreateMultipleStatues(5);
-			_productsSold = new List<IStatue>();
+			ProductsForSale = Backroom.CreateMultipleStatues(5);
+			ProductsSold = new List<IStatue>();
 			StoreIsOpen = true;
 		}
 
@@ -44,9 +44,9 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		/// </param>
 		private void RecieveProductsForSaleFromBackroom(int numberOfDecorations) {
 			lock(_syncLock) {
-				if(_productsForSale.Count + _productsSold.Count < Quota) {
+				if(ProductsForSale.Count + ProductsSold.Count < Quota) {
 					var result = Backroom.CreateProduct(numberOfDecorations);
-					_productsForSale.Add(result);
+					ProductsForSale.Add(result);
 				}
 			}
 		}
@@ -57,7 +57,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		public void CheckIfStoreShouldClose() {
 			lock(_syncLock) {
 				if(StoreIsOpen) {
-					if(_productsSold.Count == Quota) {
+					if(ProductsSold.Count == Quota) {
 						StoreIsOpen = false;
 					}
 				}
@@ -90,15 +90,15 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		/// </returns>
 		public IStatue SellProduct(int socialSecurityNumber, string name) {
 			var bank = Bank.BankFlyweight.BankFactory.GetBank("DNB");
-			lock(_productsForSale)
-				lock(_productsSold) {
+			lock(ProductsForSale)
+				lock(ProductsSold) {
 					CheckIfStoreShouldClose();
-					if(StoreIsOpen && _productsForSale.Count > 0) {
-						var product = _productsForSale[0];
+					if(StoreIsOpen && ProductsForSale.Count > 0) {
+						var product = ProductsForSale[0];
 						var price = product.GetPrice();
 						if(bank.Transaction(price, socialSecurityNumber)) {
-							_productsSold.Add(product);
-							_productsForSale.Remove(product);
+							ProductsSold.Add(product);
+							ProductsForSale.Remove(product);
 							CheckIfStoreShouldClose();
 							Console.WriteLine("Following product was sold to {0} for {1} kr from {2}.{3}{4}{5}", name,
 								price, Name, System.Environment.NewLine, Client.PrintProduct.SortAndRetrieveProductDescription(product),
@@ -118,7 +118,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 			var sumOfDay = 0.0;
 			var amountOfProducts = 0;
 			lock(_syncLock) {
-				foreach(var product in _productsSold) {
+				foreach(var product in ProductsSold) {
 					amountOfProducts++;
 					sumOfDay += product.GetPrice();
 				}
