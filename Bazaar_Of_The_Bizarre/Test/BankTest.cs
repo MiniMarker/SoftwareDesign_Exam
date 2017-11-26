@@ -7,17 +7,34 @@ namespace Bazaar_Of_The_Bizarre.Test
 {
 	[TestFixture]
     class BankTest
-    {
+	{
+		private Bank.BankFlyweight.Bank _bank;
+	    [SetUp]
+	    public void SetUp()
+	    {
+		     _bank = BankFactory.GetBank("DNB");
+
+		}
 		[Test]
 	    public void CreateAccountTest()
 		{
-		    var DnB = BankFactory.GetBank("DnB");
+			_bank.CreateAccount(007);
+			_bank.CreateAccount(008);
+			_bank.CreateAccount(009);
 
-		    DnB.CreateAccount(007);
-		    DnB.CreateAccount(008);
-		    DnB.CreateAccount(009);
+		    Assert.AreEqual(_bank.GetAccounts().Count, 3);
+	    }
 
-		    Assert.AreEqual(DnB.GetAccounts().Count, 3);
+	    [Test]
+	    public void CreatingBankWithSameNameGetsSameBank()
+	    {
+		    _bank.CreateAccount(1);
+		    _bank.CreateAccount(2);
+		    var accounts = _bank.GetAccounts();
+		    Assert.AreEqual(2, accounts.Count);
+		    var bankDuplicate = BankFactory.GetBank("DNB");
+		    accounts = bankDuplicate.GetAccounts();
+		    Assert.AreEqual(2, accounts.Count);
 	    }
 
 		[Test]

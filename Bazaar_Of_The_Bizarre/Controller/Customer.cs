@@ -42,7 +42,6 @@ namespace Bazaar_Of_The_Bizarre.controller {
 			while(CheckIfEnoughFunds()) {
 				var productBought = _bazaar.GetProductFromStoreForCustomer(SocialSecurityNumber, Name);
 				if(productBought != null) {
-					Console.WriteLine("Test");
 					ItemsPurchased.Add(productBought.GetDescription());
 					Thread.Sleep(1000);
 				}

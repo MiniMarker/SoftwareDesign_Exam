@@ -88,7 +88,7 @@ namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
 		}
 
 		/// <summary>
-		/// Returns current fund for a specific bankaccount.
+		/// Returns current fund for a specifi bankaccount.
 		/// </summary>
 		/// <param name="customerId">
 		///     Unique identifier for a customer.

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-/// <summary>
-/// This class is a part of the design pattern flyweight. Due to that only one bank is created during the program, the implementation is not neccessary. Flyweight was implemented to show understanding of the specific design pattern.
-/// </summary>
+
 namespace Bazaar_Of_The_Bizarre.Bank.BankFlyweight {
+	/// <summary>
+	/// This class is a part of the design pattern flyweight. Due to that only one bank is created during the program, the implementation is not neccessary. Flyweight was implemented to show understanding of the specific design pattern.
+	/// </summary>
 	class BankFactory {
 		private static readonly Dictionary<string, Bank> BankMap = new Dictionary<string, Bank>();
 
