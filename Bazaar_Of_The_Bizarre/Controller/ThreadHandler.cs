@@ -58,10 +58,9 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 		/// <param name="bank"></param>
 		/// <param name="bazaar"></param>
 		private void CreateAllCustomers(Bank.BankFlyweight.Bank bank, Bazaar bazaar) {
-			List<String> nameList = new List<string>();
 
 			for(var i = 0; i < AmountOfCustomers-1; i++) {
-				Customers[i] = AddCustomerToList(nameList, bank, bazaar);
+				Customers.Add(AddCustomerToList(_nameList, bank, bazaar));
 			}
 		}
 
@@ -135,7 +134,7 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 			for(var i = 0; i < AmountOfCustomers-1; i++) {
 				var customer = Customers[i];
 				var thread = new Thread(customer.BuyItem);
-				CustomerThreads[i] = thread;
+				CustomerThreads.Add(thread);
 			}
 		}
 
@@ -143,29 +142,17 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 		/// Creates all store threads
 		/// </summary>
 		/// <param name="bazaar"></param>
-		private void CreateAllStoresThreads(Bazaar bazaar) {
+		private void CreateAllStoresThreads(Bazaar bazaar)
+		{
 			var storesList = bazaar.ListOfAllStores;
 
 			var i = 0;
-			foreach(var store in storesList) {
+			foreach (var store in storesList)
+			{
 				var thread = new Thread(store.FillProducts);
 				StoreThreads[i] = thread;
 				++i;
 			}
-		}
-
-		/// <summary>
-		/// Checks if there is any thread running
-		/// </summary>
-		/// <returns>Boolean Returns true if there is a running thread.</returns>
-		public bool AnyThreadRunning() {
-			bool threadIsRunning = false;
-			foreach(var customerThread in CustomerThreads) {
-				if(customerThread.IsAlive) {
-					threadIsRunning = true;
-				}
-			}
-			return threadIsRunning;
 		}
 	}
 }
