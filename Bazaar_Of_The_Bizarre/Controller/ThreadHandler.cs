@@ -64,21 +64,29 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 		/// <summary>
 		/// This method is to avoid deadlock in the sense that stores have products to 
 		/// sell but customer does not have any money. Creates four customer and threads. 
-		/// Start thread after 200 milliseconds.
+		/// Start thread after x milliseconds.
 		/// </summary>
 		/// <param name="bank"></param>
 		/// <param name="bazaar"></param>
-		public void GenerateExtraCustomers(Bank.BankFlyweight.Bank bank, Bazaar bazaar)
-		{
-			var extraCostumerThreads = new List<Thread>();
+		public void GenerateExtraCustomers(Bank.BankFlyweight.Bank bank, Bazaar bazaar) {
+			Thread[] extraCostumerThreads = new Thread[5];
+			var custom = new Customer(115, "John", bank, bazaar);
+			var custom1 = new Customer(116, "Hans", bank, bazaar);
+			var custom2 = new Customer(117, "Leila", bank, bazaar);
+			var custom3 = new Customer(118, "Tina", bank, bazaar);
+			var custom4 = new Customer(119, "Ringo", bank, bazaar);
+			var customerList = new List<Customer>();
 
-			for(var i = 0; i < 5; i++) {
-				AddCustomerToList(bank, bazaar);
-			}
+			customerList.Add(custom);
+			customerList.Add(custom1);
+			customerList.Add(custom2);
+			customerList.Add(custom3);
+			customerList.Add(custom4);
 
-			for(var i = Customers.Count - 5; i < Customers.Count; i++) {
-				var thread = new Thread(Customers[i].BuyItem);
-				extraCostumerThreads.Add(thread);
+			for(var i = 0; i < customerList.Count; i++) {
+				var customer = customerList[i];
+				var thread = new Thread(customer.BuyItem);
+				extraCostumerThreads[i] = thread;
 			}
 
 			foreach(var customerThread in extraCostumerThreads) {
