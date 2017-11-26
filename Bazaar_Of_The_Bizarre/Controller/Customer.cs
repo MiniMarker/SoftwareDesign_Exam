@@ -36,12 +36,13 @@ namespace Bazaar_Of_The_Bizarre.controller {
 		}
 
 		/// <summary>
-		///     Buys item if sufficient funds on bankaccount. Adds in _itemsPurchased.
+		///     Buys item if sufficient funds on bankaccount. Adds in ItemsPurchased.
 		/// </summary>
 		public void BuyItem() {
 			while(CheckIfEnoughFunds()) {
 				var productBought = _bazaar.GetProductFromStoreForCustomer(SocialSecurityNumber, Name);
 				if(productBought != null) {
+					Console.WriteLine("Test");
 					ItemsPurchased.Add(productBought.GetDescription());
 					Thread.Sleep(1000);
 				}

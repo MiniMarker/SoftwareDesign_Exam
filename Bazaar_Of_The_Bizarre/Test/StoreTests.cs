@@ -14,7 +14,5 @@ namespace Bazaar_Of_The_Bizarre.Test {
 			Assert.NotNull(store);
 			Assert.AreEqual(5, store.ProductsForSale.Count);
 		}
-
-
 	}
 }

@@ -27,11 +27,5 @@ namespace Bazaar_Of_The_Bizarre.Test {
 		public void ConfirmThatCustomerIsCreatedWithEnoughFunds() {
 			Assert.True(_customer.CheckIfEnoughFunds());
 		}
-
-		[Test]
-		public void TestBuyItem() {
-			_customer.BuyItem();
-			Assert.True(_customer.ItemsPurchased.Count > 0);
-		}
 	}
 }
