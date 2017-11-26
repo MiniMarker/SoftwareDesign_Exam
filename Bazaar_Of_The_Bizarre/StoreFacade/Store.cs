@@ -15,7 +15,7 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 		public int Quota { get; set; }
 		private readonly List<IStatue> _productsForSale;
 		private readonly List<IStatue> _productsSold;
-	    private object SyncLock = new object();
+	    private readonly object _syncLock = new object();
 
         /// <summary>
         ///		Constructor
@@ -42,18 +42,22 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
         /// <param name="numberOfDecorations">
         ///		number of times a random decoration should be added to the statue
         /// </param>
-		private void RecieveProductsForSaleFromBackroom(int numberOfDecorations) {
-			if(_productsForSale.Count + _productsSold.Count < Quota) {
-				var result = Backroom.CreateProduct(numberOfDecorations);
-				_productsForSale.Add(result);
-			}
-		}
+		private void RecieveProductsForSaleFromBackroom(int numberOfDecorations)
+        {
+	        lock (_syncLock)
+	        {
+		        if(_productsForSale.Count + _productsSold.Count < Quota) {
+			        var result = Backroom.CreateProduct(numberOfDecorations);
+			        _productsForSale.Add(result);
+		        }
+	        }
+        }
 
         /// <summary>
         ///		When products sold is equal to quota the store closes.
         /// </summary>
         public void CheckIfStoreShouldClose() {
-            lock (SyncLock)
+            lock (_syncLock)
             {
                 if (StoreIsOpen)
                 {
@@ -109,7 +113,6 @@ namespace Bazaar_Of_The_Bizarre.StoreFacade {
 						Console.WriteLine("{0} tried to buy a product at {1} for {2} kr. Withdrawal rejected. Insufficient funds.{3}", name, Name, price, System.Environment.NewLine);
 					}
 				}
-
             return null;
 		}
 
