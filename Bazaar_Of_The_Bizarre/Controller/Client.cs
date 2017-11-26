@@ -34,10 +34,11 @@ namespace Bazaar_Of_The_Bizarre.controller {
 				_threadHandler.StartAllCustomerThreads(_bank, _bazaar);
 
 				while(_bazaar.IsBazarOpen()) {
-					_threadHandler.GenerateExtraCustomerIfNeeded(_bank, _bazaar);
+					_threadHandler.GenerateExtraCustomers(_bank, _bazaar);
 
 				}
 				EndOfDay();
+
 				Console.WriteLine("---------------------");
 				Console.WriteLine("Bazaar is now closed.");
 				Console.WriteLine("---------------------");

@@ -1,56 +1,46 @@
 ﻿
 using System;
 using System.Collections.Generic;
-using System.Security.Policy;
 using System.Threading;
 using Bazaar_Of_The_Bizarre.controller;
 
 namespace Bazaar_Of_The_Bizarre.Controller {
 	class ThreadHandler {
+		public Customer[] Customers { get; private set; }
+		public Thread[] CustomerThreads { get; private set; }
 		public Thread[] StoreThreads { get; private set; }
 
-		public List<Customer> Customers { get; private set; }
-		public List<Thread> CustomerThreads { get; private set; }
-		public int AmountOfCustomers { get; private set; }
-
 		private static int _socialSecurityNumber;
-		private readonly List<string> _nameList = new List<string>();
 
 		/// <summary>
-		///		Constructor
+		/// Constructor
 		/// </summary>
-		/// <param name="amountOfCustomers">
-		///		Amount of customers to be created
-		/// </param>
+		/// <param name="amountOfCustomers"></param>
 		public ThreadHandler(int amountOfCustomers) {
-			AmountOfCustomers = amountOfCustomers;
-			Customers = new List<Customer>();
-			CustomerThreads = new List<Thread>();
+			Customers = new Customer[amountOfCustomers];
+			CustomerThreads = new Thread[amountOfCustomers];
 			StoreThreads = new Thread[4];
 			_socialSecurityNumber = 120;
 		}
 
 		/// <summary>
-		///		Starts all Customer Threads
+		/// Starts all Customer Threads
 		/// </summary>
-		/// <param name="bank">
-		///		object of bank to be set
-		/// </param>
-		/// <param name="bazaar">
-		///		object of Bazaar to be used
-		/// </param>
+		/// <param name="bank"></param>
+		/// <param name="bazaar"></param>
 		public void StartAllCustomerThreads(Bank.BankFlyweight.Bank bank, Bazaar bazaar) {
 			CreateAllCustomers(bank, bazaar);
-			AddThreadsForAllCustomers();
-			StartAllCustomerThreads();
+			CreateAllCustomerThreads();
+
+			foreach(var customerThread in CustomerThreads) {
+				customerThread.Start();
+			}
 		}
 
 		/// <summary>
-		///		Starts all store threads
+		/// Starts all store threads
 		/// </summary>
-		/// <param name="bazaar">
-		///		object of Bazaar to be used
-		/// </param>
+		/// <param name="bazaar"></param>
 		public void StartAllStoresThreads(Bazaar bazaar) {
 			CreateAllStoresThreads(bazaar);
 			foreach(var storeThread in StoreThreads) {
@@ -59,71 +49,64 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 		}
 
 		/// <summary>
-		///		Creates all Customers
+		/// Creates All Customers
 		/// </summary>
-		/// <param name="bank">
-		///		object of Bank to be used
-		/// </param>
-		/// <param name="bazaar">
-		///		object of Bazaar to be used
-		/// </param>
+		/// <param name="bank"></param>
+		/// <param name="bazaar"></param>
 		private void CreateAllCustomers(Bank.BankFlyweight.Bank bank, Bazaar bazaar) {
+			List<String> nameList = new List<string>();
 
-			for(var i = 0; i < AmountOfCustomers - 1; i++) {
-				Customers.Add(AddCustomerToList(bank, bazaar));
+			for(var i = 0; i < Customers.Length; i++) {
+				Customers[i] = AddCustomerToList(nameList, bank, bazaar);
 			}
 		}
 
 		/// <summary>
-		///		Creates another if it is needed to complete the sales of the day.
-		///		Also adds a thread and starts it.
+		/// This method is to avoid deadlock in the sense that stores have products to sell but customer does not have any money. Creates four customer and threads. Start thread after x milliseconds.
 		/// </summary>
-		/// <param name="bank">
-		///		object of Bank to be used
-		/// </param>
-		/// <param name="bazaar">
-		///		object of Bazaar to be used
-		/// </param>
-		public void GenerateExtraCustomerIfNeeded(Bank.BankFlyweight.Bank bank, Bazaar bazaar) {
-			//			Customers.Add(AddCustomerToList(bank, bazaar));
-			//			AddThreadsForAllCustomers();
-			//			StartAllCustomerThreads();
+		/// <param name="bank"></param>
+		/// <param name="bazaar"></param>
+		public void GenerateExtraCustomers(Bank.BankFlyweight.Bank bank, Bazaar bazaar) {
+			Thread[] extraCostumerThreads = new Thread[5];
+			var custom = new Customer(115, "John", bank, bazaar);
+			var custom1 = new Customer(116, "Hans", bank, bazaar);
+			var custom2 = new Customer(117, "Leila", bank, bazaar);
+			var custom3 = new Customer(118, "Tina", bank, bazaar);
+			var custom4 = new Customer(119, "Ringo", bank, bazaar);
+			var customerList = new List<Customer>();
+			customerList.Add(custom);
+			customerList.Add(custom1);
+			customerList.Add(custom2);
+			customerList.Add(custom3);
+			customerList.Add(custom4);
 
-			Customers.Add(AddCustomerToList(bank, bazaar));
-			var backupThreads = new List<Thread>();
-
-			foreach(var customer in Customers) {
+			for(var i = 0; i < customerList.Count; i++) {
+				var customer = customerList[i];
 				var thread = new Thread(customer.BuyItem);
-				backupThreads.Add(thread);
+				extraCostumerThreads[i] = thread;
 			}
 
-			foreach(var customerThread in backupThreads) {
+			foreach(var customerThread in extraCostumerThreads) {
 				customerThread.Start();
-
+				Thread.Sleep(200);
 			}
+
 		}
 
 		/// <summary>
-		///		Adds a customer to the list and returns it.
-		///		The name is unique for each customer to be made.
-		///		If a name is used by another customer, choose a new one from Enum
+		/// Adds a customer to the list and returns it
 		/// </summary>
-		///	<param name="bank">
-		///		Object of Bank to be used by the Customer
-		/// </param>
-		/// <param name="bazaar">
-		///		Object of Bazaar to be used by the Customer
-		/// </param>
-		/// <returns>
-		///		Customer Returns a customer if created successfully
-		/// </returns>
-		private Customer AddCustomerToList(Bank.BankFlyweight.Bank bank, Bazaar bazaar) {
+		/// <param name="bank"></param>
+		/// <param name="bazaar"></param>
+		/// <returns>Customer Returns a customer if created successfully</returns>
+		private Customer AddCustomerToList(List<String> nameList, Bank.BankFlyweight.Bank bank, Bazaar bazaar) {
 			var values = Enum.GetValues(typeof(Names));
 			var customerName = values.GetValue(Client.Rnd.Next(0, values.Length));
 			var nameIsTaken = false;
 			while(!nameIsTaken) {
-				if(_nameList.Count != 0) {
-					foreach(var name in _nameList) {
+				if(nameList.Count != 0) {
+
+					foreach(var name in nameList) {
 						if(name.Equals(customerName.ToString())) {
 							nameIsTaken = true;
 						}
@@ -134,7 +117,7 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 					nameIsTaken = false;
 				}
 				else {
-					_nameList.Add(customerName.ToString());
+					nameList.Add(customerName.ToString());
 					return new Customer(_socialSecurityNumber++, customerName.ToString(), bank, bazaar);
 				}
 			}
@@ -142,11 +125,20 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 		}
 
 		/// <summary>
-		///		Creates all store threads
+		/// Creates all customer threads
 		/// </summary>
-		/// <param name="bazaar">
-		///		Object of Bazaar to be used
-		/// </param>
+		private void CreateAllCustomerThreads() {
+			for(var i = 0; i < CustomerThreads.Length; i++) {
+				var customer = Customers[i];
+				var thread = new Thread(customer.BuyItem);
+				CustomerThreads[i] = thread;
+			}
+		}
+
+		/// <summary>
+		/// Creates all store threads
+		/// </summary>
+		/// <param name="bazaar"></param>
 		private void CreateAllStoresThreads(Bazaar bazaar) {
 			var storesList = bazaar.ListOfAllStores;
 
@@ -159,24 +151,17 @@ namespace Bazaar_Of_The_Bizarre.Controller {
 		}
 
 		/// <summary>
-		/// adds threads for all customers
+		/// Checks if there is any thread running
 		/// </summary>
-		private void AddThreadsForAllCustomers() {
-			foreach(var customer in Customers) {
-				var thread = new Thread(customer.BuyItem);
-				CustomerThreads.Add(thread);
-			}
-		}
-
-		/// <summary>
-		/// Starts all threads for customers
-		/// </summary>
-		private void StartAllCustomerThreads() {
+		/// <returns>Boolean Returns true if there is a running thread.</returns>
+		public bool AnyThreadRunning() {
+			bool threadIsRunning = false;
 			foreach(var customerThread in CustomerThreads) {
-				if((customerThread.ThreadState & ThreadState.Unstarted) != 0) {
-					customerThread.Start();
+				if(customerThread.IsAlive) {
+					threadIsRunning = true;
 				}
 			}
+			return threadIsRunning;
 		}
 	}
 }
